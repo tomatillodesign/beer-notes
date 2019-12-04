@@ -10,16 +10,33 @@ import SelectBeer from './SelectBeer';
 import SelectBrewery from './SelectBrewery';
 import BeerLogNotes from './BeerLogNotes';
 
-export default function BeerLog() {
+import { beers, domestics, completeBeerList } from '../data/beers.js';
 
-  return (
-       <div className="beer-log-area">
-         <BeerLogDate />
-         <div className="clb-two-col">
-              <SelectBeer />
-              <SelectBrewery />
+class BeerLog extends React.Component {
+
+     state = {
+         completeBeerList: { completeBeerList }
+       };
+
+
+
+render() {
+
+     const beerList = completeBeerList;
+
+       return (
+            <div className="beer-log-area">
+              <BeerLogDate />
+              <div className="clb-two-col">
+                   <SelectBeer beerList={beerList} />
+                   <SelectBrewery beerList={beerList} />
+              </div>
+              <BeerLogNotes />
          </div>
-         <BeerLogNotes />
-    </div>
-  );
+       );
+     }
+
 }
+
+
+export default BeerLog;

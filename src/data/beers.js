@@ -58,4 +58,26 @@ export const completeBeerList = [
                },
           ]
      },
+     {
+          brewery: 'Appalachian Mountain Brewery',
+          brewery_slug: 'amb',
+          location: 'Boone, NC',
+          beers: [
+               {
+                    beer_name: 'Spoaty Oaty',
+                    abv: 5.4,
+                    my_rating: 'Good'
+               },
+               {
+                    beer_name: 'Long Leaf IPA',
+                    abv: 7.1,
+                    my_rating: 'Good'
+               },
+               {
+                    beer_name: 'Boone Creek',
+                    abv: 4.7,
+                    my_rating: 'Good'
+               },
+          ]
+     },
 ];

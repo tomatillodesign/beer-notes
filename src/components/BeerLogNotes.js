@@ -12,6 +12,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function BeerLogNotes() {
+
   const classes = useStyles();
 
   return (
@@ -19,12 +20,11 @@ export default function BeerLogNotes() {
       <TextField
           id="outlined-basic"
           label="Notes"
-          variant="filled"
           fullWidth
           multiline
           rows="4"
-          variant="outlined"
           />
     </form>
   );
+  
 }
