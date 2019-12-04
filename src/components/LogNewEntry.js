@@ -12,7 +12,7 @@ import BeerLogNotes from './BeerLogNotes';
 
 class LogNewEntry extends React.Component {
 
-     entryDate = null;
+     entryDate = Date.now();
      beerNotes = null;
      beerType = null;
      brewery = null;
