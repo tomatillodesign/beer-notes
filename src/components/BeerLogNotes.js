@@ -2,29 +2,40 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-      marginLeft: 0
-    },
-  },
-}));
+class BeerLogNotes extends React.Component {
 
-export default function BeerLogNotes() {
+     useStyles = makeStyles(theme => ({
+       root: {
+         '& > *': {
+           margin: theme.spacing(1),
+           marginLeft: 0
+         },
+       },
+     }));
 
-  const classes = useStyles();
+  classes = this.useStyles;
 
-  return (
-    <form className={classes.root} noValidate autoComplete="off">
-      <TextField
-          id="outlined-basic"
-          label="Notes"
-          fullWidth
-          multiline
-          rows="4"
-          />
-    </form>
-  );
-  
+ //  onChange = (event) => {
+ //       console.log(event.target.value);
+ // }
+
+render() {
+
+       return (
+
+           <TextField
+               id="outlined-basic"
+               label="Notes"
+               fullWidth
+               multiline
+               rows="4"
+               onChange={this.props.getNotes}
+               />
+
+       );
+
 }
+
+}
+
+export default BeerLogNotes;

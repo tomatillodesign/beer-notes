@@ -6,13 +6,14 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 
-export default function BeerLogDate() {
+export default function BeerLogDate(props) {
 
 // The first commit of Material-UI
 const [selectedDate, setSelectedDate] = React.useState(new Date());
 
 const handleDateChange = date => {
-  setSelectedDate(date);
+     setSelectedDate(date);
+     props.getEntryDate(date);
 };
 
 return (
