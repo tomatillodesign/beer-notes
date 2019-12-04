@@ -22,7 +22,9 @@ class BeerLog extends React.Component {
 
 render() {
 
+
      const beerList = completeBeerList;
+     //console.log(beerList);
 
        return (
             <div className="beer-log-area">
