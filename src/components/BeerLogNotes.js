@@ -25,7 +25,7 @@ render() {
 
            <TextField
                id="outlined-basic"
-               label="Notes"
+               label={this.props.placeholder}
                fullWidth
                multiline
                rows="4"

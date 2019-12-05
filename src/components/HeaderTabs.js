@@ -9,6 +9,7 @@ import Box from '@material-ui/core/Box';
 
 import BeerHome from './BeerHome';
 import BeerLog from './BeerLog';
+import NewBeerForm from './NewBeerForm';
 import BeerCards from './BeerCards';
 
 function TabPanel(props) {
@@ -48,7 +49,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function HeaderTabs() {
+export default function HeaderTabs(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -69,13 +70,14 @@ export default function HeaderTabs() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <BeerLog />
+        <BeerLog beerList={props.beerList} />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <BeerHome />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <BeerCards />
+         <NewBeerForm beerList={props.beerList} />
+         <BeerCards />
       </TabPanel>
     </div>
   );

@@ -11,7 +11,7 @@ import { beers, domestics, completeBeerList } from '../data/beers.js';
 class BeerLog extends React.Component {
 
      state = {
-         completeBeerList: { completeBeerList },
+         completeBeerList: this.props.beerList,
          logEntries: {}
        };
 

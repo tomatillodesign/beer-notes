@@ -38,3 +38,8 @@
      grid-column-gap: 20px;
      text-align: left;
 }
+
+.MuiTabs-root {
+    margin-left: auto;
+    margin-right: auto;
+}
