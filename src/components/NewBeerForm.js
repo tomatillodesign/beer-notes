@@ -10,6 +10,7 @@ import Creatable, { makeCreatableSelect } from 'react-select/creatable';
 import SelectBrewery from './SelectBrewery';
 import BeerLogNotes from './BeerLogNotes';
 import NameOfBeer from './NameOfBeer';
+import BeerABV from './BeerABV';
 
 class NewBeerForm extends React.Component {
 
@@ -17,6 +18,7 @@ class NewBeerForm extends React.Component {
      beerName = null;
      brewery = null;
      beerNotes = null;
+     beerABV = null;
 
      createNewBeer = (event) => {
           // 1. Stop the form from submitting
@@ -29,18 +31,16 @@ class NewBeerForm extends React.Component {
           // }
 
           const entry = {
-                         brewery: 'TEST',
-                         brewery_slug: 'TEST',
-                         location: 'Hershey, PA',
+                         brewery: this.brewery,
                          beers: [
                               {
                                    beer_name: this.beerName,
-                                   abv: 8.2,
+                                   abv: this.beerABV,
                                    my_rating: 'Good',
                                    description: this.beerNotes
                               }
                          ]
-               }
+                    }
 
           console.log(entry);
           // 2 add the new beer to state (App.js)
@@ -56,6 +56,10 @@ class NewBeerForm extends React.Component {
 
      getBeerDescription = (event) => {
           this.beerNotes = (event.target.value);
+     }
+
+     getABV = (event) => {
+          this.beerABV = (event.target.value);
      }
 
      getEntryDate = (date) => {
@@ -77,7 +81,10 @@ render() {
        return (
             <div className="new-beer-area">
                <form className="new-beer" onSubmit={this.createNewBeer} >
+                    <div className="clb-flex-row-three-fourths">
                         <NameOfBeer getBeerName={this.getBeerName} />
+                        <BeerABV getABV={this.getABV} />
+                   </div>
                         <SelectBrewery beerList={beerList} getBrewery={this.getBrewery} />
                    <BeerLogNotes placeholder='Description' getNotes={this.getBeerDescription} />
                    <Button variant="contained" color="primary" type="submit">Add New Beer</Button>

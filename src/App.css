@@ -45,6 +45,8 @@
 }
 
 
-.button, button {
-     
+.clb-flex-row-three-fourths {
+     display: grid;
+     grid-template-columns: 3fr 1fr;
+     grid-column-gap: 20px;
 }
