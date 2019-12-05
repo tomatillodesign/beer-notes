@@ -60,7 +60,7 @@ export const completeBeerList = {
                               beer_name: '1554',
                               abv: 6,
                               my_rating: 'Good',
-                              description: 'A surprisingly bright taste and a dry, chocolaty finish -- one evocotive of dark brews enjoyed in Belgian taverns 500 years ago. Not a porter, not a stout -- it's 1554.'
+                              description: 'A surprisingly bright taste and a dry, chocolaty finish -- one evocotive of dark brews enjoyed in Belgian taverns 500 years ago. Not a porter, not a stout -- it\'s 1554.'
                          },
                     ]
                },

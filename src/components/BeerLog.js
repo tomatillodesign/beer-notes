@@ -6,12 +6,11 @@ import Creatable, { makeCreatableSelect } from 'react-select/creatable';
 import LogNewEntry from './LogNewEntry';
 import LogEntry from './LogEntry';
 
-import { beers, domestics, completeBeerList } from '../data/beers.js';
+//import { beers, domestics, completeBeerList } from '../data/beers.js';
 
 class BeerLog extends React.Component {
 
      state = {
-         completeBeerList: this.props.beerList,
          logEntries: {}
        };
 
@@ -30,8 +29,8 @@ class BeerLog extends React.Component {
 
 render() {
 
-
-     const beerList = completeBeerList;
+     const beerList = this.props.beerList;
+     console.log("UPDATED BEER LIST: " + JSON.stringify(beerList));
      console.log("Log Entry: " + JSON.stringify(this.state.logEntries));
 
        return (

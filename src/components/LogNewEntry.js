@@ -1,6 +1,7 @@
 import 'date-fns';
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 
 import Select from 'react-select';
 import Creatable, { makeCreatableSelect } from 'react-select/creatable';
@@ -59,6 +60,7 @@ class LogNewEntry extends React.Component {
 render() {
 
      const beerList = this.props.beerList;
+     console.log("LOG NEW ENTRY" + JSON.stringify(beerList));
 
        return (
             <div className="log-new-entry">
@@ -68,8 +70,8 @@ render() {
                         <SelectBeer beerList={beerList} getBeerType={this.getBeerType} />
                         <SelectBrewery beerList={beerList} getBrewery={this.getBrewery} />
                    </div>
-                   <BeerLogNotes getNotes={this.getNotes} />
-                   <button type="submit">Submit Entry</button>
+                   <BeerLogNotes placeholder='Notes' getNotes={this.getNotes} />
+                   <Button variant="contained" color="primary" type="submit">Add Entry</Button>
               </form>
          </div>
        );

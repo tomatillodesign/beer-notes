@@ -76,7 +76,7 @@ export default function HeaderTabs(props) {
         <BeerHome />
       </TabPanel>
       <TabPanel value={value} index={2}>
-         <NewBeerForm beerList={props.beerList} />
+         <NewBeerForm beerList={props.beerList} addNewBeer={props.addNewBeer} />
          <BeerCards />
       </TabPanel>
     </div>

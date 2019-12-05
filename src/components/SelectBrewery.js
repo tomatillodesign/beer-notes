@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
-import { beers, domestics, completeBeerList } from '../data/beers.js';
+//import { beers, domestics, completeBeerList } from '../data/beers.js';
 
 class SelectBrewery extends React.Component {
 
@@ -13,6 +13,7 @@ class SelectBrewery extends React.Component {
 
      getBreweries() {
 
+          const completeBeerList = this.props.beerList;
           var options = [];
 
           Object.keys(completeBeerList).forEach(key => {

@@ -1,12 +1,15 @@
 import 'date-fns';
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
 
 import Select from 'react-select';
 import Creatable, { makeCreatableSelect } from 'react-select/creatable';
 
 import SelectBrewery from './SelectBrewery';
 import BeerLogNotes from './BeerLogNotes';
+import NameOfBeer from './NameOfBeer';
 
 class NewBeerForm extends React.Component {
 
@@ -18,32 +21,46 @@ class NewBeerForm extends React.Component {
      createNewBeer = (event) => {
           // 1. Stop the form from submitting
           event.preventDefault();
+          // const entry = {
+          //      timestamp: Date.now(),
+          //      beer_name: this.beerName,
+          //      brewery: this.brewery,
+          //      description: this.beerNotes,
+          // }
+
           const entry = {
-               timestamp: Date.now(),
-               beerName: this.beerName,
-               brewery: this.brewery,
-               notes: this.beerNotes,
-          }
+                         brewery: 'TEST',
+                         brewery_slug: 'TEST',
+                         location: 'Hershey, PA',
+                         beers: [
+                              {
+                                   beer_name: this.beerName,
+                                   abv: 8.2,
+                                   my_rating: 'Good',
+                                   description: this.beerNotes
+                              }
+                         ]
+               }
 
           console.log(entry);
+          // 2 add the new beer to state (App.js)
           this.props.addNewBeer(entry);
           // refresh the form
           event.currentTarget.reset();
      }
 
-     getNotes = (event) => {
+     getBeerName = (event) => {
+          this.beerName = (event.target.value);
+          console.log(this.beerName);
+     }
+
+     getBeerDescription = (event) => {
           this.beerNotes = (event.target.value);
      }
 
      getEntryDate = (date) => {
           this.entryDate = date;
           console.log("ENTRY DATE: " + this.entryDate);
-     }
-
-     getBeerType = (selectedOption) => {
-          if(selectedOption) {
-               this.beerType = selectedOption.value;
-          }
      }
 
      getBrewery = (selectedOption) => {
@@ -60,11 +77,10 @@ render() {
        return (
             <div className="new-beer-area">
                <form className="new-beer" onSubmit={this.createNewBeer} >
-                   <div className="clb-two-col">
+                        <NameOfBeer getBeerName={this.getBeerName} />
                         <SelectBrewery beerList={beerList} getBrewery={this.getBrewery} />
-                   </div>
-                   <BeerLogNotes placeholder='Description' getDescription={this.getDescription} />
-                   <button type="submit">Submit Entry</button>
+                   <BeerLogNotes placeholder='Description' getNotes={this.getBeerDescription} />
+                   <Button variant="contained" color="primary" type="submit">Add New Beer</Button>
               </form>
          </div>
        );

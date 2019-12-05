@@ -23,7 +23,7 @@
 
 /* ---- CLB Styles ----- */
 
-.beer-log-area {
+.beer-log-area, .new-beer {
      max-width: 560px;
      margin-left: auto;
      margin-right: auto;
@@ -42,4 +42,9 @@
 .MuiTabs-root {
     margin-left: auto;
     margin-right: auto;
+}
+
+
+.button, button {
+     
 }
