@@ -85,7 +85,9 @@ render() {
                         <NameOfBeer getBeerName={this.getBeerName} />
                         <BeerABV getABV={this.getABV} />
                    </div>
+                         <div className="clb-left-align">
                         <SelectBrewery beerList={beerList} getBrewery={this.getBrewery} />
+                        </div>
                    <BeerLogNotes placeholder='Description' getNotes={this.getBeerDescription} />
                    <Button variant="contained" color="primary" type="submit">Add New Beer</Button>
               </form>

@@ -14,13 +14,26 @@ class App extends React.Component {
        };
 
      addNewBeer = (newBeer) => {
-          console.log("ADD NEW BEER");
           console.log("ADD NEW BEER" + JSON.stringify(newBeer));
           // 1. take a copy of existing state
           const completeBeerList = { ...this.state.completeBeerList };
           // 2. add our new fish to that fishes variable
           //completeBeerList[`newBeer_${Date.now()}`] = newBeer;
           completeBeerList[`brewery04`] = newBeer;
+          // 3. Set the new fishes object to state
+          this.setState({
+               completeBeerList: completeBeerList
+          })
+     }
+
+     addNewBrewery = (newBrewery) => {
+          console.log("ADD NEW BREWERY" + JSON.stringify(newBrewery));
+          
+          // 1. take a copy of existing state
+          const completeBeerList = { ...this.state.completeBeerList };
+          // 2. add our new fish to that fishes variable
+          //completeBeerList[`newBeer_${Date.now()}`] = newBeer;
+          completeBeerList[newBrewery.brewery_slug] = newBrewery;
           // 3. Set the new fishes object to state
           this.setState({
                completeBeerList: completeBeerList
@@ -34,7 +47,7 @@ class App extends React.Component {
 
             return (
               <div className="App">
-                <HeaderTabs beerList={beerList} addNewBeer={this.addNewBeer} />
+                <HeaderTabs beerList={beerList} addNewBeer={this.addNewBeer} addNewBrewery={this.addNewBrewery} />
               </div>
             );
      }

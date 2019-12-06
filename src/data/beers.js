@@ -14,10 +14,11 @@ export const domestics = [
 
 
 export const completeBeerList = {
-     brewery01: {
+     troegs: {
                     brewery: 'Tröegs Brewing Company',
                     brewery_slug: 'troegs',
                     location: 'Hershey, PA',
+                    timestamp: Date.now(),
                     beers: [
                          {
                               beer_name: 'Troegenator',
@@ -39,10 +40,11 @@ export const completeBeerList = {
                          },
                     ]
                },
-     brewery02: {
+     new_belgium: {
                     brewery: 'New Belgium',
                     brewery_slug: 'new_belgium',
                     location: 'Asheville, NC',
+                    timestamp: Date.now(),
                     beers: [
                          {
                               beer_name: 'Fat Tire Amber Ale',
@@ -64,10 +66,11 @@ export const completeBeerList = {
                          },
                     ]
                },
-     brewery03: {
+     appalachian_mountain_brewery: {
                     brewery: 'Appalachian Mountain Brewery',
-                    brewery_slug: 'amb',
+                    brewery_slug: 'appalachian_mountain_brewery',
                     location: 'Boone, NC',
+                    timestamp: Date.now(),
                     beers: [
                          {
                               beer_name: 'Spoaty Oaty',

@@ -10,6 +10,7 @@ import Box from '@material-ui/core/Box';
 import BeerHome from './BeerHome';
 import BeerLog from './BeerLog';
 import NewBeerForm from './NewBeerForm';
+import NewBreweryForm from './NewBreweryForm';
 import BeerCards from './BeerCards';
 
 function TabPanel(props) {
@@ -65,19 +66,24 @@ export default function HeaderTabs(props) {
           </Typography>
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab label="Log" {...a11yProps(0)} />
-          <Tab label="Home" {...a11yProps(1)} />
-          <Tab label="Cards" {...a11yProps(2)} />
+          <Tab label="Beers" {...a11yProps(1)} />
+          <Tab label="New Beer" {...a11yProps(2)} />
+          <Tab label="New Brewery" {...a11yProps(3)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
         <BeerLog beerList={props.beerList} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <BeerHome />
+        <BeerCards beerList={props.beerList} />
       </TabPanel>
       <TabPanel value={value} index={2}>
+          <h2>Add New Beer</h2>
          <NewBeerForm beerList={props.beerList} addNewBeer={props.addNewBeer} />
-         <BeerCards />
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+          <h2>Add New Brewery</h2>
+         <NewBreweryForm addNewBrewery={props.addNewBrewery} />
       </TabPanel>
     </div>
   );

@@ -49,4 +49,23 @@
      display: grid;
      grid-template-columns: 3fr 1fr;
      grid-column-gap: 20px;
+     text-align: left;
+}
+
+.clb-flex-row-two-thirds {
+     display: grid;
+     grid-template-columns: 2fr 1fr;
+     grid-column-gap: 20px;
+     text-align: left;
+}
+
+.clb-flex-row-fifty-fifty {
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     grid-column-gap: 20px;
+     text-align: left;
+}
+
+.clb-left-align {
+     text-align: left;
 }
