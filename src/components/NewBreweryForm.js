@@ -37,7 +37,6 @@ class NewBreweryForm extends React.Component {
                          city: this.breweryCity,
                          state: this.breweryState,
                          timestamp: this.timestamp,
-                         beers: []
                     }
 
           console.log(entry);

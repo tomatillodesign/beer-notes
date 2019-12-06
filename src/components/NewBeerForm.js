@@ -11,6 +11,7 @@ import SelectBrewery from './SelectBrewery';
 import BeerLogNotes from './BeerLogNotes';
 import NameOfBeer from './NameOfBeer';
 import BeerABV from './BeerABV';
+import { slugify } from '../helpers';
 
 class NewBeerForm extends React.Component {
 
@@ -30,17 +31,14 @@ class NewBeerForm extends React.Component {
           //      description: this.beerNotes,
           // }
 
-          const entry = {
-                         brewery: this.brewery,
-                         beers: [
+          const entry = [this.brewery,
                               {
                                    beer_name: this.beerName,
                                    abv: this.beerABV,
                                    my_rating: 'Good',
                                    description: this.beerNotes
                               }
-                         ]
-                    }
+                         ];
 
           console.log(entry);
           // 2 add the new beer to state (App.js)
@@ -69,7 +67,7 @@ class NewBeerForm extends React.Component {
 
      getBrewery = (selectedOption) => {
           if(selectedOption) {
-               this.brewery = selectedOption.label;
+               this.brewery = slugify(selectedOption.label);
           }
      }
 
