@@ -11,6 +11,7 @@ import SelectBrewery from './SelectBrewery';
 import BeerLogNotes from './BeerLogNotes';
 import NameOfBeer from './NameOfBeer';
 import BeerABV from './BeerABV';
+import SelectRating from './SelectRating';
 import { slugify } from '../helpers';
 
 class NewBeerForm extends React.Component {
@@ -18,8 +19,10 @@ class NewBeerForm extends React.Component {
      timestamp = Date.now();
      beerName = null;
      brewery = null;
+     my_rating = null;
      beerNotes = null;
      beerABV = null;
+     newBeersAdded = 0;
 
      createNewBeer = (event) => {
           // 1. Stop the form from submitting
@@ -35,7 +38,7 @@ class NewBeerForm extends React.Component {
                               beer_name: this.beerName,
                               brewery: this.brewery,
                               abv: this.beerABV,
-                              my_rating: 'Good',
+                              my_rating: this.my_rating,
                               description: this.beerNotes
                          }
 
@@ -70,13 +73,21 @@ class NewBeerForm extends React.Component {
           }
      }
 
+     setRating = (selectedOption) => {
+          if(selectedOption) {
+               this.my_rating = selectedOption.label;
+          }
+     }
+
 
 render() {
 
      const beerList = this.props.beerList;
      const breweries = this.props.breweries;
+     this.newBeersAdded++;
 
        return (
+            <>
             <div className="new-beer-area">
                <form className="new-beer" onSubmit={this.createNewBeer} >
                     <div className="clb-flex-row-three-fourths">
@@ -84,12 +95,21 @@ render() {
                         <BeerABV getABV={this.getABV} />
                    </div>
                          <div className="clb-left-align">
-                        <SelectBrewery breweries={breweries} getBrewery={this.getBrewery} />
+                              <div className="clb-flex-row-two-thirds">
+                              <SelectBrewery breweries={breweries} getBrewery={this.getBrewery} />
+                              <SelectRating setRating={this.setRating} reset={this.reset} />
+                              </div>
                         </div>
                    <BeerLogNotes placeholder='Description' getNotes={this.getBeerDescription} />
                    <Button variant="contained" color="primary" type="submit">Add New Beer</Button>
               </form>
          </div>
+         
+              {this.newBeersAdded > 1 &&
+             <div className="successful-added-message">You added a new beer!</div>
+           }
+
+         </>
        );
      }
 

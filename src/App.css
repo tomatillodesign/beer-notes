@@ -69,3 +69,16 @@
 .clb-left-align {
      text-align: left;
 }
+
+.successful-added-message {
+     display: inline-block;
+     margin-top: 20px;
+     background: yellow;
+     padding: 20px;
+     border-radius: 12px;
+}
+
+.clb-beer-card-area {
+     display: grid;
+     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}

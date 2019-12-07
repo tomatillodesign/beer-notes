@@ -27,6 +27,7 @@ render() {
                id="outlined-basic"
                label="Name of Beer"
                fullWidth
+               required
                onChange={this.props.getBeerName}
                />
 

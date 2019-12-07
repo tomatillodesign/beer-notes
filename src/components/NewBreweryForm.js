@@ -20,6 +20,7 @@ class NewBreweryForm extends React.Component {
      brewerySlug = null;
      breweryCity = null;
      breweryState = null;
+     newBeersAdded = 0;
 
      createNewBrewery = (event) => {
           // 1. Stop the form from submitting
@@ -64,7 +65,10 @@ class NewBreweryForm extends React.Component {
 
 render() {
 
+     this.newBeersAdded++;
+
        return (
+            <>
             <div className="new-beer-area">
                <form className="new-beer" onSubmit={this.createNewBrewery} >
                         <NameOfBrewery getBreweryName={this.getBreweryName} />
@@ -75,6 +79,10 @@ render() {
                    <Button variant="contained" color="primary" type="submit">Add New Brewery</Button>
               </form>
          </div>
+         {this.newBeersAdded > 1 &&
+        <div className="successful-added-message">You added a new brewery!</div>
+      }
+      </>
        );
      }
 

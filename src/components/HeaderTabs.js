@@ -11,7 +11,7 @@ import BeerHome from './BeerHome';
 import BeerLog from './BeerLog';
 import NewBeerForm from './NewBeerForm';
 import NewBreweryForm from './NewBreweryForm';
-import BeerCards from './BeerCards';
+import NewBeerCards from './NewBeerCards';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -76,7 +76,9 @@ export default function HeaderTabs(props) {
         <BeerLog beerList={props.beerList} breweries={props.breweries} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <BeerCards beerList={props.beerList} breweries={props.breweries} />
+        {// <BeerCards beerList={props.beerList} breweries={props.breweries} />
+        }
+        <NewBeerCards beerList={props.beerList} breweries={props.breweries} />
       </TabPanel>
       <TabPanel value={value} index={2}>
           <h2>Add New Beer</h2>
