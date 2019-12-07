@@ -13,21 +13,24 @@ class SelectBrewery extends React.Component {
 
      getBreweries() {
 
-          const completeBeerList = this.props.beerList;
+          const completeBreweryList = this.props.breweries;
+          console.log(completeBreweryList);
           var options = [];
+          for (let j = 0; j < completeBreweryList.length; j++) {
+                 options.push( {value: completeBreweryList[j].brewery_slug, label: completeBreweryList[j].brewery } );
+            }
 
-          Object.keys(completeBeerList).forEach(key => {
-            let brewery = completeBeerList[key];
-            console.log(brewery);
-            console.log(brewery.beers);
-
-            options.push( {value: brewery.brewery_slug, label: brewery.brewery } );
-
-          });
+          // Object.keys(completeBeerList).forEach(key => {
+          //   let brewery = completeBeerList[key];
+          //   console.log(brewery);
+          //   console.log(brewery.beers);
+          //
+          //   options.push( {value: brewery.brewery_slug, label: brewery.brewery } );
+          //
+          // });
 
           // Create a new array in alphabectical order
           const alphabeticalBreweries = [...options].sort((a, b) => (a.label > b.label) ? 1 : -1);
-
           return alphabeticalBreweries;
 
      }

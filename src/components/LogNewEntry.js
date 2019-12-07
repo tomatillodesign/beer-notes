@@ -60,6 +60,7 @@ class LogNewEntry extends React.Component {
 render() {
 
      const beerList = this.props.beerList;
+     const breweries = this.props.breweries;
      console.log("LOG NEW ENTRY" + JSON.stringify(beerList));
 
        return (
@@ -68,7 +69,7 @@ render() {
                    <BeerLogDate getEntryDate={this.getEntryDate} />
                    <div className="clb-two-col">
                         <SelectBeer beerList={beerList} getBeerType={this.getBeerType} />
-                        <SelectBrewery beerList={beerList} getBrewery={this.getBrewery} />
+                        <SelectBrewery breweries={breweries} getBrewery={this.getBrewery} />
                    </div>
                    <BeerLogNotes placeholder='Notes' getNotes={this.getNotes} />
                    <Button variant="contained" color="primary" type="submit">Add Entry</Button>

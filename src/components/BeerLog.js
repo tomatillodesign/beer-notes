@@ -30,12 +30,13 @@ class BeerLog extends React.Component {
 render() {
 
      const beerList = this.props.beerList;
+     const breweries= this.props.breweries;
      console.log("UPDATED BEER LIST: " + JSON.stringify(beerList));
      console.log("Log Entry: " + JSON.stringify(this.state.logEntries));
 
        return (
             <div className="beer-log-area">
-               <LogNewEntry beerList={beerList} addLogEntry={this.addLogEntry} />
+               <LogNewEntry beerList={beerList} breweries={breweries} addLogEntry={this.addLogEntry} />
                <ul className="log-entry-area">
                     {Object.keys(this.state.logEntries).map(key => <LogEntry key={key} details={this.state.logEntries[key]} />)}
                </ul>

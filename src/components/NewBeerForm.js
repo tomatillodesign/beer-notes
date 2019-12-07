@@ -31,14 +31,13 @@ class NewBeerForm extends React.Component {
           //      description: this.beerNotes,
           // }
 
-          const entry = [this.brewery,
-                              {
-                                   beer_name: this.beerName,
-                                   abv: this.beerABV,
-                                   my_rating: 'Good',
-                                   description: this.beerNotes
-                              }
-                         ];
+          const entry = {
+                              beer_name: this.beerName,
+                              brewery: this.brewery,
+                              abv: this.beerABV,
+                              my_rating: 'Good',
+                              description: this.beerNotes
+                         }
 
           console.log(entry);
           // 2 add the new beer to state (App.js)
@@ -75,6 +74,7 @@ class NewBeerForm extends React.Component {
 render() {
 
      const beerList = this.props.beerList;
+     const breweries = this.props.breweries;
 
        return (
             <div className="new-beer-area">
@@ -84,7 +84,7 @@ render() {
                         <BeerABV getABV={this.getABV} />
                    </div>
                          <div className="clb-left-align">
-                        <SelectBrewery beerList={beerList} getBrewery={this.getBrewery} />
+                        <SelectBrewery breweries={breweries} getBrewery={this.getBrewery} />
                         </div>
                    <BeerLogNotes placeholder='Description' getNotes={this.getBeerDescription} />
                    <Button variant="contained" color="primary" type="submit">Add New Beer</Button>

@@ -100,7 +100,7 @@ export const completeBeerList = {
 // New approach to the data in state
 // 12-6 449pm
 
-export const beerList = [
+export const beerListUpdated = [
      {
           beer_name: 'Troegenator',
           brewery_slug: 'troegs',
