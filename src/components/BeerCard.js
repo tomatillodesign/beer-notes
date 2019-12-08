@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Collapse from '@material-ui/core/Collapse';
+import LogEntry from './LogEntry';
 import { getBrewery } from '../helpers';
 
 import ExampleModal from './ExampleModal';
@@ -51,39 +52,60 @@ export default function BeerCard(props) {
      const brewerySlug = props.beer.brewery_slug;
      const myRating = props.beer.my_rating;
 
-     //const test = getBrewery( 'Testing 123' );
-
      const breweries = props.breweries;
+     const beerLog = props.beerLog;
+     //console.log(beerLog);
 
-     var result = breweries.find(obj => {
+     var getBreweryObj = breweries.find(obj => {
        return obj.brewery_slug === brewerySlug
      });
-     console.log("FOUND BREWERY: " + result);
 
+     var getLogObj = beerLog.filter(obj => {
+       return obj.beer === beerName
+     });
+     console.log("LOG OBJ" + JSON.stringify(getLogObj));
+
+     let breweryToPublish = null;
+     if(getBreweryObj) {
+          breweryToPublish = <Typography variant="overline" display="block" gutterBottom>
+        {getBreweryObj.brewery}
+      </Typography>;
+}
+
+     let isActiveClass = 'inactive';
+     let logCount = 0;
+     if( getLogObj.length > 0 ) {
+          //console.log(getLogObj);
+          logCount = getLogObj.length;
+          isActiveClass = 'active';
+     }
+
+     const matchingLogNotes = getLogObj;
 
      return (
-         <Card className={classes.card}>
-             <CardMedia
-               className={classes.media}
-               image="http://www.tomatillodesign.com/wp-content/uploads/2019/12/beer01.jpg"
-               title="Beer!"
-             />
+         <Card className={classes.card + ' clb-single-beer-card ' + isActiveClass}>
+
+             <img src="http://www.tomatillodesign.com/wp-content/uploads/2019/12/beer01.jpg" />
              <CardContent>
                <Typography gutterBottom variant="h5" component="h2">
                  {beerName}
                </Typography>
-               <Typography variant="overline" display="block" gutterBottom>
-                  {result.brewery}
-                </Typography>
+               {breweryToPublish}
                <Typography variant="body2" color="textSecondary" component="p">
                  {description}
                </Typography>
              </CardContent>
              <CardActions>
-             <ExampleModal beerName={beerName}/>
+
+             {logCount > 0 &&
+                  <ExampleModal beerName={beerName} beerLog={matchingLogNotes} />
+                }
                   <Button variant="outlined" disabled>
                     {myRating}
                  </Button>
+                 <Button variant="outlined" disabled>
+                   {logCount}
+               </Button>
            </CardActions>
     </Card>
 

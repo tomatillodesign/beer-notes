@@ -10,22 +10,6 @@ import LogEntry from './LogEntry';
 
 class BeerLog extends React.Component {
 
-     // state = {
-     //     logEntries: {}
-     //   };
-     //
-     //
-     //   addLogEntry = (logEntry) => {
-     //       // 1. take a copy of existing state
-     //       const logEntries = { ...this.state.logEntries };
-     //       // 2. add our new fish to that fishes variable
-     //       logEntries[`logEntry_${Date.now()}`] = logEntry;
-     //       // 3. Set the new fishes object to state
-     //       this.setState({
-     //            logEntries: logEntries
-     //       })
-     //  }
-
 
 render() {
 
@@ -38,9 +22,11 @@ render() {
        return (
             <div className="beer-log-area">
                <LogNewEntry beerList={beerList} breweries={breweries} addLogEntry={this.props.addLogEntry} />
-               <ul className="log-entry-area">
-                    {Object.keys(beerLog).map(key => <LogEntry key={key} details={beerLog[key]} />)}
-               </ul>
+               <div className="complete-log">
+                    <ul className="log-entry-area">
+                         {Object.keys(beerLog).map(key => <LogEntry key={key} details={beerLog[key]} />)}
+                    </ul>
+               </div>
          </div>
        );
      }

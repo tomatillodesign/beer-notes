@@ -61,7 +61,7 @@ render() {
 
      const beerList = this.props.beerList;
      const breweries = this.props.breweries;
-     console.log("LOG NEW ENTRY" + JSON.stringify(beerList));
+     //console.log("LOG NEW ENTRY" + JSON.stringify(beerList));
 
        return (
             <div className="log-new-entry">

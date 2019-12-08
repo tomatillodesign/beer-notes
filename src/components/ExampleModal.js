@@ -1,12 +1,15 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from '@material-ui/core/Button';
+import LogEntry from './LogEntry';
 
 export default function ExampleModal(props) {
   const [show, setShow] = React.useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const beerLog = props.beerLog;
 
   return (
     <>
@@ -18,7 +21,11 @@ export default function ExampleModal(props) {
         <Modal.Header closeButton>
           <Modal.Title>{props.beerName}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Body>
+             <ul className="log-entry-area">
+                  {Object.keys(beerLog).map(key => <LogEntry key={key} details={beerLog[key]} modal={true} />)}
+             </ul>
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="contained" color="secondary" onClick={handleClose}>
             Close

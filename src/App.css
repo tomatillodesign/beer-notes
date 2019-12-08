@@ -84,3 +84,16 @@
      grid-column-gap: 30px;
      grid-row-gap: 30px;
 }
+
+.clb-single-beer-card img {
+     width: 100%;
+}
+
+.clb-single-beer-card.inactive img {
+     filter: grayscale(1) opacity(.2);
+}
+
+.clb-single-beer-card .MuiCardActions-root {
+     display: block;
+     padding-bottom: 20px;
+}
