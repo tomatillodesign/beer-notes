@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 import LogEntry from './LogEntry';
 
 export default function ExampleModal(props) {
@@ -17,7 +18,7 @@ export default function ExampleModal(props) {
         View Log
       </Button>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} className="clb-single-beer-notes">
         <Modal.Header closeButton>
           <Modal.Title>{props.beerName}</Modal.Title>
         </Modal.Header>
@@ -27,6 +28,7 @@ export default function ExampleModal(props) {
              </ul>
         </Modal.Body>
         <Modal.Footer>
+          <div className="clb-modal-subheader"><Typography variant="overline" display="block" gutterBottom>By {props.breweryName}</Typography></div>
           <Button variant="contained" color="secondary" onClick={handleClose}>
             Close
           </Button>

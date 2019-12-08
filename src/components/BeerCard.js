@@ -66,10 +66,13 @@ export default function BeerCard(props) {
      console.log("LOG OBJ" + JSON.stringify(getLogObj));
 
      let breweryToPublish = null;
+     let breweryName = null;
      if(getBreweryObj) {
           breweryToPublish = <Typography variant="overline" display="block" gutterBottom>
         {getBreweryObj.brewery}
       </Typography>;
+
+          breweryName = getBreweryObj.brewery;
 }
 
      let isActiveClass = 'inactive';
@@ -98,7 +101,7 @@ export default function BeerCard(props) {
              <CardActions>
 
              {logCount > 0 &&
-                  <ExampleModal beerName={beerName} beerLog={matchingLogNotes} />
+                  <ExampleModal beerName={beerName} breweryName={breweryName} beerLog={matchingLogNotes} />
                 }
                   <Button variant="outlined" disabled>
                     {myRating}

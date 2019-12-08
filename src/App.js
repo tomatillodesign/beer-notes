@@ -5,6 +5,7 @@ import Header from './components/Header.js';
 import HeaderTabs from './components/HeaderTabs.js';
 import Router from './components/Router.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 import { beers, domestics, completeBeerList, beerListUpdated, breweryList } from './data/beers.js';
 
