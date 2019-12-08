@@ -4,6 +4,7 @@ import './App.css';
 import Header from './components/Header.js';
 import HeaderTabs from './components/HeaderTabs.js';
 import Router from './components/Router.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { beers, domestics, completeBeerList, beerListUpdated, breweryList } from './data/beers.js';
 
@@ -11,7 +12,8 @@ class App extends React.Component {
 
      state = {
          completeBeerList: beerListUpdated,
-         breweries: breweryList
+         breweries: breweryList,
+         beerLog: {},
        };
 
      addNewBeer = (newBeer) => {
@@ -46,15 +48,36 @@ class App extends React.Component {
           }))
      }
 
+     addLogEntry = (logEntry) => {
+         // 1. take a copy of existing state
+         const logEntries = { ...this.state.beerLog };
+         // 2. add our new fish to that fishes variable
+         logEntries[`logEntry_${Date.now()}`] = logEntry;
+         // 3. Set the new fishes object to state
+         this.setState({
+              beerLog: logEntries
+         })
+    }
+
+
+
      render() {
 
           const beerList = this.state.completeBeerList;
           const breweries = this.state.breweries;
+          const beerLog = this.state.beerLog;
           console.log(beerList);
 
             return (
               <div className="App">
-                <HeaderTabs beerList={beerList} breweries={breweries} addNewBeer={this.addNewBeer} addNewBrewery={this.addNewBrewery} />
+                <HeaderTabs
+                    beerList={beerList}
+                    breweries={breweries}
+                    addNewBeer={this.addNewBeer}
+                    addNewBrewery={this.addNewBrewery}
+                    addLogEntry={this.addLogEntry}
+                    beerLog={beerLog}
+               />
               </div>
             );
      }

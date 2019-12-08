@@ -73,12 +73,12 @@ export default function HeaderTabs(props) {
       </AppBar>
       <TabPanel value={value} index={0}>
           <h2>Log New Entry</h2>
-        <BeerLog beerList={props.beerList} breweries={props.breweries} />
+        <BeerLog beerList={props.beerList} breweries={props.breweries} beerLog={props.beerLog} addLogEntry={props.addLogEntry}/>
       </TabPanel>
       <TabPanel value={value} index={1}>
         {// <BeerCards beerList={props.beerList} breweries={props.breweries} />
         }
-        <NewBeerCards beerList={props.beerList} breweries={props.breweries} />
+        <NewBeerCards beerList={props.beerList} breweries={props.breweries} beerLog={props.beerLog}  />
       </TabPanel>
       <TabPanel value={value} index={2}>
           <h2>Add New Beer</h2>

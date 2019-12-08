@@ -9,6 +9,9 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Collapse from '@material-ui/core/Collapse';
+import { getBrewery } from '../helpers';
+
+import ExampleModal from './ExampleModal';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -45,51 +48,43 @@ export default function BeerCard(props) {
      // get props and set variables
      const beerName = props.beer.beer_name;
      const description = props.beer.description;
+     const brewerySlug = props.beer.brewery_slug;
+     const myRating = props.beer.my_rating;
+
+     //const test = getBrewery( 'Testing 123' );
+
+     const breweries = props.breweries;
+
+     var result = breweries.find(obj => {
+       return obj.brewery_slug === brewerySlug
+     });
+     console.log("FOUND BREWERY: " + result);
+
 
      return (
          <Card className={classes.card}>
-           <CardActionArea>
              <CardMedia
                className={classes.media}
-               image="/static/images/cards/contemplative-reptile.jpg"
-               title="Contemplative Reptile"
+               image="http://www.tomatillodesign.com/wp-content/uploads/2019/12/beer01.jpg"
+               title="Beer!"
              />
              <CardContent>
                <Typography gutterBottom variant="h5" component="h2">
                  {beerName}
                </Typography>
+               <Typography variant="overline" display="block" gutterBottom>
+                  {result.brewery}
+                </Typography>
                <Typography variant="body2" color="textSecondary" component="p">
                  {description}
                </Typography>
              </CardContent>
-           </CardActionArea>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>Method:</Typography>
-          <Typography paragraph>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10
-            minutes.
-          </Typography>
-          <Typography paragraph>
-            Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high
-            heat. Add chicken, shrimp and chorizo, and cook, stirring occasionally until lightly
-            browned, 6 to 8 minutes. Transfer shrimp to a large plate and set aside, leaving chicken
-            and chorizo in the pan. Add pimentón, bay leaves, garlic, tomatoes, onion, salt and
-            pepper, and cook, stirring often until thickened and fragrant, about 10 minutes. Add
-            saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
-          </Typography>
-          <Typography paragraph>
-            Add rice and stir very gently to distribute. Top with artichokes and peppers, and cook
-            without stirring, until most of the liquid is absorbed, 15 to 18 minutes. Reduce heat to
-            medium-low, add reserved shrimp and mussels, tucking them down into the rice, and cook
-            again without stirring, until mussels have opened and rice is just tender, 5 to 7
-            minutes more. (Discard any mussels that don’t open.)
-          </Typography>
-          <Typography>
-            Set aside off of the heat to let rest for 10 minutes, and then serve.
-          </Typography>
-        </CardContent>
-      </Collapse>
+             <CardActions>
+             <ExampleModal beerName={beerName}/>
+                  <Button variant="outlined" disabled>
+                    {myRating}
+                 </Button>
+           </CardActions>
     </Card>
 
        );

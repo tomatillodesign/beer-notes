@@ -10,3 +10,12 @@ export function slugify(text) {
     .replace(/^-+/, "")
     .replace(/-+$/, "");
 }
+
+
+export function getBrewery( brewery_slug ) {
+
+     
+
+     return brewery_slug;
+
+}
