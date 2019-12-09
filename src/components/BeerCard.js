@@ -44,17 +44,17 @@ export default function BeerCard(props) {
      const beerABV = props.beer.abv;
      const addNewBeer = props.addNewBeer;
 
-     console.log("---------------" + beerName + "----------------");
+     //console.log("---------------" + beerName + "----------------");
 
      const beerList = props.beerList;
      const breweries = props.breweries;
      const beerLog = props.beerLog;
-     console.log(brewerySlug);
+     //console.log(brewerySlug);
 
      var getBreweryObj = breweries.find(obj => {
        return obj.brewery_slug === brewerySlug
      });
-     console.log("Brewery OBJ" + JSON.stringify(getBreweryObj));
+     //console.log("Brewery OBJ" + JSON.stringify(getBreweryObj));
 
      var getLogObj = beerLog.filter(obj => {
        return obj.beer === beerName
@@ -86,7 +86,15 @@ export default function BeerCard(props) {
              <img src="http://www.tomatillodesign.com/wp-content/uploads/2019/12/beer01.jpg" />
              <CardContent>
                <Typography gutterBottom variant="h5" component="h2">
-                 {beerName}
+                    <EditBeer
+                        beerObj={beerObj}
+                        beerName={beerName}
+                        breweries={breweries}
+                        beerList={beerList}
+                        breweryName={breweryToPublish}
+                        editCurrentBeer={true}
+                        addNewBeer={addNewBeer}
+                   />
                </Typography>
                {breweryToPublish}
                <Typography variant="body2" color="textSecondary" component="p">
@@ -111,14 +119,6 @@ export default function BeerCard(props) {
                       <Button variant="outlined" disabled title="You haven't logged this beer yet!">
                         {logCount}
                     </Button>}
-               <EditBeer
-                    beerObj={beerObj}
-                    beerName={beerName}
-                    breweries={breweries}
-                    beerList={beerList}
-                    breweryName={breweryToPublish}
-                    editCurrentBeer={true}
-                    addNewBeer={addNewBeer} />
            </CardActions>
     </Card>
 

@@ -20,11 +20,10 @@ export default function EditBeer(props) {
 
   return (
     <>
-      <Button variant="contained" color="primary" onClick={handleShow} title="View Log">
-        Edit Beer
-      </Button>
-
-      <Modal show={show} onHide={handleClose} className="clb-single-beer-notes">
+      <a href="#" onClick={handleShow} title="View Log">
+        {beerName}
+      </a>
+      <Modal show={show} onHide={handleClose} className="clb-edit-beer">
         <Modal.Header closeButton>
           <Modal.Title>Now Editing: {props.beerName}</Modal.Title>
         </Modal.Header>
@@ -43,6 +42,7 @@ export default function EditBeer(props) {
                               }
                          }
                     brewerySlug={beerObj.brewery_slug}
+                    breweryName={beerObj.brewery_name}
                     defaultRating={beerObj.my_rating}
                     addNewBeer={addNewBeer}
                     editCurrentBeer={editCurrentBeer}

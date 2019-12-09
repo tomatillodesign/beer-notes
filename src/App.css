@@ -105,6 +105,16 @@
      padding-bottom: 20px;
 }
 
+.clb-single-beer-card a {
+     color: #000;
+     transition: all ease-in-out .25s;
+}
+
+.clb-single-beer-card a:hover {
+     color: #673ab7;
+     text-decoration: none;
+}
+
 .clb-single-beer-notes .modal-footer {
      justify-content: space-between;
 }
@@ -140,7 +150,13 @@
      text-decoration: none;
 }
 
+.clb-edit-beer {
+     background: rgba(103,58,183,.9);
+}
 
+.clb-single-beer-notes {
+     background: rgba(0,0,0,.7);
+}
 
 
 

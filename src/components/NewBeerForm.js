@@ -18,7 +18,7 @@ class NewBeerForm extends React.Component {
 
      timestamp = Date.now();
      beerName = this.props.beerName;
-     brewery_name = this.props.defaultBrewery;
+     brewery_name = this.props.breweryName;
      brewery_slug = this.props.brewerySlug;
      my_rating = this.props.defaultRating;
      beerNotes = this.props.defaultValue;
@@ -37,6 +37,7 @@ class NewBeerForm extends React.Component {
           // }
 
           const entry = {
+                              timestamp: this.timestamp,
                               beer_name: this.beerName,
                               brewery_name: this.brewery_name,
                               brewery_slug: this.brewery_slug,
@@ -44,7 +45,6 @@ class NewBeerForm extends React.Component {
                               my_rating: this.my_rating,
                               description: this.beerNotes,
                               editCurrentBeer: this.props.editCurrentBeer,
-                              timestamp: this.timestamp
                          }
 
           console.log(entry);
@@ -132,7 +132,7 @@ render() {
               </form>
          </div>
 
-              {this.newBeersAdded > 1 &&
+              {(this.newBeersAdded > 1 && edit !== true) &&
              <div className="successful-added-message">You added a new beer!</div>
            }
 

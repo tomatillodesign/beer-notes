@@ -32,7 +32,7 @@ class App extends React.Component {
      addNewBeer = (newBeer) => {
           console.log(newBeer);
           // 1. take a copy of existing state
-          //const completeBeerList = { ...this.state.completeBeerList };
+          //const prevBeerList = { ...this.state.completeBeerList };
           // 2. add our new fish to that fishes variable
           //completeBeerList[`newBeer_${Date.now()}`] = newBeer;
           //completeBeerList[newBeer[0]] = newBeer[1];
@@ -40,9 +40,31 @@ class App extends React.Component {
           // this.setState({
           //      completeBeerList: completeBeerList
           // })
-          this.setState(prevState => ({
-            completeBeerList: [...prevState.completeBeerList, newBeer]
-          }))
+
+          if( newBeer.editCurrentBeer ) {
+               console.log("EDITING THIS BEER: " + newBeer.beer_name);
+               let beerName = newBeer.beer_name;
+               let clbCustomPreviousState = [...this.state.completeBeerList];
+               let getBeerObjInState = clbCustomPreviousState.filter(obj => {
+                 return obj.beer_name === beerName
+            });
+               //console.log(getBeerObjInState);
+
+               let index = clbCustomPreviousState.map(function(e) { return e.beer_name; }).indexOf(beerName);
+               //console.log(index);
+
+               let ids = [...this.state.completeBeerList];     // create the copy of state array
+               ids[index] = newBeer;                  //new value
+               //console.log(ids[index]);
+               this.setState({ completeBeerList: ids });            //update the value
+
+          } else {
+
+               this.setState(prevState => ({
+                 completeBeerList: [...prevState.completeBeerList, newBeer]
+            }));
+
+           }
      }
 
      addNewBrewery = (newBrewery) => {
@@ -102,7 +124,7 @@ class App extends React.Component {
 
               <div className="clb-footer">
                  <Typography variant="body1">
-                 By Chris Liu-Beers &middot; <a href="http://tomatillodesign.com" target="_blank">Tomatillo Design</a>
+                 Version 0.2 &middot; Updated Dec 9 &middot; A custom React App by Chris Liu-Beers, <a href="http://tomatillodesign.com" target="_blank">Tomatillo Design</a>
                  </Typography>
                  </div>
                  </MuiThemeProvider>
