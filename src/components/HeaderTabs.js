@@ -13,6 +13,8 @@ import NewBeerForm from './NewBeerForm';
 import NewBreweryForm from './NewBreweryForm';
 import NewBeerCards from './NewBeerCards';
 
+import { createMuiTheme } from '@material-ui/core/styles';
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -60,7 +62,7 @@ export default function HeaderTabs(props) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="sticky">
+      <AppBar position="static">
            <Typography variant="h1" className={classes.title + " clb-header"}>
             Beer Notes
           </Typography>

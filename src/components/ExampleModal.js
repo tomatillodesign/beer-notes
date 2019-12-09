@@ -14,8 +14,8 @@ export default function ExampleModal(props) {
 
   return (
     <>
-      <Button variant="contained" color="primary" onClick={handleShow}>
-        View Log
+      <Button variant="contained" color="primary" onClick={handleShow} title="View Log">
+        {props.logCount}
       </Button>
 
       <Modal show={show} onHide={handleClose} className="clb-single-beer-notes">

@@ -7,8 +7,19 @@ import Typography from '@material-ui/core/Typography';
 import Router from './components/Router.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import {createMuiTheme} from '@material-ui/core/styles';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import orange from '@material-ui/core/colors/orange';
+import deepPurple from '@material-ui/core/colors/deepPurple';
 
 import { beers, domestics, completeBeerList, beerListUpdated, breweryList } from './data/beers.js';
+
+const theme = createMuiTheme({
+     palette: {
+       primary: deepPurple,
+       secondary: orange,
+     },
+});
 
 class App extends React.Component {
 
@@ -79,7 +90,7 @@ class App extends React.Component {
 
             return (
               <div className="App">
-               
+               <MuiThemeProvider theme={theme}>
                 <HeaderTabs
                     beerList={beerList}
                     breweries={breweries}
@@ -94,7 +105,7 @@ class App extends React.Component {
                  By Chris Liu-Beers &middot; <a href="http://tomatillodesign.com" target="_blank">Tomatillo Design</a>
                  </Typography>
                  </div>
-
+                 </MuiThemeProvider>
             </div>
             );
      }

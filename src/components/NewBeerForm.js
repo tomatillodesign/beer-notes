@@ -18,6 +18,7 @@ class NewBeerForm extends React.Component {
 
      timestamp = Date.now();
      beerName = null;
+     brewery_name = null;
      brewery_slug = null;
      my_rating = null;
      beerNotes = null;
@@ -36,7 +37,8 @@ class NewBeerForm extends React.Component {
 
           const entry = {
                               beer_name: this.beerName,
-                              brewery_slug: this.brewery,
+                              brewery_name: this.brewery_name,
+                              brewery_slug: this.brewery_slug,
                               abv: this.beerABV,
                               my_rating: this.my_rating,
                               description: this.beerNotes
@@ -69,7 +71,8 @@ class NewBeerForm extends React.Component {
 
      getBrewery = (selectedOption) => {
           if(selectedOption) {
-               this.brewery = slugify(selectedOption.label);
+               this.brewery_slug = slugify(selectedOption.label);
+               this.brewery_name = selectedOption.label;
           }
      }
 

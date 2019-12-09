@@ -4,13 +4,15 @@ class LogEntry extends React.Component {
 
      render() {
 
+          console.log(this.props.details);
+
           //console.log(this.props);
 
           const dateOptions = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
           //console.log(event.toLocaleDateString('us-US', options));
 
           // use ES6 to destructure an object into single variables
-          const { timestamp, entryDate, beer, brewery, notes } = this.props.details;
+          const { timestamp, entryDate, beer, brewery_name, notes } = this.props.details;
           //const entryDatePublish = JSON.stringify(entryDate);
           let newDate = new Date(entryDate);
           //console.log(newDate);
@@ -30,7 +32,7 @@ class LogEntry extends React.Component {
                } else {
                     return (
                          <li className="single-entry">
-                              <h3 className="beer-name">{beer} ({brewery})</h3>
+                              <h3 className="beer-name">{beer} ({brewery_name})</h3>
                               <p>Notes: {notes}</p>
                               <p>{entryDatePublish}</p>
                          </li>

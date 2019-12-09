@@ -39,6 +39,7 @@ export default function BeerCard(props) {
      const description = props.beer.description;
      const brewerySlug = props.beer.brewery_slug;
      const myRating = props.beer.my_rating;
+     const beerABV = props.beer.abv;
      console.log("---------------" + beerName + "----------------");
 
      const breweries = props.breweries;
@@ -63,7 +64,7 @@ export default function BeerCard(props) {
       </Typography>;
 
           breweryName = getBreweryObj.brewery;
-}
+     }
 
      let isActiveClass = 'inactive';
      let logCount = 0;
@@ -76,7 +77,7 @@ export default function BeerCard(props) {
      const matchingLogNotes = getLogObj;
 
      return (
-         <Card className={classes.card + ' clb-single-beer-card ' + isActiveClass} elevation={3} >
+         <Card className={classes.card + ' clb-single-beer-card ' + isActiveClass} elevation={2} >
              <img src="http://www.tomatillodesign.com/wp-content/uploads/2019/12/beer01.jpg" />
              <CardContent>
                <Typography gutterBottom variant="h5" component="h2">
@@ -89,15 +90,22 @@ export default function BeerCard(props) {
              </CardContent>
              <CardActions>
 
-             {logCount > 0 &&
-                  <ExampleModal beerName={beerName} breweryName={breweryName} beerLog={matchingLogNotes} />
-                }
+                {myRating !== null &&
                   <Button variant="outlined" disabled>
                     {myRating}
-                 </Button>
-                 <Button variant="outlined" disabled>
-                   {logCount}
-               </Button>
+                 </Button>}
+                 {beerABV !== null &&
+                  <Button variant="outlined" disabled>
+                    ABV: {beerABV}
+                 </Button>}
+
+                 {logCount > 0 &&
+                     <ExampleModal beerName={beerName} breweryName={breweryName} beerLog={matchingLogNotes} logCount={logCount} />
+                   }
+                   {logCount === 0 &&
+                      <Button variant="outlined" disabled title="You haven't logged this beer yet!">
+                        {logCount}
+                    </Button>}
            </CardActions>
     </Card>
 

@@ -14,13 +14,14 @@ class SelectBeer extends React.Component {
      getBeers() {
 
           const completeBeerList = this.props.beerList;
+          const breweries = this.props.breweries;
           const options = [];
           for (let j = 0; j < completeBeerList.length; j++) {
-                 //console.log(completeBeerList[j].beer_name);
-                 options.push( {value: completeBeerList[j].beer_name, label: completeBeerList[j].beer_name } );
+               options.push( {value: completeBeerList[j].beer_name, label: completeBeerList[j].beer_name + " (" + completeBeerList[j].brewery_name + ")" } );
             }
 
           const alphabeticalBeers = [...options].sort((a, b) => (a.label > b.label) ? 1 : -1);
+
           return alphabeticalBeers;
 
      }
@@ -28,15 +29,14 @@ class SelectBeer extends React.Component {
 render() {
 
      let currentBeerOptions = this.getBeers();
-     //console.log(currentBeerOptions);
 
      return(
        <Select
           placeholder='Select Beer'
+          onChange={this.props.getBeerType}
           options={currentBeerOptions}
           isClearable
           isSearchable
-          onChange={this.props.getBeerType}
         />
    );
 

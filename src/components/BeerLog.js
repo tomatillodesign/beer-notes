@@ -16,14 +16,13 @@ import LogEntry from './LogEntry';
 
 class BeerLog extends React.Component {
 
-
 render() {
 
      const beerList = this.props.beerList;
      const breweries = this.props.breweries;
      const beerLog = this.props.beerLog;
      //console.log("UPDATED BEER LIST: " + JSON.stringify(beerList));
-     //console.log("Log Entry: " + JSON.stringify(this.state.logEntries));
+     console.log("Log Entry: " + JSON.stringify(beerLog));
 
      const logEntriesByDate = [...beerLog].sort((a, b) => (a.entryDate < b.entryDate) ? 1 : -1);
 
