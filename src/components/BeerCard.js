@@ -42,6 +42,8 @@ export default function BeerCard(props) {
      const brewerySlug = props.beer.brewery_slug;
      const myRating = props.beer.my_rating;
      const beerABV = props.beer.abv;
+     const addNewBeer = props.addNewBeer;
+
      console.log("---------------" + beerName + "----------------");
 
      const beerList = props.beerList;
@@ -109,7 +111,14 @@ export default function BeerCard(props) {
                       <Button variant="outlined" disabled title="You haven't logged this beer yet!">
                         {logCount}
                     </Button>}
-               <EditBeer beerObj={beerObj} beerName={beerName} breweries={breweries} beerList={beerList} breweryName={breweryToPublish} />
+               <EditBeer
+                    beerObj={beerObj}
+                    beerName={beerName}
+                    breweries={breweries}
+                    beerList={beerList}
+                    breweryName={breweryToPublish}
+                    editCurrentBeer={true}
+                    addNewBeer={addNewBeer} />
            </CardActions>
     </Card>
 

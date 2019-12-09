@@ -15,6 +15,8 @@ export default function EditBeer(props) {
   const beerObj = props.beerObj;
   const beerName = props.beerName;
   const currentABV = beerObj.abv;
+  const addNewBeer = props.addNewBeer;
+  const editCurrentBeer=props.editCurrentBeer;
 
   return (
     <>
@@ -40,7 +42,10 @@ export default function EditBeer(props) {
                                    label: beerObj.brewery_name
                               }
                          }
+                    brewerySlug={beerObj.brewery_slug}
                     defaultRating={beerObj.my_rating}
+                    addNewBeer={addNewBeer}
+                    editCurrentBeer={editCurrentBeer}
                />
         </Modal.Body>
         <Modal.Footer>

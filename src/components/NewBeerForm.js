@@ -17,13 +17,14 @@ import { slugify } from '../helpers';
 class NewBeerForm extends React.Component {
 
      timestamp = Date.now();
-     beerName = null;
-     brewery_name = null;
-     brewery_slug = null;
-     my_rating = null;
-     beerNotes = null;
-     beerABV = null;
+     beerName = this.props.beerName;
+     brewery_name = this.props.defaultBrewery;
+     brewery_slug = this.props.brewerySlug;
+     my_rating = this.props.defaultRating;
+     beerNotes = this.props.defaultValue;
+     beerABV = this.props.currentABV;
      newBeersAdded = 0;
+     //editCurrentBeer = null;
 
      createNewBeer = (event) => {
           // 1. Stop the form from submitting
@@ -41,10 +42,13 @@ class NewBeerForm extends React.Component {
                               brewery_slug: this.brewery_slug,
                               abv: this.beerABV,
                               my_rating: this.my_rating,
-                              description: this.beerNotes
+                              description: this.beerNotes,
+                              editCurrentBeer: this.props.editCurrentBeer,
+                              timestamp: this.timestamp
                          }
 
           console.log(entry);
+          console.log(this.props.editCurrentBeer);
           // 2 add the new beer to state (App.js)
           this.props.addNewBeer(entry);
           // refresh the form
