@@ -13,7 +13,7 @@ class LogEntry extends React.Component {
           const { timestamp, entryDate, beer, brewery, notes } = this.props.details;
           //const entryDatePublish = JSON.stringify(entryDate);
           let newDate = new Date(entryDate);
-          console.log(newDate);
+          //console.log(newDate);
           const entryDatePublish = newDate.toLocaleDateString('en-US', dateOptions);
           //const entryDatePublish = entryDate.toISOString();
           const modal = this.props.modal;

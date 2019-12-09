@@ -1,22 +1,9 @@
 
-export const beers = [
-  { value: 'fat_tire', label: 'Fat Tire' },
-  { value: 'blue_moon', label: 'Blue Moon' },
-  { value: 'rocket_science', label: 'Rocket Science' }
-];
-
-
-export const domestics = [
-  { value: 'bud', label: 'Budweiser' },
-  { value: 'coors', label: 'Coors' },
-  { value: 'miller_lite', label: 'Miller Lite' }
-];
-
 
 export const completeBeerList = {
      troegs: {
                     brewery: 'Tröegs Brewing Company',
-                    brewery_slug: 'troegs',
+                    brewery_slug: 'tregs_brewing_company',
                     location: 'Hershey, PA',
                     timestamp: Date.now(),
                     beers: [

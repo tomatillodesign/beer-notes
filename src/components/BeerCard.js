@@ -7,8 +7,6 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Collapse from '@material-ui/core/Collapse';
 import LogEntry from './LogEntry';
 import { getBrewery } from '../helpers';
 
@@ -21,16 +19,6 @@ const useStyles = makeStyles(theme => ({
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9
-  },
-  expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)',
   },
 }));
 
@@ -51,19 +39,21 @@ export default function BeerCard(props) {
      const description = props.beer.description;
      const brewerySlug = props.beer.brewery_slug;
      const myRating = props.beer.my_rating;
+     console.log("---------------" + beerName + "----------------");
 
      const breweries = props.breweries;
      const beerLog = props.beerLog;
-     //console.log(beerLog);
+     console.log(brewerySlug);
 
      var getBreweryObj = breweries.find(obj => {
        return obj.brewery_slug === brewerySlug
      });
+     console.log("Brewery OBJ" + JSON.stringify(getBreweryObj));
 
      var getLogObj = beerLog.filter(obj => {
        return obj.beer === beerName
      });
-     console.log("LOG OBJ" + JSON.stringify(getLogObj));
+     //console.log("LOG OBJ" + JSON.stringify(getLogObj));
 
      let breweryToPublish = null;
      let breweryName = null;
@@ -86,8 +76,7 @@ export default function BeerCard(props) {
      const matchingLogNotes = getLogObj;
 
      return (
-         <Card className={classes.card + ' clb-single-beer-card ' + isActiveClass}>
-
+         <Card className={classes.card + ' clb-single-beer-card ' + isActiveClass} elevation={3} >
              <img src="http://www.tomatillodesign.com/wp-content/uploads/2019/12/beer01.jpg" />
              <CardContent>
                <Typography gutterBottom variant="h5" component="h2">

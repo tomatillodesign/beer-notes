@@ -22,15 +22,15 @@ render() {
      const beerList = this.props.beerList;
      const breweries = this.props.breweries;
      const beerLog = this.props.beerLog;
-     console.log("UPDATED BEER LIST: " + JSON.stringify(beerList));
+     //console.log("UPDATED BEER LIST: " + JSON.stringify(beerList));
      //console.log("Log Entry: " + JSON.stringify(this.state.logEntries));
 
      const logEntriesByDate = [...beerLog].sort((a, b) => (a.entryDate < b.entryDate) ? 1 : -1);
 
        return (
-            <div className="beer-log-area">
+            <div className="beer-log-page">
                <LogNewEntry beerList={beerList} breweries={breweries} addLogEntry={this.props.addLogEntry} />
-
+               <div className="beer-log-area">
                <ExpansionPanel>
                   <ExpansionPanelSummary
                     expandIcon={<ExpandMoreIcon />}
@@ -47,6 +47,7 @@ render() {
                          </div>
                        </ExpansionPanelDetails>
                 </ExpansionPanel>
+                </div>
          </div>
        );
      }

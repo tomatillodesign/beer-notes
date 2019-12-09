@@ -9,9 +9,10 @@ class NewBeerCards extends React.Component {
           const breweries = this.props.breweries;
           const beerLog = this.props.beerLog;
 
-          console.log(beerList);
+          //console.log(beerList);
 
           const alphabeticalBeers = [...beerList].sort((a, b) => (a.beer_name > b.beer_name) ? 1 : -1);
+          console.log(alphabeticalBeers);
 
           return (
                <div className="clb-beer-card-area">

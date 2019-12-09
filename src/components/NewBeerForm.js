@@ -18,7 +18,7 @@ class NewBeerForm extends React.Component {
 
      timestamp = Date.now();
      beerName = null;
-     brewery = null;
+     brewery_slug = null;
      my_rating = null;
      beerNotes = null;
      beerABV = null;
@@ -36,7 +36,7 @@ class NewBeerForm extends React.Component {
 
           const entry = {
                               beer_name: this.beerName,
-                              brewery: this.brewery,
+                              brewery_slug: this.brewery,
                               abv: this.beerABV,
                               my_rating: this.my_rating,
                               description: this.beerNotes
@@ -104,7 +104,7 @@ render() {
                    <Button variant="contained" color="primary" type="submit">Add New Beer</Button>
               </form>
          </div>
-         
+
               {this.newBeersAdded > 1 &&
              <div className="successful-added-message">You added a new beer!</div>
            }

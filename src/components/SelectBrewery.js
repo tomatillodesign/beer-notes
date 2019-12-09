@@ -14,7 +14,7 @@ class SelectBrewery extends React.Component {
      getBreweries() {
 
           const completeBreweryList = this.props.breweries;
-          console.log(completeBreweryList);
+          //console.log(completeBreweryList);
           var options = [];
           for (let j = 0; j < completeBreweryList.length; j++) {
                  options.push( {value: completeBreweryList[j].brewery_slug, label: completeBreweryList[j].brewery } );

@@ -60,25 +60,23 @@ export default function HeaderTabs(props) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
-           <Typography variant="h5" className={classes.title}>
+      <AppBar position="sticky">
+           <Typography variant="h1" className={classes.title + " clb-header"}>
             Beer Notes
           </Typography>
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-          <Tab label="Log" {...a11yProps(0)} />
-          <Tab label="Beers" {...a11yProps(1)} />
+          <Tab label="Beers" {...a11yProps(0)} />
+          <Tab label="Log" {...a11yProps(1)} />
           <Tab label="New Beer" {...a11yProps(2)} />
           <Tab label="New Brewery" {...a11yProps(3)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-          <h2>Log New Entry</h2>
-        <BeerLog beerList={props.beerList} breweries={props.breweries} beerLog={props.beerLog} addLogEntry={props.addLogEntry}/>
+        <NewBeerCards beerList={props.beerList} breweries={props.breweries} beerLog={props.beerLog}  />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        {// <BeerCards beerList={props.beerList} breweries={props.breweries} />
-        }
-        <NewBeerCards beerList={props.beerList} breweries={props.breweries} beerLog={props.beerLog}  />
+          <h2>Log New Entry</h2>
+        <BeerLog beerList={props.beerList} breweries={props.breweries} beerLog={props.beerLog} addLogEntry={props.addLogEntry}/>
       </TabPanel>
       <TabPanel value={value} index={2}>
           <h2>Add New Beer</h2>

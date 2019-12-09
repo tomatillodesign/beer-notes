@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header.js';
 import HeaderTabs from './components/HeaderTabs.js';
+import Typography from '@material-ui/core/Typography';
 import Router from './components/Router.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -18,7 +19,7 @@ class App extends React.Component {
        };
 
      addNewBeer = (newBeer) => {
-          console.log("ADD NEW BEER" + JSON.stringify(newBeer));
+          console.log(newBeer);
           // 1. take a copy of existing state
           //const completeBeerList = { ...this.state.completeBeerList };
           // 2. add our new fish to that fishes variable
@@ -34,7 +35,7 @@ class App extends React.Component {
      }
 
      addNewBrewery = (newBrewery) => {
-          console.log("ADD NEW BREWERY" + JSON.stringify(newBrewery));
+          console.log(newBrewery);
           // 1. take a copy of existing state
           //const breweries = { ...this.state.breweries };
           // 2. add our new fish to that fishes variable
@@ -50,7 +51,7 @@ class App extends React.Component {
      }
 
      addLogEntry = (logEntry) => {
-          console.log("New LOG ENTRY" + JSON.stringify(logEntry));
+          console.log(logEntry);
          // 1. take a copy of existing state
          // const logEntries = { ...this.state.beerLog };
          // // 2. add our new fish to that fishes variable
@@ -71,10 +72,14 @@ class App extends React.Component {
           const beerList = this.state.completeBeerList;
           const breweries = this.state.breweries;
           const beerLog = this.state.beerLog;
-          //console.log(beerList);
+
+          console.log(beerList);
+          console.log(breweries);
+          console.log(beerLog);
 
             return (
               <div className="App">
+               
                 <HeaderTabs
                     beerList={beerList}
                     breweries={breweries}
@@ -83,7 +88,14 @@ class App extends React.Component {
                     addLogEntry={this.addLogEntry}
                     beerLog={beerLog}
                />
-              </div>
+
+              <div className="clb-footer">
+                 <Typography variant="p">
+                 By Chris Liu-Beers &middot; <a href="http://tomatillodesign.com" target="_blank">Tomatillo Design</a>
+                 </Typography>
+                 </div>
+
+            </div>
             );
      }
 

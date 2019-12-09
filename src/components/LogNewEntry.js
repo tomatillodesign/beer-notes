@@ -29,7 +29,7 @@ class LogNewEntry extends React.Component {
                notes: this.beerNotes,
           }
 
-          console.log(entry);
+          //console.log(entry);
           this.props.addLogEntry(entry);
           // refresh the form
           event.currentTarget.reset();

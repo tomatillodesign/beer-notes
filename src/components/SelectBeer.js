@@ -16,7 +16,7 @@ class SelectBeer extends React.Component {
           const completeBeerList = this.props.beerList;
           const options = [];
           for (let j = 0; j < completeBeerList.length; j++) {
-                 console.log(completeBeerList[j].beer_name);
+                 //console.log(completeBeerList[j].beer_name);
                  options.push( {value: completeBeerList[j].beer_name, label: completeBeerList[j].beer_name } );
             }
 
@@ -28,7 +28,7 @@ class SelectBeer extends React.Component {
 render() {
 
      let currentBeerOptions = this.getBeers();
-     console.log(currentBeerOptions);
+     //console.log(currentBeerOptions);
 
      return(
        <Select
