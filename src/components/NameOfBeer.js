@@ -19,13 +19,17 @@ class NameOfBeer extends React.Component {
  //       console.log(event.target.value);
  // }
 
+
 render() {
+
+     console.log(this.props.beerName);
 
        return (
 
            <TextField
                id="outlined-basic"
                label="Name of Beer"
+               defaultValue={this.props.beerName}
                fullWidth
                required
                onChange={this.props.getBeerName}

@@ -139,3 +139,39 @@
      color: #fff;
      text-decoration: none;
 }
+
+
+
+
+
+/* ---- Media ----- */
+
+@media only screen and (max-width: 1123px) {
+
+     .clb-beer-card-area {
+          grid-template-columns: 1fr 1fr 1fr;
+          grid-column-gap: 20px;
+          grid-row-gap: 20px;
+     }
+
+}
+
+
+
+
+@media only screen and (max-width: 880px) {
+
+     .clb-beer-card-area {
+          grid-template-columns: 1fr 1fr;
+     }
+
+}
+
+
+@media only screen and (max-width: 500px) {
+
+     .clb-beer-card-area {
+          grid-template-columns: 1fr;
+     }
+
+}

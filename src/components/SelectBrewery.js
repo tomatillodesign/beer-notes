@@ -38,11 +38,15 @@ class SelectBrewery extends React.Component {
      render() {
 
           let currentBreweryOptions = this.getBreweries();
+          const edit = this.props.edit;
+          const defaultBrewery = this.props.defaultBrewery;
+          console.log(edit);
 
           return (
             <Select
                placeholder='Select Brewery'
                options={currentBreweryOptions}
+               defaultValue={defaultBrewery}
                isClearable
                isSearchable
                onChange={this.props.getBrewery}

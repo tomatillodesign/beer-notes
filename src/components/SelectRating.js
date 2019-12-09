@@ -12,12 +12,33 @@ class SelectRating extends React.Component {
 
      render() {
 
+          const defaultRating = this.props.defaultRating;
+          const defaultRatingPublish = {
+               value: defaultRating,
+               label: defaultRating
+          };
+          console.log(defaultRating);
+
           const ratingOptions = [
                { value: 'Great', label: 'Great' },
                { value: 'Good', label: 'Good' },
                { value: 'Not Good', label: 'Not Good' },
           ];
 
+          if( defaultRating ) {
+
+               return (
+                 <Select
+                    placeholder='Rating'
+                    options={ratingOptions}
+                    defaultValue={defaultRatingPublish}
+                    isClearable
+                    isSearchable
+                    onChange={this.props.setRating}
+                 />
+               );
+
+          } else {
 
                return (
                  <Select
@@ -28,7 +49,8 @@ class SelectRating extends React.Component {
                     onChange={this.props.setRating}
                  />
                );
-               
+
+          }
 
      }
 

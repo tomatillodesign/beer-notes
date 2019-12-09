@@ -87,6 +87,26 @@ render() {
 
      const beerList = this.props.beerList;
      const breweries = this.props.breweries;
+
+     let beerName = this.props.beerName;
+     let currentABV = this.props.currentABV;
+
+     let actionButtonText = this.props.actionButtonText;
+     if( !actionButtonText ) { actionButtonText = 'Add New Beer'; }
+
+     let defaultValue = this.props.defaultValue;
+     if( !defaultValue ) { defaultValue = 'Description'; }
+
+     let defaultBrewery = this.props.defaultBrewery;
+     let defaultRating = this.props.defaultRating;
+     //console.log(defaultBrewery);
+
+     let edit = this.props.edit;
+     let placeholder='Notes';
+     if( !edit ) {
+          placeholder='Description';
+     }
+
      this.newBeersAdded++;
 
        return (
@@ -94,17 +114,17 @@ render() {
             <div className="new-beer-area">
                <form className="new-beer" onSubmit={this.createNewBeer} >
                     <div className="clb-flex-row-three-fourths">
-                        <NameOfBeer getBeerName={this.getBeerName} />
-                        <BeerABV getABV={this.getABV} />
+                        <NameOfBeer getBeerName={this.getBeerName} beerName={beerName}/>
+                        <BeerABV getABV={this.getABV} currentABV={currentABV} />
                    </div>
                          <div className="clb-left-align">
                               <div className="clb-flex-row-two-thirds">
-                              <SelectBrewery breweries={breweries} getBrewery={this.getBrewery} />
-                              <SelectRating setRating={this.setRating} reset={this.reset} />
+                              <SelectBrewery breweries={breweries} getBrewery={this.getBrewery} edit={edit} defaultBrewery={defaultBrewery} />
+                              <SelectRating setRating={this.setRating} reset={this.reset} edit={edit} defaultRating={defaultRating} />
                               </div>
                         </div>
-                   <BeerLogNotes placeholder='Description' getNotes={this.getBeerDescription} />
-                   <Button variant="contained" color="primary" type="submit">Add New Beer</Button>
+                   <BeerLogNotes placeholder={placeholder} defaultValue={defaultValue} getNotes={this.getBeerDescription} edit={edit} />
+                   <Button variant="contained" color="primary" type="submit">{actionButtonText}</Button>
               </form>
          </div>
 

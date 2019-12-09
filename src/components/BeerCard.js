@@ -11,6 +11,7 @@ import LogEntry from './LogEntry';
 import { getBrewery } from '../helpers';
 
 import ExampleModal from './ExampleModal';
+import EditBeer from './EditBeer';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -35,6 +36,7 @@ export default function BeerCard(props) {
 
 
      // get props and set variables
+     const beerObj = props.beer;
      const beerName = props.beer.beer_name;
      const description = props.beer.description;
      const brewerySlug = props.beer.brewery_slug;
@@ -42,6 +44,7 @@ export default function BeerCard(props) {
      const beerABV = props.beer.abv;
      console.log("---------------" + beerName + "----------------");
 
+     const beerList = props.beerList;
      const breweries = props.breweries;
      const beerLog = props.beerLog;
      console.log(brewerySlug);
@@ -106,6 +109,7 @@ export default function BeerCard(props) {
                       <Button variant="outlined" disabled title="You haven't logged this beer yet!">
                         {logCount}
                     </Button>}
+               <EditBeer beerObj={beerObj} beerName={beerName} breweries={breweries} beerList={beerList} breweryName={breweryToPublish} />
            </CardActions>
     </Card>
 

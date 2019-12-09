@@ -16,7 +16,7 @@ class NewBeerCards extends React.Component {
 
           return (
                <div className="clb-beer-card-area">
-                    { Object.keys(alphabeticalBeers).map(key => <BeerCard beer={alphabeticalBeers[key]} key={key} breweries={breweries} beerLog={beerLog} />) }
+                    { Object.keys(alphabeticalBeers).map(key => <BeerCard beer={alphabeticalBeers[key]} key={key} beerList={beerList} breweries={breweries} beerLog={beerLog} />) }
                </div>
                );
      }

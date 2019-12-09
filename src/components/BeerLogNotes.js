@@ -21,10 +21,15 @@ class BeerLogNotes extends React.Component {
 
 render() {
 
+          const edit = this.props.edit;
+
+          if( edit ) {
+
        return (
 
            <TextField
                id="outlined-basic"
+               defaultValue={this.props.defaultValue}
                label={this.props.placeholder}
                fullWidth
                multiline
@@ -33,6 +38,23 @@ render() {
                />
 
        );
+
+ } else {
+
+      return (
+
+          <TextField
+              id="outlined-basic"
+              label={this.props.placeholder}
+              fullWidth
+              multiline
+              rows="4"
+              onChange={this.props.getNotes}
+              />
+
+      );
+
+}
 
 }
 

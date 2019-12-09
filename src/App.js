@@ -8,7 +8,7 @@ import Router from './components/Router.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import {createMuiTheme} from '@material-ui/core/styles';
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import orange from '@material-ui/core/colors/orange';
 import deepPurple from '@material-ui/core/colors/deepPurple';
 
@@ -101,7 +101,7 @@ class App extends React.Component {
                />
 
               <div className="clb-footer">
-                 <Typography variant="p">
+                 <Typography variant="body1">
                  By Chris Liu-Beers &middot; <a href="http://tomatillodesign.com" target="_blank">Tomatillo Design</a>
                  </Typography>
                  </div>

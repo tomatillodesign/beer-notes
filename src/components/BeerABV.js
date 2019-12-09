@@ -26,6 +26,7 @@ render() {
            <TextField
                id="outlined-basic"
                label="ABV"
+               defaultValue={this.props.currentABV}
                fullWidth
                onChange={this.props.getABV}
                />
