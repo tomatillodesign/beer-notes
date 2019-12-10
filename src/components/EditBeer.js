@@ -29,6 +29,7 @@ export default function EditBeer(props) {
         </Modal.Header>
         <Modal.Body>
              <NewBeerForm
+                    id={beerObj.id}
                     breweries={breweries}
                     actionButtonText={'Save Changes'}
                     defaultValue={beerObj.description}
@@ -49,7 +50,7 @@ export default function EditBeer(props) {
                />
         </Modal.Body>
         <Modal.Footer>
-          <div className="clb-modal-subheader"></div>
+          <div className="clb-modal-subheader">Delete Beer</div>
           <Button variant="contained" color="secondary" onClick={handleClose}>
             Close
           </Button>

@@ -14,8 +14,11 @@ import BeerABV from './BeerABV';
 import SelectRating from './SelectRating';
 import { slugify } from '../helpers';
 
+const shortid = require('shortid');
+
 class NewBeerForm extends React.Component {
 
+     id = this.props.id;
      timestamp = Date.now();
      beerName = this.props.beerName;
      brewery_name = this.props.breweryName;
@@ -29,14 +32,16 @@ class NewBeerForm extends React.Component {
      createNewBeer = (event) => {
           // 1. Stop the form from submitting
           event.preventDefault();
-          // const entry = {
-          //      timestamp: Date.now(),
-          //      beer_name: this.beerName,
-          //      brewery: this.brewery,
-          //      description: this.beerNotes,
-          // }
+
+          let customID = this.props.id;
+          console.log('SHORT ID: ' + customID);
+          if( customID === undefined ) {
+               customID = shortid.generate();
+               console.log('SHORT ID: ' + customID);
+          }
 
           const entry = {
+                              id: customID,
                               timestamp: this.timestamp,
                               beer_name: this.beerName,
                               brewery_name: this.brewery_name,
@@ -103,7 +108,6 @@ render() {
 
      let defaultBrewery = this.props.defaultBrewery;
      let defaultRating = this.props.defaultRating;
-     //console.log(defaultBrewery);
 
      let edit = this.props.edit;
      let placeholder='Notes';
@@ -116,6 +120,9 @@ render() {
        return (
             <>
             <div className="new-beer-area">
+
+            {((this.newBeersAdded < 2 && edit === true) || edit !== true ) &&
+
                <form className="new-beer" onSubmit={this.createNewBeer} >
                     <div className="clb-flex-row-three-fourths">
                         <NameOfBeer getBeerName={this.getBeerName} beerName={beerName}/>
@@ -130,6 +137,13 @@ render() {
                    <BeerLogNotes placeholder={placeholder} defaultValue={defaultValue} getNotes={this.getBeerDescription} edit={edit} />
                    <Button variant="contained" color="primary" type="submit">{actionButtonText}</Button>
               </form>
+
+         }
+
+         {(this.newBeersAdded >= 2 && edit === true) &&
+             <div className="successful-edit-message">You successfully edited this beer!</div>
+           }
+
          </div>
 
               {(this.newBeersAdded > 1 && edit !== true) &&

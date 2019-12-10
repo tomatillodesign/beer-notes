@@ -115,7 +115,7 @@
      text-decoration: none;
 }
 
-.clb-single-beer-notes .modal-footer {
+.clb-single-beer-notes .modal-footer, .clb-edit-beer .modal-footer {
      justify-content: space-between;
 }
 

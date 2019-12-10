@@ -43,14 +43,15 @@ class App extends React.Component {
 
           if( newBeer.editCurrentBeer ) {
                console.log("EDITING THIS BEER: " + newBeer.beer_name);
+               let beerID = newBeer.id;
                let beerName = newBeer.beer_name;
                let clbCustomPreviousState = [...this.state.completeBeerList];
                let getBeerObjInState = clbCustomPreviousState.filter(obj => {
-                 return obj.beer_name === beerName
+                 return obj.id === beerID
             });
                //console.log(getBeerObjInState);
 
-               let index = clbCustomPreviousState.map(function(e) { return e.beer_name; }).indexOf(beerName);
+               let index = clbCustomPreviousState.map(function(e) { return e.id; }).indexOf(beerID);
                //console.log(index);
 
                let ids = [...this.state.completeBeerList];     // create the copy of state array
@@ -99,6 +100,23 @@ class App extends React.Component {
     }
 
 
+    removeBeer = (beerObj) => {
+         //console.log(beerObj);
+         console.log("Removed: " + beerObj.beer_name);
+         let beerID = beerObj.id;
+         let beerName = beerObj.beer_name;
+         let clbCopyBeerState = [...this.state.completeBeerList];
+         let getBeerObjInState = clbCopyBeerState.filter(obj => {
+           return obj.id === beerID
+          });
+
+          let index = clbCopyBeerState.map(function(e) { return e.id; }).indexOf(beerID);
+          clbCopyBeerState.splice(index, 1);
+
+          this.setState({ completeBeerList: clbCopyBeerState });
+
+    }
+
 
      render() {
 
@@ -119,6 +137,7 @@ class App extends React.Component {
                     addNewBeer={this.addNewBeer}
                     addNewBrewery={this.addNewBrewery}
                     addLogEntry={this.addLogEntry}
+                    removeBeer={this.removeBeer}
                     beerLog={beerLog}
                />
 
