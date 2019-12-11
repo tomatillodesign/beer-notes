@@ -17,6 +17,14 @@ export default function EditBeer(props) {
   const currentABV = beerObj.abv;
   const addNewBeer = props.addNewBeer;
   const editCurrentBeer=props.editCurrentBeer;
+  const removeBeer=props.removeBeer;
+  //console.log(removeBeer);
+
+  const nowRemoveBeer = (event) => {
+       removeBeer(beerObj);
+       handleClose();
+  }
+
 
   return (
     <>
@@ -50,7 +58,11 @@ export default function EditBeer(props) {
                />
         </Modal.Body>
         <Modal.Footer>
-          <div className="clb-modal-subheader">Delete Beer</div>
+          <a href="#" className="clb-modal-subheader remove-beer" onClick={e =>
+            window.confirm(
+              "Are you sure you want to delete this beer? All of your logs with this beer will also be removed. You cannot undo this action."
+         ) && nowRemoveBeer()
+          }>Delete Beer</a>
           <Button variant="contained" color="secondary" onClick={handleClose}>
             Close
           </Button>

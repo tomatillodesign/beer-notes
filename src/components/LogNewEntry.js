@@ -23,7 +23,8 @@ class LogNewEntry extends React.Component {
 
      entryDate = Date.now();
      beerNotes = null;
-     beerType = null;
+     beerType = null
+     beerID = null;
      brewery_name = null;
      brewery_slug = null;
 
@@ -34,6 +35,7 @@ class LogNewEntry extends React.Component {
                timestamp: Date.now(),
                entryDate: this.entryDate,
                beer: this.beerType,
+               beerID: this.beerID,
                brewery_name: this.brewery_name,
                brewery_slug: this.brewery_slug,
                notes: this.beerNotes,
@@ -67,10 +69,10 @@ class LogNewEntry extends React.Component {
                let currentBeerObj = beerListObj.find(obj => {
                  return obj.beer_name === currentBeerName
                })
-               //console.log(currentBeerObj);
+               console.log(currentBeerObj);
                this.brewery_name = currentBeerObj.brewery_name;
                this.brewery_slug = currentBeerObj.brewery_slug;
-
+               this.beerID = currentBeerObj.id;
                //this.setState({ selection: selectedOption.value });
 
           }

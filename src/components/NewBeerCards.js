@@ -9,6 +9,7 @@ class NewBeerCards extends React.Component {
           const breweries = this.props.breweries;
           const beerLog = this.props.beerLog;
           const addNewBeer = this.props.addNewBeer;
+          const removeBeer = this.props.removeBeer;
 
           //console.log(beerList);
 
@@ -17,7 +18,7 @@ class NewBeerCards extends React.Component {
 
           return (
                <div className="clb-beer-card-area">
-                    { Object.keys(alphabeticalBeers).map(key => <BeerCard beer={alphabeticalBeers[key]} key={key} beerList={beerList} breweries={breweries} beerLog={beerLog} addNewBeer={addNewBeer} />) }
+                    { Object.keys(alphabeticalBeers).map(key => <BeerCard beer={alphabeticalBeers[key]} key={key} beerList={beerList} breweries={breweries} beerLog={beerLog} addNewBeer={addNewBeer} removeBeer={removeBeer} />) }
                </div>
                );
      }

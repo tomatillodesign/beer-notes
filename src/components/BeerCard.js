@@ -43,6 +43,7 @@ export default function BeerCard(props) {
      const myRating = props.beer.my_rating;
      const beerABV = props.beer.abv;
      const addNewBeer = props.addNewBeer;
+     const removeBeer = props.removeBeer;
 
      //console.log("---------------" + beerName + "----------------");
 
@@ -94,6 +95,7 @@ export default function BeerCard(props) {
                         breweryName={breweryToPublish}
                         editCurrentBeer={true}
                         addNewBeer={addNewBeer}
+                        removeBeer={removeBeer}
                    />
                </Typography>
                {breweryToPublish}

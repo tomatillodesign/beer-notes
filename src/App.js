@@ -101,7 +101,7 @@ class App extends React.Component {
 
 
     removeBeer = (beerObj) => {
-         //console.log(beerObj);
+         console.log(beerObj);
          console.log("Removed: " + beerObj.beer_name);
          let beerID = beerObj.id;
          let beerName = beerObj.beer_name;
@@ -143,7 +143,7 @@ class App extends React.Component {
 
               <div className="clb-footer">
                  <Typography variant="body1">
-                 Version 0.2 &middot; Updated Dec 9 &middot; A custom React App by Chris Liu-Beers, <a href="http://tomatillodesign.com" target="_blank">Tomatillo Design</a>
+                 Version 0.3 &middot; Updated Dec 10 &middot; A custom React App by Chris Liu-Beers, <a href="http://tomatillodesign.com" target="_blank">Tomatillo Design</a>
                  </Typography>
                  </div>
                  </MuiThemeProvider>

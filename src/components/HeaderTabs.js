@@ -74,7 +74,7 @@ export default function HeaderTabs(props) {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <NewBeerCards beerList={props.beerList} breweries={props.breweries} beerLog={props.beerLog} addNewBeer={props.addNewBeer} />
+        <NewBeerCards beerList={props.beerList} breweries={props.breweries} beerLog={props.beerLog} addNewBeer={props.addNewBeer} removeBeer={props.removeBeer} />
       </TabPanel>
       <TabPanel value={value} index={1}>
           <h2>Log New Entry</h2>

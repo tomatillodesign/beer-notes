@@ -13,9 +13,12 @@ import BreweryCity from './BreweryCity';
 import BeerABV from './BeerABV';
 import { slugify } from '../helpers';
 
+const shortid = require('shortid');
+
 class NewBreweryForm extends React.Component {
 
      timestamp = Date.now();
+     id = this.props.id;
      breweryName = null;
      brewerySlug = null;
      breweryCity = null;
@@ -25,14 +28,16 @@ class NewBreweryForm extends React.Component {
      createNewBrewery = (event) => {
           // 1. Stop the form from submitting
           event.preventDefault();
-          // const entry = {
-          //      timestamp: Date.now(),
-          //      beer_name: this.beerName,
-          //      brewery: this.brewery,
-          //      description: this.beerNotes,
-          // }
+
+          let customID = this.props.id;
+          console.log('SHORT Brewery ID: ' + customID);
+          if( customID === undefined ) {
+               customID = shortid.generate();
+               console.log('SHORT Brewery ID: ' + customID);
+          }
 
           const entry = {
+                         id: customID,
                          brewery: this.breweryName,
                          brewery_slug: this.brewerySlug,
                          city: this.breweryCity,
