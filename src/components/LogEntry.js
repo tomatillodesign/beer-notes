@@ -26,15 +26,18 @@ class LogEntry extends React.Component {
           return (
                     <li className="modal-single-entry">
                          <div className="modal-log-date">{entryDatePublish}</div>
-                         <div className="modal-log-notes">Notes: {notes}</div>
+                         { notes &&
+                            <div className="modal-log-notes">Notes: {notes}</div>
+                         }
                     </li>
                     );
                } else {
                     return (
                          <li className="single-entry">
-                              <h3 className="beer-name">{beer} ({brewery_name})</h3>
-                              <p>Notes: {notes}</p>
-                              <p>{entryDatePublish}</p>
+                              <h3 className="beer-name">{beer} ({brewery_name}) &middot; {entryDatePublish}</h3>
+                              { notes &&
+                                 <p>{notes}</p>
+                              }
                          </li>
                          );
                }

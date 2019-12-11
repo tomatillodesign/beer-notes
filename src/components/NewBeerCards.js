@@ -6,23 +6,25 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 class NewBeerCards extends React.Component {
 
-     viewType = 'alphabetical';
+     state = {
+         viewType: 'alphabetical'
+       };
 
      setAlphabeticalView = (event) => {
           event.preventDefault();
-          this.viewType = 'alphabetical';
+          this.setState({ viewType: 'alphabetical' });
           console.log('setAlphabeticalView');
      }
 
      setRecentView = (event) => {
           event.preventDefault();
-          this.viewType = 'recent';
+          this.setState({ viewType: 'recent' });
           console.log('setRecentView');
      }
 
      setCountView = (event) => {
           event.preventDefault();
-          this.viewType = 'count';
+          this.setState({ viewType: 'count' });
           console.log('setCountView');
      }
 
@@ -35,11 +37,14 @@ class NewBeerCards extends React.Component {
           const removeBeer = this.props.removeBeer;
 
           const btnSelected = true;
-          console.log(this.viewType);
+          console.log(this.state.viewType);
 
           let orderedBeers = [...beerList].sort((a, b) => (a.beer_name > b.beer_name) ? 1 : -1);
-          if( this.viewType === 'count') {
-               orderedBeers = [...beerList].sort((a, b) => (a.timestamp > b.timestamp) ? 1 : -1);
+          if( this.state.viewType === 'recent') {
+               orderedBeers = [...beerList].sort((a, b) => (a.timestamp < b.timestamp) ? 1 : -1);
+          }
+          if( this.state.viewType === 'count') {
+               orderedBeers = [...beerList].sort((a, b) => (a.count < b.count) ? 1 : -1);
           }
           console.log(orderedBeers);
 
@@ -48,8 +53,8 @@ class NewBeerCards extends React.Component {
                <div className="clb-select-view">
                <ButtonGroup size="small" color="secondary" aria-label="outlined primary button group">
                    <Button selected={btnSelected} onClick={this.setAlphabeticalView} >Alphabetical</Button>
-                   <Button selected={btnSelected} onClick={this.setRecentView} >Most Recent</Button>
                    <Button selected={btnSelected} onClick={this.setCountView} >High Count</Button>
+                   <Button selected={btnSelected} onClick={this.setRecentView} >Recently Added</Button>
                  </ButtonGroup>
                  </div>
                <div className="clb-beer-card-area">

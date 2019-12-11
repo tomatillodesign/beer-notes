@@ -45,6 +45,7 @@ render() {
 
           <TextField
               id="outlined-basic"
+              defaultValue={this.props.defaultValue}
               label={this.props.placeholder}
               fullWidth
               multiline

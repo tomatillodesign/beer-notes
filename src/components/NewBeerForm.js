@@ -6,13 +6,17 @@ import Snackbar from '@material-ui/core/Snackbar';
 
 import Select from 'react-select';
 import Creatable, { makeCreatableSelect } from 'react-select/creatable';
-
+import { SliderPicker } from 'react-color';
 import SelectBrewery from './SelectBrewery';
 import BeerLogNotes from './BeerLogNotes';
 import NameOfBeer from './NameOfBeer';
 import BeerABV from './BeerABV';
 import SelectRating from './SelectRating';
 import { slugify } from '../helpers';
+
+///////////////////////////////////////////////////////////////////////
+
+
 
 const shortid = require('shortid');
 
@@ -23,6 +27,8 @@ class NewBeerForm extends React.Component {
      beerName = this.props.beerName;
      brewery_name = this.props.breweryName;
      brewery_slug = this.props.brewerySlug;
+     backgroundColor = this.props.backgroundColor;
+     count = this.props.count;
      my_rating = this.props.defaultRating;
      beerNotes = this.props.defaultValue;
      beerABV = this.props.currentABV;
@@ -40,12 +46,18 @@ class NewBeerForm extends React.Component {
                console.log('SHORT ID: ' + customID);
           }
 
+          if( this.count === undefined ) {
+               this.count = 0;
+          }
+
           const entry = {
                               id: customID,
                               timestamp: this.timestamp,
                               beer_name: this.beerName,
                               brewery_name: this.brewery_name,
                               brewery_slug: this.brewery_slug,
+                              backgroundColor: this.backgroundColor,
+                              count: this.count,
                               abv: this.beerABV,
                               my_rating: this.my_rating,
                               description: this.beerNotes,
@@ -87,9 +99,13 @@ class NewBeerForm extends React.Component {
 
      setRating = (selectedOption) => {
           if(selectedOption) {
-               this.my_rating = selectedOption.label;
+               this.my_rating = selectedOption.value;
           }
      }
+
+     handleColorChangeComplete = (color, event) => {
+          this.backgroundColor = color.hex;
+       };
 
 
 render() {
@@ -134,6 +150,7 @@ render() {
                               <SelectRating setRating={this.setRating} reset={this.reset} edit={edit} defaultRating={defaultRating} />
                               </div>
                         </div>
+                   <SliderPicker onChangeComplete={ this.handleColorChangeComplete } />
                    <BeerLogNotes placeholder={placeholder} defaultValue={defaultValue} getNotes={this.getBeerDescription} edit={edit} />
                    <Button variant="contained" color="primary" type="submit">{actionButtonText}</Button>
               </form>

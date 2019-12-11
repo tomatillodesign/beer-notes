@@ -8,7 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import LogEntry from './LogEntry';
-import { getBrewery } from '../helpers';
+import { getBrewery, lightenDarkenColor } from '../helpers';
 
 import ExampleModal from './ExampleModal';
 import EditBeer from './EditBeer';
@@ -45,6 +45,10 @@ export default function BeerCard(props) {
      const backgroundColor = props.beer.backgroundColor;
      const addNewBeer = props.addNewBeer;
      const removeBeer = props.removeBeer;
+
+     if( backgroundColor ) {
+          var lightBackground = lightenDarkenColor(backgroundColor, 200);
+     }
 
      //console.log("---------------" + beerName + "----------------");
 
@@ -95,6 +99,7 @@ export default function BeerCard(props) {
                   editCurrentBeer={true}
                   addNewBeer={addNewBeer}
                   removeBeer={removeBeer}
+                  backgroundColor={backgroundColor}
             />
          </Typography>
              <CardContent>

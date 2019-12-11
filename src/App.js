@@ -86,17 +86,25 @@ class App extends React.Component {
 
      addLogEntry = (logEntry) => {
           console.log(logEntry);
-         // 1. take a copy of existing state
-         // const logEntries = { ...this.state.beerLog };
-         // // 2. add our new fish to that fishes variable
-         // logEntries[`logEntry_${Date.now()}`] = logEntry;
-         // // 3. Set the new fishes object to state
-         // this.setState({
-         //      beerLog: logEntries
-         // })
+
+          // Update the completeBeerList state to add 1 to this beer's count
+          let beerID = logEntry.beerID;
+          let clbPreviousBeerListState = [...this.state.completeBeerList];
+          let getBeerObjInState = clbPreviousBeerListState.filter(obj => {
+            return obj.id === beerID
+          });
+          let index = clbPreviousBeerListState.map(function(e) { return e.id; }).indexOf(beerID);
+          let previousCount = clbPreviousBeerListState[index].count;
+          let newCount = previousCount + 1;
+          console.log("PREV COUNT: " + previousCount);
+          console.log("NEW COUNT: " + newCount);
+          clbPreviousBeerListState[index].count = newCount;
+          this.setState({ completeBeerList: clbPreviousBeerListState });
+
          this.setState(prevState => ({
            beerLog: [...prevState.beerLog, logEntry]
          }))
+
     }
 
 

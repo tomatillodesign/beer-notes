@@ -15,8 +15,6 @@ import { slugify } from '../helpers';
 class LogNewEntry extends React.Component {
      constructor(props) {
           super(props);
-
-
      }
 
      beerList = this.props.beerList;
@@ -31,6 +29,9 @@ class LogNewEntry extends React.Component {
      createNewEntry = (event) => {
           // 1. Stop the form from submitting
           event.preventDefault();
+
+          console.log("BEER NOTES: " + this.beerNotes);
+
           const entry = {
                timestamp: Date.now(),
                entryDate: this.entryDate,
@@ -41,20 +42,19 @@ class LogNewEntry extends React.Component {
                notes: this.beerNotes,
           }
 
-          //console.log(entry);
           this.props.addLogEntry(entry);
           // refresh the form
           event.currentTarget.reset();
-          this.setState({selection: ''});
+          this.beerNotes = null;
      }
 
      getNotes = (event) => {
           this.beerNotes = (event.target.value);
+          console.log(this.beerNotes);
      }
 
      getEntryDate = (date) => {
           this.entryDate = date;
-          //console.log("ENTRY DATE: " + this.entryDate);
      }
 
      getBeerType = (selectedOption) => {
@@ -93,7 +93,7 @@ render() {
                    <div className="clb-one-col">
                         <SelectBeer beerList={beerList} breweries={breweries} getBeerType={this.getBeerType} />
                    </div>
-                   <BeerLogNotes placeholder='Notes' getNotes={this.getNotes} />
+                   <BeerLogNotes placeholder='Notes' defaultValue={''} getNotes={this.getNotes} />
                    <Button variant="contained" color="primary" type="submit">Add Entry</Button>
               </form>
          </div>

@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import NewBeerForm from './NewBeerForm';
+import { hexToRgbA } from '../helpers';
 
 export default function EditBeer(props) {
   const [show, setShow] = React.useState(false);
@@ -18,6 +19,9 @@ export default function EditBeer(props) {
   const addNewBeer = props.addNewBeer;
   const editCurrentBeer=props.editCurrentBeer;
   const removeBeer=props.removeBeer;
+  const backgroundColor=props.backgroundColor;
+
+  const backgroundRGBA = hexToRgbA(props.backgroundColor);
   //console.log(removeBeer);
 
   const nowRemoveBeer = (event) => {
@@ -31,7 +35,7 @@ export default function EditBeer(props) {
       <a href="#" onClick={handleShow} title="Edit this Beer">
         {beerName}
       </a>
-      <Modal show={show} onHide={handleClose} className="clb-edit-beer">
+      <Modal show={show} onHide={handleClose} className="clb-edit-beer"  style={{background: backgroundRGBA}} >
         <Modal.Header closeButton>
           <Modal.Title>Now Editing: {props.beerName}</Modal.Title>
         </Modal.Header>
@@ -53,7 +57,9 @@ export default function EditBeer(props) {
                     brewerySlug={beerObj.brewery_slug}
                     breweryName={beerObj.brewery_name}
                     defaultRating={beerObj.my_rating}
+                    defaultRating={beerObj.my_rating}
                     addNewBeer={addNewBeer}
+                    backgroundColor={beerObj.backgroundColor}
                     editCurrentBeer={editCurrentBeer}
                />
         </Modal.Body>
