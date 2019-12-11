@@ -96,6 +96,30 @@
      width: 100%;
 }
 
+.clb-single-beer-card h2 {
+     color: #fff;
+     margin-top: 8px;
+     font-weight: 600;
+     background: #eaaa3c;
+     padding: 20px;
+     padding-bottom: 12px;
+     margin-top: -8px;
+}
+
+.clb-single-beer-card {
+     box-shadow: 0px 0px 50px 30px #ff9100 inset;
+}
+
+.clb-brewery-to-publish {
+     font-size: 0.75rem;
+     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+     font-weight: 400;
+     line-height: 1.4;
+     letter-spacing: 0.08333em;
+     text-transform: uppercase;
+     margin-bottom: 12px;
+}
+
 .clb-single-beer-card.inactive img {
      filter: grayscale(1) opacity(.2);
 }
@@ -106,13 +130,14 @@
 }
 
 .clb-single-beer-card a {
-     color: #000;
+     color: #fff;
      transition: all ease-in-out .25s;
 }
 
 .clb-single-beer-card a:hover {
-     color: #673ab7;
+     color: #fff;
      text-decoration: none;
+     text-shadow: 0 0 30px rgba(255,255,255,.8);
 }
 
 .clb-single-beer-notes .modal-footer, .clb-edit-beer .modal-footer {

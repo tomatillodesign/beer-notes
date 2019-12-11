@@ -42,6 +42,7 @@ export default function BeerCard(props) {
      const brewerySlug = props.beer.brewery_slug;
      const myRating = props.beer.my_rating;
      const beerABV = props.beer.abv;
+     const backgroundColor = props.beer.backgroundColor;
      const addNewBeer = props.addNewBeer;
      const removeBeer = props.removeBeer;
 
@@ -65,9 +66,9 @@ export default function BeerCard(props) {
      let breweryToPublish = null;
      let breweryName = null;
      if(getBreweryObj) {
-          breweryToPublish = <Typography variant="overline" display="block" gutterBottom>
+          breweryToPublish = <div className="clb-brewery-to-publish">
         {getBreweryObj.brewery}
-      </Typography>;
+      </div>;
 
           breweryName = getBreweryObj.brewery;
      }
@@ -84,20 +85,20 @@ export default function BeerCard(props) {
 
      return (
          <Card className={classes.card + ' clb-single-beer-card ' + isActiveClass} elevation={2} >
-             <img src="http://www.tomatillodesign.com/wp-content/uploads/2019/12/beer01.jpg" />
+         <Typography gutterBottom variant="h5" component="h2" style={{background: backgroundColor}} >
+              <EditBeer
+                  beerObj={beerObj}
+                  beerName={beerName}
+                  breweries={breweries}
+                  beerList={beerList}
+                  breweryName={breweryToPublish}
+                  editCurrentBeer={true}
+                  addNewBeer={addNewBeer}
+                  removeBeer={removeBeer}
+            />
+         </Typography>
              <CardContent>
-               <Typography gutterBottom variant="h5" component="h2">
-                    <EditBeer
-                        beerObj={beerObj}
-                        beerName={beerName}
-                        breweries={breweries}
-                        beerList={beerList}
-                        breweryName={breweryToPublish}
-                        editCurrentBeer={true}
-                        addNewBeer={addNewBeer}
-                        removeBeer={removeBeer}
-                   />
-               </Typography>
+
                {breweryToPublish}
                <Typography variant="body2" color="textSecondary" component="p">
                  {description}

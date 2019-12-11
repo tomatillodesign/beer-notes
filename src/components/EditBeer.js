@@ -28,7 +28,7 @@ export default function EditBeer(props) {
 
   return (
     <>
-      <a href="#" onClick={handleShow} title="View Log">
+      <a href="#" onClick={handleShow} title="Edit this Beer">
         {beerName}
       </a>
       <Modal show={show} onHide={handleClose} className="clb-edit-beer">
