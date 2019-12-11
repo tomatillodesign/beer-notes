@@ -106,11 +106,12 @@ export default function BeerCard(props) {
              <CardActions>
 
                 {myRating !== null &&
-                  <Button variant="outlined" disabled>
-                    {myRating}
-                 </Button>}
+                     <Button variant="outlined" id="my-rating-button" className="clb-light-border-outline-button">
+                       {myRating}
+                    </Button>
+                }
                  {beerABV !== null &&
-                  <Button variant="outlined" disabled>
+                  <Button variant="outlined" disabled className="clb-light-border-outline-button">
                     ABV: {beerABV}
                  </Button>}
 
@@ -118,7 +119,7 @@ export default function BeerCard(props) {
                      <ExampleModal beerName={beerName} breweryName={breweryName} beerLog={matchingLogNotes} logCount={logCount} />
                    }
                    {logCount === 0 &&
-                      <Button variant="outlined" disabled title="You haven't logged this beer yet!">
+                      <Button variant="outlined" disabled title="You haven't logged this beer yet!" className="clb-light-border-outline-button">
                         {logCount}
                     </Button>}
            </CardActions>

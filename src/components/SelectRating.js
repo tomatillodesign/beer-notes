@@ -20,9 +20,9 @@ class SelectRating extends React.Component {
           console.log(defaultRating);
 
           const ratingOptions = [
-               { value: 'Great', label: 'Great' },
-               { value: 'Good', label: 'Good' },
-               { value: 'Not Good', label: 'Not Good' },
+               { value: '❤️', label: '❤️ Great' },
+               { value: '👍', label: '👍 Good' },
+               { value: '👎', label: '👎 Not Good' },
           ];
 
           if( defaultRating ) {
