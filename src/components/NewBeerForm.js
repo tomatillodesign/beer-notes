@@ -120,10 +120,13 @@ render() {
      if( !actionButtonText ) { actionButtonText = 'Add New Beer'; }
 
      let defaultValue = this.props.defaultValue;
-     if( !defaultValue ) { defaultValue = 'Description'; }
+     if( !defaultValue ) { defaultValue = ''; }
+     console.log( defaultValue );
 
      let defaultBrewery = this.props.defaultBrewery;
      let defaultRating = this.props.defaultRating;
+
+     let defaultColor = this.props.backgroundColor;
 
      let edit = this.props.edit;
      let placeholder='Notes';
@@ -150,7 +153,10 @@ render() {
                               <SelectRating setRating={this.setRating} reset={this.reset} edit={edit} defaultRating={defaultRating} />
                               </div>
                         </div>
-                   <SliderPicker onChangeComplete={ this.handleColorChangeComplete } />
+                        <div className="color-picker-area">
+                        <h4>Set Background Color</h4>
+                        <SliderPicker color={ defaultColor } onChangeComplete={ this.handleColorChangeComplete } />
+                   </div>
                    <BeerLogNotes placeholder={placeholder} defaultValue={defaultValue} getNotes={this.getBeerDescription} edit={edit} />
                    <Button variant="contained" color="primary" type="submit">{actionButtonText}</Button>
               </form>

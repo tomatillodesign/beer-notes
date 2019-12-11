@@ -10,23 +10,38 @@ class NewBeerCards extends React.Component {
          viewType: 'alphabetical'
        };
 
+      btnAlphabeticalSelected = 'clb-view-button selected';
+      btnCountSelected = 'clb-view-button';
+      btnRecentSelected = 'clb-view-button';
+
      setAlphabeticalView = (event) => {
           event.preventDefault();
           this.setState({ viewType: 'alphabetical' });
+          this.btnAlphabeticalSelected = 'clb-view-button selected';
+          this.btnCountSelected = 'clb-view-button';
+          this.btnRecentSelected = 'clb-view-button';
           console.log('setAlphabeticalView');
      }
 
      setRecentView = (event) => {
           event.preventDefault();
           this.setState({ viewType: 'recent' });
+          this.btnRecentSelected = 'clb-view-button selected';
+          this.btnAlphabeticalSelected = 'clb-view-button';
+          this.btnCountSelected = 'clb-view-button';
           console.log('setRecentView');
      }
 
      setCountView = (event) => {
           event.preventDefault();
           this.setState({ viewType: 'count' });
+          this.btnCountSelected = 'clb-view-button selected';
+          this.btnAlphabeticalSelected = 'clb-view-button';
+          this.btnRecentSelected = 'clb-view-button';
           console.log('setCountView');
      }
+
+
 
      render() {
 
@@ -52,14 +67,18 @@ class NewBeerCards extends React.Component {
                <>
                <div className="clb-select-view">
                <ButtonGroup size="small" color="secondary" aria-label="outlined primary button group">
-                   <Button selected={btnSelected} onClick={this.setAlphabeticalView} >Alphabetical</Button>
-                   <Button selected={btnSelected} onClick={this.setCountView} >High Count</Button>
-                   <Button selected={btnSelected} onClick={this.setRecentView} >Recently Added</Button>
+                   <Button onClick={this.setAlphabeticalView} className={this.btnAlphabeticalSelected}>Alphabetical</Button>
+                   <Button onClick={this.setCountView} className={this.btnCountSelected}>High Count</Button>
+                   <Button onClick={this.setRecentView} className={this.btnRecentSelected}>Recently Added</Button>
                  </ButtonGroup>
                  </div>
-               <div className="clb-beer-card-area">
+
+
+                 <div className="clb-beer-card-area">
                     { Object.keys(orderedBeers).map(key => <BeerCard beer={orderedBeers[key]} key={key} beerList={beerList} breweries={breweries} beerLog={beerLog} addNewBeer={addNewBeer} removeBeer={removeBeer} />) }
                </div>
+
+
                </>
                );
      }

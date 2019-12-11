@@ -16,7 +16,8 @@
     "react-router-dom": "^4.2.2",
     "react-scripts": "3.2.0",
     "react-select": "^3.0.8",
-    "react-transition-group": "^2.2.1",
+    "react-shuffle": "^2.1.0",
+    "react-transition-group": "^2.9.0",
     "shortid": "^2.2.15"
   },
   "scripts": {

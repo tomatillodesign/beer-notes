@@ -64,7 +64,7 @@ export default function HeaderTabs(props) {
     <div className={classes.root}>
       <AppBar position="static">
            <Typography variant="h1" className={classes.title + " clb-header"}>
-            Beer Notes
+            Beer Journal
           </Typography>
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab label="Beers" {...a11yProps(0)} />

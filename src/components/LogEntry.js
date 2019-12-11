@@ -27,7 +27,7 @@ class LogEntry extends React.Component {
                     <li className="modal-single-entry">
                          <div className="modal-log-date">{entryDatePublish}</div>
                          { notes &&
-                            <div className="modal-log-notes">Notes: {notes}</div>
+                            <div className="modal-log-notes">{notes}</div>
                          }
                     </li>
                     );

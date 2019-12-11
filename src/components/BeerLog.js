@@ -36,7 +36,7 @@ render() {
                     aria-controls="panel1b-content"
                     id="panel1b-header"
                   >
-                    <h3>Complete Log</h3>
+                    <h3 className="collapsible-log-title">Complete Log</h3>
                        </ExpansionPanelSummary>
                        <ExpansionPanelDetails>
                          <div className="complete-log">

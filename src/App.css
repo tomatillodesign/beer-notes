@@ -80,7 +80,7 @@
 .successful-added-message {
      display: inline-block;
      margin-top: 20px;
-     background: yellow;
+     background: #eaaa3c;
      padding: 20px;
      border-radius: 12px;
 }
@@ -107,7 +107,7 @@
 }
 
 .clb-single-beer-card {
-     box-shadow: 0px 0px 50px 30px #ff9100 inset;
+     transition: all ease-in-out .5s;
 }
 
 .clb-brewery-to-publish {
@@ -166,6 +166,10 @@
      background: #673ab7;
 }
 
+.clb-footer p {
+     font-size: .75rem;
+}
+
 .clb-footer a {
      color: #fff;
 }
@@ -204,12 +208,12 @@ button.clb-light-border-outline-button {
      text-align: left;
 }
 
-.complete-log ul {
+.complete-log ul, .modal-body ul.log-entry-area {
      padding: 0;
      margin: 0;
 }
 
-.complete-log li {
+.complete-log li, li.modal-single-entry {
      display: block;
      background: #f5f5f5;
      border-radius: 3px;
@@ -218,10 +222,11 @@ button.clb-light-border-outline-button {
      margin-bottom: 12px;
 }
 
-.complete-log li.single-entry p {
+.complete-log li.single-entry p, .modal-log-notes {
      margin: 0;
      margin-top: 12px;
      font-size: .75em;
+     font-style: italic;
 }
 
 .complete-log h3 {
@@ -230,8 +235,61 @@ button.clb-light-border-outline-button {
      margin: 0;
 }
 
+.color-picker-area {
+     padding: 20px;
+     background: #f5f5f5;
+     border-radius: 3px;
+}
+
+.color-picker-area h4 {
+     text-align: left;
+     font-weight: 400;
+     font-size: 1rem;
+}
+
+:focus {
+    outline: none !important;
+}
+
+.clb-modal-subheader.remove-beer {
+     color: #ff9100;
+     font-size: .75rem;
+}
+
+h3.collapsible-log-title {
+     margin-top: 6px;
+}
+
+.clb-view-button:hover {
+     background: #ff9100 !important;
+     color: #fff !important;
+}
+
+.clb-view-button.selected {
+     background: #ff9100;
+     color: #fff;
+}
 
 
+/* ----- React Transitions ------ */
+
+.example-enter {
+   opacity: 0.01;
+ }
+
+ .example-enter.example-enter-active {
+   opacity: 1;
+   transition: opacity 500ms ease-in;
+ }
+
+.example-exit {
+   opacity: 1;
+ }
+
+.example-exit.example-exit-active {
+   opacity: 0.01;
+   transition: opacity 300ms ease-in;
+ }
 
 
 /* ---- Media ----- */

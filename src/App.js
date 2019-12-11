@@ -151,7 +151,7 @@ class App extends React.Component {
 
               <div className="clb-footer">
                  <Typography variant="body1">
-                 Version 0.3 &middot; Updated Dec 10 &middot; A custom React App by Chris Liu-Beers, <a href="http://tomatillodesign.com" target="_blank">Tomatillo Design</a>
+                 Version 0.4 &middot; Updated Dec 11 &middot; A custom React App by Chris Liu-Beers, <a href="http://tomatillodesign.com" target="_blank">Tomatillo Design</a>
                  </Typography>
                  </div>
                  </MuiThemeProvider>
