@@ -39,67 +39,69 @@ class NewBeerCards extends React.Component {
           const removeBeer = this.props.removeBeer;
           var orderedBeers = null;
 
-          if( this.props.beerCardView === 'Alphabetical') {
-               orderedBeers = [...beerList].sort((a, b) => (a.beer_name > b.beer_name) ? 1 : -1);
-               this.btnAlphabeticalSelected = 'clb-view-button selected';
-               this.btnCountSelected = 'clb-view-button';
-               this.btnRecentSelected = 'clb-view-button';
-          }
+               if( this.props.beerCardView === 'Alphabetical') {
+                    orderedBeers = [...beerList].sort((a, b) => (a.beer_name > b.beer_name) ? 1 : -1);
+                    this.btnAlphabeticalSelected = 'clb-view-button selected';
+                    this.btnCountSelected = 'clb-view-button';
+                    this.btnRecentSelected = 'clb-view-button';
+               }
 
-          if( this.props.beerCardView === 'High Count') {
-               //orderedBeers = [...beerList].sort((a, b) => (a.count < b.count) ? 1 : -1);
-               this.btnCountSelected = 'clb-view-button selected';
-               this.btnAlphabeticalSelected = 'clb-view-button';
-               this.btnRecentSelected = 'clb-view-button';
+               if( this.props.beerCardView === 'High Count') {
+                    //orderedBeers = [...beerList].sort((a, b) => (a.count < b.count) ? 1 : -1);
+                    this.btnCountSelected = 'clb-view-button selected';
+                    this.btnAlphabeticalSelected = 'clb-view-button';
+                    this.btnRecentSelected = 'clb-view-button';
 
+
+                         // New sorting
+                         orderedBeers = [...beerList].sort(function (a, b) {
+
+                         	// If the first item has a higher number, move it down
+                         	// If the first item has a lower number, move it up
+                         	if (a.count > b.count) return -1;
+                         	if (a.count < b.count) return 1;
+
+                         	// If the count number is the same between both items, sort alphabetically
+                         	// If the first item comes first in the alphabet, move it up
+                         	// Otherwise move it down
+                         	if (a.beer_name > b.beer_name) return 1;
+               	          if (a.beer_name < b.beer_name) return -1;
+
+                         });
+
+               }
+
+
+               if( this.props.beerCardView === 'Recently Added') {
+                    //orderedBeers = [...beerList].sort((a, b) => (a.timestamp < b.timestamp) ? 1 : -1);
+                    this.btnRecentSelected = 'clb-view-button selected';
+                    this.btnAlphabeticalSelected = 'clb-view-button';
+                    this.btnCountSelected = 'clb-view-button';
 
                     // New sorting
                     orderedBeers = [...beerList].sort(function (a, b) {
 
-                    	// If the first item has a higher number, move it down
-                    	// If the first item has a lower number, move it up
-                    	if (a.count > b.count) return -1;
-                    	if (a.count < b.count) return 1;
+                         // If the first item has a higher number, move it down
+                         // If the first item has a lower number, move it up
+                         if (a.timestamp > b.timestamp) return -1;
+                         if (a.timestamp < b.timestamp) return 1;
 
-                    	// If the count number is the same between both items, sort alphabetically
-                    	// If the first item comes first in the alphabet, move it up
-                    	// Otherwise move it down
-                    	if (a.beer_name > b.beer_name) return 1;
-          	          if (a.beer_name < b.beer_name) return -1;
+                         // If the count number is the same between both items, sort alphabetically
+                         // If the first item comes first in the alphabet, move it up
+                         // Otherwise move it down
+                         if (a.beer_name > b.beer_name) return 1;
+                         if (a.beer_name < b.beer_name) return -1;
 
                     });
 
-          }
+               }
 
-
-          if( this.props.beerCardView === 'Recently Added') {
-               //orderedBeers = [...beerList].sort((a, b) => (a.timestamp < b.timestamp) ? 1 : -1);
-               this.btnRecentSelected = 'clb-view-button selected';
-               this.btnAlphabeticalSelected = 'clb-view-button';
-               this.btnCountSelected = 'clb-view-button';
-
-               // New sorting
-               orderedBeers = [...beerList].sort(function (a, b) {
-
-                    // If the first item has a higher number, move it down
-                    // If the first item has a lower number, move it up
-                    if (a.timestamp > b.timestamp) return -1;
-                    if (a.timestamp < b.timestamp) return 1;
-
-                    // If the count number is the same between both items, sort alphabetically
-                    // If the first item comes first in the alphabet, move it up
-                    // Otherwise move it down
-                    if (a.beer_name > b.beer_name) return 1;
-                    if (a.beer_name < b.beer_name) return -1;
-
-               });
-
-          }
 
 
           console.log(orderedBeers);
 
           return (
+
                <div className="clb-beers">
                     <div className="clb-select-view">
                     <ButtonGroup size="small" color="secondary" aria-label="outlined primary button group">
@@ -124,6 +126,7 @@ class NewBeerCards extends React.Component {
                     </div>
                </div>
                );
+
      }
 
 }

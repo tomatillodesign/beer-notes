@@ -14,6 +14,8 @@ import deepPurple from '@material-ui/core/colors/deepPurple';
 
 import { beers, domestics, completeBeerList, beerListUpdated, breweryList } from './data/beers.js';
 
+import base from './base.js';
+
 const theme = createMuiTheme({
      palette: {
        primary: deepPurple,
@@ -27,8 +29,28 @@ class App extends React.Component {
          completeBeerList: beerListUpdated,
          breweries: breweryList,
          beerLog: [],
-         beerCardView: 'Alphabetical'
+         beerCardView: 'Alphabetical',
+         firebaseTest: 'Firebase Test',
        };
+
+
+       componentDidMount() {
+            console.log('MOUNTED');
+            //this.ref = base.syncState('journal');
+            this.beerListRef = base.syncState('firebaseTest', {
+                             context: this,
+                             state: 'firebaseTest'
+                           });
+       }
+
+
+       componentWillUnmount() {
+            console.log('Unmounting');
+            base.removeBinding(this.beerListRef);
+       }
+
+
+
 
      addNewBeer = (newBeer) => {
           console.log(newBeer);
