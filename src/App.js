@@ -27,6 +27,7 @@ class App extends React.Component {
          completeBeerList: beerListUpdated,
          breweries: breweryList,
          beerLog: [],
+         beerCardView: 'Alphabetical'
        };
 
      addNewBeer = (newBeer) => {
@@ -126,15 +127,29 @@ class App extends React.Component {
     }
 
 
+    changeBeerCardView = (newViewString) => {
+         console.log('CHANGE BEER CARD VIEW');
+         console.log(newViewString);
+         let newBeerCardView = 'Alphabetical';
+         if( newViewString === 'view-high-count' ) { newBeerCardView = 'High Count'; }
+         if( newViewString === 'view-recently-added' ) { newBeerCardView = 'Recently Added'; }
+
+         this.setState({ beerCardView: newBeerCardView });
+
+    }
+
+
      render() {
 
           const beerList = this.state.completeBeerList;
           const breweries = this.state.breweries;
           const beerLog = this.state.beerLog;
+          const beerCardView = this.state.beerCardView;
 
           console.log(beerList);
           console.log(breweries);
           console.log(beerLog);
+          console.log(beerCardView);
 
             return (
               <div className="App">
@@ -147,6 +162,8 @@ class App extends React.Component {
                     addLogEntry={this.addLogEntry}
                     removeBeer={this.removeBeer}
                     beerLog={beerLog}
+                    beerCardView={beerCardView}
+                    changeBeerCardView={this.changeBeerCardView}
                />
 
               <div className="clb-footer">
