@@ -14,7 +14,8 @@ import deepPurple from '@material-ui/core/colors/deepPurple';
 
 import { beers, domestics, completeBeerList, beerListUpdated, breweryList } from './data/beers.js';
 
-import base from './base.js';
+//import fire from './fire';
+import base from './base';
 
 const theme = createMuiTheme({
      palette: {
@@ -30,23 +31,38 @@ class App extends React.Component {
          breweries: breweryList,
          beerLog: [],
          beerCardView: 'Alphabetical',
-         firebaseTest: 'Firebase Test',
        };
 
 
-       componentDidMount() {
-            console.log('MOUNTED');
-            //this.ref = base.syncState('journal');
-            this.beerListRef = base.syncState('firebaseTest', {
-                             context: this,
-                             state: 'firebaseTest'
-                           });
-       }
+       componentDidMount(){
 
+            console.log("componentDidMount");
 
-       componentWillUnmount() {
-            console.log('Unmounting');
-            base.removeBinding(this.beerListRef);
+            base.syncState(`completeBeerList`, {
+              context: this,
+              state: 'completeBeerList',
+              asArray: true
+            });
+
+            base.syncState(`breweries`, {
+              context: this,
+              state: 'breweries',
+              asArray: true
+            });
+
+            base.syncState(`beerLog`, {
+              context: this,
+              state: 'beerLog',
+              asArray: true
+            });
+
+            base.syncState(`beerCardView`, {
+              context: this,
+              state: 'beerCardView',
+              defaultValue: 'Alphabetical',
+              asArray: false
+            });
+
        }
 
 
@@ -83,6 +99,15 @@ class App extends React.Component {
                this.setState({ completeBeerList: ids });            //update the value
 
           } else {
+
+               // make sure none of the object's properties are undefined, to prevent errors
+               if (typeof newBeer.brewery_name === 'undefined') { newBeer.brewery_name = null; }
+               if (typeof newBeer.brewery_slug === 'undefined') { newBeer.brewery_slug = null; }
+               if (typeof newBeer.backgroundColor === 'undefined') { newBeer.backgroundColor = null; }
+               if (typeof newBeer.abv === 'undefined') { newBeer.abv = null; }
+               if (typeof newBeer.my_rating === 'undefined') { newBeer.my_rating = null; }
+               if (typeof newBeer.description === 'undefined') { newBeer.description = null; }
+               newBeer.editCurrentBeer = false;
 
                this.setState(prevState => ({
                  completeBeerList: [...prevState.completeBeerList, newBeer]
@@ -128,6 +153,8 @@ class App extends React.Component {
            beerLog: [...prevState.beerLog, logEntry]
          }))
 
+         //fire.database().ref('beerLog').set( this.state.beerLog );
+
     }
 
 
@@ -161,7 +188,14 @@ class App extends React.Component {
     }
 
 
+
+
+
+
+
      render() {
+
+          //fire.database().ref('beerLog').set( this.state.beerLog );
 
           const beerList = this.state.completeBeerList;
           const breweries = this.state.breweries;
@@ -190,7 +224,7 @@ class App extends React.Component {
 
               <div className="clb-footer">
                  <Typography variant="body1">
-                 Version 0.4 &middot; Updated Dec 11 &middot; A custom React App by Chris Liu-Beers, <a href="http://tomatillodesign.com" target="_blank">Tomatillo Design</a>
+                 Version 0.5 &middot; Updated Dec 16 &middot; A custom React App by Chris Liu-Beers, <a href="http://tomatillodesign.com" target="_blank">Tomatillo Design</a>
                  </Typography>
                  </div>
                  </MuiThemeProvider>

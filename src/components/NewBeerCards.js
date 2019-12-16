@@ -33,11 +33,14 @@ class NewBeerCards extends React.Component {
      render() {
 
           const beerList = this.props.beerList;
+          console.log(beerList);
           const breweries = this.props.breweries;
           const beerLog = this.props.beerLog;
           const addNewBeer = this.props.addNewBeer;
           const removeBeer = this.props.removeBeer;
           var orderedBeers = null;
+
+          console.log(this.props.beerCardView);
 
                if( this.props.beerCardView === 'Alphabetical') {
                     orderedBeers = [...beerList].sort((a, b) => (a.beer_name > b.beer_name) ? 1 : -1);
@@ -100,32 +103,38 @@ class NewBeerCards extends React.Component {
 
           console.log(orderedBeers);
 
-          return (
+          if( orderedBeers ) {
 
-               <div className="clb-beers">
-                    <div className="clb-select-view">
-                    <ButtonGroup size="small" color="secondary" aria-label="outlined primary button group">
-                        <Button onClick={this.onChangeView} id="view-alphabetical" className={this.btnAlphabeticalSelected}>Alphabetical</Button>
-                        <Button onClick={this.onChangeView} id="view-high-count" className={this.btnCountSelected}>High Count</Button>
-                        <Button onClick={this.onChangeView} id="view-recently-added" className={this.btnRecentSelected}>Recently Added</Button>
-                      </ButtonGroup>
-                      </div>
+               return (
 
-                      <div className="clb-beer-card-area">
-                         { Object.keys(orderedBeers).map(key => (
-                                   <BeerCard
-                                        beer={orderedBeers[key]}
-                                        key={key}
-                                        beerList={beerList}
-                                        breweries={breweries}
-                                        beerLog={beerLog}
-                                        addNewBeer={addNewBeer}
-                                        removeBeer={removeBeer}
-                                   />
-                         )) }
+                    <div className="clb-beers">
+                         <div className="clb-select-view">
+                         <ButtonGroup size="small" color="secondary" aria-label="outlined primary button group">
+                             <Button onClick={this.onChangeView} id="view-alphabetical" className={this.btnAlphabeticalSelected}>Alphabetical</Button>
+                             <Button onClick={this.onChangeView} id="view-high-count" className={this.btnCountSelected}>High Count</Button>
+                             <Button onClick={this.onChangeView} id="view-recently-added" className={this.btnRecentSelected}>Recently Added</Button>
+                           </ButtonGroup>
+                           </div>
+
+                           <div className="clb-beer-card-area">
+                              { Object.keys(orderedBeers).map(key => (
+                                        <BeerCard
+                                             beer={orderedBeers[key]}
+                                             key={key}
+                                             beerList={beerList}
+                                             breweries={breweries}
+                                             beerLog={beerLog}
+                                             addNewBeer={addNewBeer}
+                                             removeBeer={removeBeer}
+                                        />
+                              )) }
+                         </div>
                     </div>
-               </div>
-               );
+                    );
+
+               } else {
+                    return 'Please use the tabs above to add new breweries and beers.';
+               }
 
      }
 
