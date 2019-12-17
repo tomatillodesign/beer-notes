@@ -24,7 +24,7 @@ render() {
        return (
 
            <TextField
-               id="outlined-basic"
+               id="beer-abv-text-input"
                label="ABV"
                defaultValue={this.props.currentABV}
                fullWidth

@@ -12,6 +12,7 @@ import BeerLogNotes from './BeerLogNotes';
 import NameOfBeer from './NameOfBeer';
 import BeerABV from './BeerABV';
 import SelectRating from './SelectRating';
+import ColorPickerSwitch from './ColorPickerSwitch';
 import { slugify } from '../helpers';
 
 ///////////////////////////////////////////////////////////////////////
@@ -108,6 +109,12 @@ class NewBeerForm extends React.Component {
        };
 
 
+  manualHexSelection = (event) => {
+       this.backgroundColor = '#' + (event.target.value);
+       console.log(this.backgroundColor);
+  }
+
+
 render() {
 
      const beerList = this.props.beerList;
@@ -153,10 +160,8 @@ render() {
                               <SelectRating setRating={this.setRating} reset={this.reset} edit={edit} defaultRating={defaultRating} />
                               </div>
                         </div>
-                        <div className="color-picker-area">
-                        <h4>Set Background Color</h4>
-                        <SliderPicker color={ defaultColor } onChangeComplete={ this.handleColorChangeComplete } />
-                   </div>
+                        <ColorPickerSwitch defaultColor={defaultColor} onChangeComplete={ this.handleColorChangeComplete } manualHexSelection={this.manualHexSelection} />
+
                    <BeerLogNotes placeholder={placeholder} defaultValue={defaultValue} getNotes={this.getBeerDescription} edit={edit} />
                    <Button variant="contained" color="primary" type="submit">{actionButtonText}</Button>
               </form>

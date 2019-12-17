@@ -28,7 +28,7 @@ render() {
        return (
 
            <TextField
-               id="outlined-basic"
+               id="notes-basic-outline"
                defaultValue={this.props.defaultValue}
                label={this.props.placeholder}
                fullWidth

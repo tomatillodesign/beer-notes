@@ -19,7 +19,7 @@ class NewBeerCards extends React.Component {
       btnAlphabeticalSelected = null;
       btnCountSelected = null;
       btnRecentSelected = null;
-
+      btnRatingSelected = null;
 
       onChangeView = (event) => {
           // 1. Stop the form from submitting
@@ -46,13 +46,16 @@ class NewBeerCards extends React.Component {
                     orderedBeers = [...beerList].sort((a, b) => (a.beer_name > b.beer_name) ? 1 : -1);
                     this.btnAlphabeticalSelected = 'clb-view-button selected';
                     this.btnCountSelected = 'clb-view-button';
+                    this.btnRatingSelected = 'clb-view-button';
                     this.btnRecentSelected = 'clb-view-button';
+
                }
 
                if( this.props.beerCardView === 'High Count') {
                     //orderedBeers = [...beerList].sort((a, b) => (a.count < b.count) ? 1 : -1);
                     this.btnCountSelected = 'clb-view-button selected';
                     this.btnAlphabeticalSelected = 'clb-view-button';
+                    this.btnRatingSelected = 'clb-view-button';
                     this.btnRecentSelected = 'clb-view-button';
 
 
@@ -79,6 +82,7 @@ class NewBeerCards extends React.Component {
                     //orderedBeers = [...beerList].sort((a, b) => (a.timestamp < b.timestamp) ? 1 : -1);
                     this.btnRecentSelected = 'clb-view-button selected';
                     this.btnAlphabeticalSelected = 'clb-view-button';
+                    this.btnRatingSelected = 'clb-view-button';
                     this.btnCountSelected = 'clb-view-button';
 
                     // New sorting
@@ -100,6 +104,33 @@ class NewBeerCards extends React.Component {
                }
 
 
+               if( this.props.beerCardView === 'Rating') {
+                    //orderedBeers = [...beerList].sort((a, b) => (a.count < b.count) ? 1 : -1);
+                    this.btnRatingSelected = 'clb-view-button selected';
+                    this.btnCountSelected = 'clb-view-button';
+                    this.btnAlphabeticalSelected = 'clb-view-button';
+                    this.btnRecentSelected = 'clb-view-button';
+
+
+                         // New sorting
+                         orderedBeers = [...beerList].sort(function (a, b) {
+
+                         	// If the first item has a higher number, move it down
+                         	// If the first item has a lower number, move it up
+                         	if (a.my_rating > b.my_rating) return -1;
+                         	if (a.my_rating < b.my_rating) return 1;
+
+                         	// If the count number is the same between both items, sort alphabetically
+                         	// If the first item comes first in the alphabet, move it up
+                         	// Otherwise move it down
+                         	if (a.beer_name > b.beer_name) return 1;
+               	          if (a.beer_name < b.beer_name) return -1;
+
+                         });
+
+               }
+
+
 
           console.log(orderedBeers);
 
@@ -112,6 +143,7 @@ class NewBeerCards extends React.Component {
                          <ButtonGroup size="small" color="secondary" aria-label="outlined primary button group">
                              <Button onClick={this.onChangeView} id="view-alphabetical" className={this.btnAlphabeticalSelected}>Alphabetical</Button>
                              <Button onClick={this.onChangeView} id="view-high-count" className={this.btnCountSelected}>High Count</Button>
+                             <Button onClick={this.onChangeView} id="view-rating" className={this.btnRatingSelected}>Rating</Button>
                              <Button onClick={this.onChangeView} id="view-recently-added" className={this.btnRecentSelected}>Recently Added</Button>
                            </ButtonGroup>
                            </div>

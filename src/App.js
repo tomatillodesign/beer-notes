@@ -17,12 +17,49 @@ import { beers, domestics, completeBeerList, beerListUpdated, breweryList } from
 //import fire from './fire';
 import base from './base';
 
+// const theme = createMuiTheme({
+//      palette: {
+//        primary: deepPurple,
+//        secondary: orange,
+//      },
+// });
+
+
 const theme = createMuiTheme({
-     palette: {
-       primary: deepPurple,
-       secondary: orange,
-     },
+  palette: {
+    primary: {
+      // light: will be calculated from palette.primary.main,
+      main: '#30336C',
+      // dark: will be calculated from palette.primary.main,
+      // contrastText: will be calculated to contrast with palette.primary.main
+    },
+    secondary: {
+      light: '#B4DFE5',
+      main: '#CC683B',
+      // dark: will be calculated from palette.secondary.main,
+      contrastText: '#FFF',
+    },
+    // error: will use the default color
+  },
+
+  typography: {
+   fontFamily: [
+      'Open Sans',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+   ].join(','),
+  },
+
 });
+
+
 
 class App extends React.Component {
 
@@ -181,6 +218,7 @@ class App extends React.Component {
          console.log(newViewString);
          let newBeerCardView = 'Alphabetical';
          if( newViewString === 'view-high-count' ) { newBeerCardView = 'High Count'; }
+         if( newViewString === 'view-rating' ) { newBeerCardView = 'Rating'; }
          if( newViewString === 'view-recently-added' ) { newBeerCardView = 'Recently Added'; }
 
          this.setState({ beerCardView: newBeerCardView });
@@ -224,7 +262,7 @@ class App extends React.Component {
 
               <div className="clb-footer">
                  <Typography variant="body1">
-                 Version 0.5 &middot; Updated Dec 16 &middot; A custom React App by Chris Liu-Beers, <a href="http://tomatillodesign.com" target="_blank">Tomatillo Design</a>
+                 <a href="https://github.com/tomatillodesign/beer-notes" target="_blank">Version 0.6</a> &middot; By Chris Liu-Beers, <a href="http://tomatillodesign.com" target="_blank">Tomatillo Design</a>
                  </Typography>
                  </div>
                  </MuiThemeProvider>

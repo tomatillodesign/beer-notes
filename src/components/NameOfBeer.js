@@ -27,7 +27,7 @@ render() {
        return (
 
            <TextField
-               id="outlined-basic"
+               id="name-of-beer-text-input"
                label="Name of Beer"
                defaultValue={this.props.beerName}
                fullWidth
