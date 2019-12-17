@@ -13,6 +13,9 @@ import NewBeerForm from './NewBeerForm';
 import NewBreweryForm from './NewBreweryForm';
 import NewBeerCards from './NewBeerCards';
 
+import Login from './Login';
+import Register from './Register';
+
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 
@@ -97,6 +100,11 @@ export default function LandingPage(props) {
     setValue(newValue);
   };
 
+
+  const authenticate = () => {
+       alert('Yeah');
+ }
+
   return (
        <div className="App">
        <MuiThemeProvider theme={theme}>
@@ -111,10 +119,10 @@ export default function LandingPage(props) {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <h2>Login to the App here</h2>
+        <Login authenticate={authenticate} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-          <h2>Register Here</h2>
+          <Register />
         </TabPanel>
     </div>
           <div className="clb-footer">
