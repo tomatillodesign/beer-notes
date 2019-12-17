@@ -46,6 +46,13 @@ export default function BeerCard(props) {
      const addNewBeer = props.addNewBeer;
      const removeBeer = props.removeBeer;
 
+          var myRatingToPublish = null;
+          if( myRating === '3' ) { myRatingToPublish = '❤️'; }
+          if( myRating === '2' ) { myRatingToPublish = '👍'; }
+          if( myRating === '1' ) { myRatingToPublish = '👎'; }
+
+          console.log(myRating);
+
      if( backgroundColor ) {
           var lightBackground = lightenDarkenColor(backgroundColor, 200);
      }
@@ -113,7 +120,7 @@ export default function BeerCard(props) {
 
                 {myRating !== null &&
                      <Button variant="outlined" className="clb-light-border-outline-button my-rating-button">
-                       {myRating}
+                       {myRatingToPublish}
                     </Button>
                 }
                  {beerABV !== null &&

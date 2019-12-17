@@ -28,7 +28,7 @@ This project was created by Chris Liu-Beers of [Tomatillo Design](http://www.tom
 
 ## Possible Refinements
 
-- Main Beer view, add sorting by Rating (heart, thumbs up, etc.)
 - Main Beer view, add transition/animations for smooth switching
+- ~~Main Beer view, add sorting by Rating (heart, thumbs up, etc.)~~
 - ~~Main Beer view, ensure that sorting also happens when items are tied (eg sort all beers with 0 log entries alphabetically when "High Count" is selected)~~
 - ~~Main Beer view, persist the state of viewing (eg viewType: 'alphabetical')~~

@@ -13,16 +13,22 @@ class SelectRating extends React.Component {
      render() {
 
           const defaultRating = this.props.defaultRating;
+
+               var myRatingToPublish = null;
+               if( defaultRating === '3' ) { myRatingToPublish = '❤️ Great'; }
+               if( defaultRating === '2' ) { myRatingToPublish = '👍 Good'; }
+               if( defaultRating === '1' ) { myRatingToPublish = '👎 Not Good'; }
+
           const defaultRatingPublish = {
                value: defaultRating,
-               label: defaultRating
+               label: myRatingToPublish
           };
           console.log(defaultRating);
 
           const ratingOptions = [
-               { value: '❤️', label: '❤️ Great' },
-               { value: '👍', label: '👍 Good' },
-               { value: '👎', label: '👎 Not Good' },
+               { value: '3', label: '❤️ Great' },
+               { value: '2', label: '👍 Good' },
+               { value: '1', label: '👎 Not Good' },
           ];
 
           if( defaultRating ) {

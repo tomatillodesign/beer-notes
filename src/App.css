@@ -277,8 +277,8 @@ h3.collapsible-log-title {
 }
 
 .my-rating-button:hover {
-     cursor: default;
-     background: #fff;
+     cursor: default !important;
+     background: #fff !important;
 }
 
 .MuiTab-wrapper, .h2, h2, .h3, h3 {
