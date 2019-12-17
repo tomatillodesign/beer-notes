@@ -12,7 +12,7 @@ import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import orange from '@material-ui/core/colors/orange';
 import deepPurple from '@material-ui/core/colors/deepPurple';
 
-import { beers, domestics, completeBeerList, beerListUpdated, breweryList } from './data/beers.js';
+//import { beers, domestics, completeBeerList, beerListUpdated, breweryList } from './data/beers.js';
 
 //import fire from './fire';
 import base from './base';
@@ -64,8 +64,8 @@ const theme = createMuiTheme({
 class App extends React.Component {
 
      state = {
-         completeBeerList: beerListUpdated,
-         breweries: breweryList,
+         completeBeerList: [],
+         breweries: [],
          beerLog: [],
          beerCardView: 'Alphabetical',
        };
@@ -74,31 +74,57 @@ class App extends React.Component {
        componentDidMount(){
 
             console.log("componentDidMount");
+            const { params } = this.props.match;
 
-            base.syncState(`completeBeerList`, {
+            base.syncState(`${params.journalID}/completeBeerList`, {
               context: this,
               state: 'completeBeerList',
               asArray: true
             });
 
-            base.syncState(`breweries`, {
+            base.syncState(`${params.journalID}/breweries`, {
               context: this,
               state: 'breweries',
               asArray: true
             });
 
-            base.syncState(`beerLog`, {
+            base.syncState(`${params.journalID}/beerLog`, {
               context: this,
               state: 'beerLog',
               asArray: true
             });
 
-            base.syncState(`beerCardView`, {
+            base.syncState(`${params.journalID}/beerCardView`, {
               context: this,
               state: 'beerCardView',
               defaultValue: 'Alphabetical',
               asArray: false
             });
+
+            // base.syncState(`completeBeerList`, {
+            //   context: this,
+            //   state: 'completeBeerList',
+            //   asArray: true
+            // });
+            //
+            // base.syncState(`breweries`, {
+            //   context: this,
+            //   state: 'breweries',
+            //   asArray: true
+            // });
+            //
+            // base.syncState(`beerLog`, {
+            //   context: this,
+            //   state: 'beerLog',
+            //   asArray: true
+            // });
+            //
+            // base.syncState(`beerCardView`, {
+            //   context: this,
+            //   state: 'beerCardView',
+            //   defaultValue: 'Alphabetical',
+            //   asArray: false
+            // });
 
        }
 
@@ -235,6 +261,8 @@ class App extends React.Component {
 
           //fire.database().ref('beerLog').set( this.state.beerLog );
 
+          const journalID = this.props.match.params.journalID;
+
           const beerList = this.state.completeBeerList;
           const breweries = this.state.breweries;
           const beerLog = this.state.beerLog;
@@ -259,7 +287,7 @@ class App extends React.Component {
                     beerCardView={beerCardView}
                     changeBeerCardView={this.changeBeerCardView}
                />
-
+               JournalID: {journalID}
               <div className="clb-footer">
                  <Typography variant="body1">
                  <a href="https://github.com/tomatillodesign/beer-notes" target="_blank">Version 0.6</a> &middot; By Chris Liu-Beers, <a href="http://tomatillodesign.com" target="_blank">Tomatillo Design</a>

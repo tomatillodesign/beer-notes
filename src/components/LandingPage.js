@@ -14,6 +14,43 @@ import NewBreweryForm from './NewBreweryForm';
 import NewBeerCards from './NewBeerCards';
 
 import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
+
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      // light: will be calculated from palette.primary.main,
+      main: '#30336C',
+      // dark: will be calculated from palette.primary.main,
+      // contrastText: will be calculated to contrast with palette.primary.main
+    },
+    secondary: {
+      light: '#B4DFE5',
+      main: '#CC683B',
+      // dark: will be calculated from palette.secondary.main,
+      contrastText: '#FFF',
+    },
+    // error: will use the default color
+  },
+
+  typography: {
+   fontFamily: [
+      'Open Sans',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+   ].join(','),
+  },
+
+});
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -52,7 +89,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function NotFound(props) {
+export default function LandingPage(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -61,26 +98,31 @@ export default function NotFound(props) {
   };
 
   return (
+       <div className="App">
+       <MuiThemeProvider theme={theme}>
     <div className={classes.root}>
       <AppBar position="static">
            <Typography variant="h1" className={classes.title + " clb-header"}>
             Welcome to the Beer Journal
           </Typography>
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-        <Tab label="Sorry, not found" {...a11yProps(0)} />
-          <Tab label="Login" {...a11yProps(1)} />
-          <Tab label="Register" {...a11yProps(2)} />
+          <Tab label="Login" {...a11yProps(0)} />
+          <Tab label="Register" {...a11yProps(1)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <h2>Sorry, we couldn't find it. Click the tabs above to login or register a new journal.</h2>
-      </TabPanel>
-      <TabPanel value={value} index={1}>
         <h2>Login to the App here</h2>
       </TabPanel>
-      <TabPanel value={value} index={2}>
+      <TabPanel value={value} index={1}>
           <h2>Register Here</h2>
         </TabPanel>
+    </div>
+          <div className="clb-footer">
+            <Typography variant="body1">
+            <a href="https://github.com/tomatillodesign/beer-notes" target="_blank">Version 0.6</a> &middot; By Chris Liu-Beers, <a href="http://tomatillodesign.com" target="_blank">Tomatillo Design</a>
+            </Typography>
+            </div>
+    </MuiThemeProvider>
     </div>
   );
 }
