@@ -105,32 +105,31 @@ export default function LandingPage(props) {
        alert('Yeah');
  }
 
-  return (
-       <div className="App">
-       <MuiThemeProvider theme={theme}>
-    <div className={classes.root}>
-      <AppBar position="static">
-           <Typography variant="h1" className={classes.title + " clb-header"}>
-            Welcome to the Beer Journal
-          </Typography>
-        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-          <Tab label="Login" {...a11yProps(0)} />
-          <Tab label="Register" {...a11yProps(1)} />
-        </Tabs>
-      </AppBar>
-      <TabPanel value={value} index={0}>
-        <Login authenticate={authenticate} />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-          <Register />
-        </TabPanel>
-    </div>
-          <div className="clb-footer">
-            <Typography variant="body1">
-            <a href="https://github.com/tomatillodesign/beer-notes" target="_blank">Version 0.6</a> &middot; By Chris Liu-Beers, <a href="http://tomatillodesign.com" target="_blank">Tomatillo Design</a>
-            </Typography>
-            </div>
-    </MuiThemeProvider>
-    </div>
-  );
-}
+
+//console.log(props.registerNewUser);
+
+
+       return (
+            <div className="App">
+            <MuiThemeProvider theme={theme}>
+         <div className={classes.root}>
+           <AppBar position="static">
+                <Typography variant="h1" className={classes.title + " clb-header"}>
+                 Welcome to the Beer Journal
+               </Typography>
+             <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+               <Tab label="Login" {...a11yProps(0)} />
+               <Tab label="Register" {...a11yProps(1)} />
+             </Tabs>
+           </AppBar>
+           <TabPanel value={value} index={0}>
+             <Login authenticate={authenticate} />
+           </TabPanel>
+           <TabPanel value={value} index={1}>
+               <Register test={"Test"} registerNewUser={props.registerNewUser} />
+             </TabPanel>
+         </div>
+         </MuiThemeProvider>
+         </div>
+       );
+     }

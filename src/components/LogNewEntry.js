@@ -30,7 +30,7 @@ class LogNewEntry extends React.Component {
           // 1. Stop the form from submitting
           event.preventDefault();
 
-          console.log("BEER NOTES: " + this.beerNotes);
+          //console.log("BEER NOTES: " + this.beerNotes);
 
           const entry = {
                timestamp: Date.now(),
@@ -54,7 +54,9 @@ class LogNewEntry extends React.Component {
      }
 
      getEntryDate = (date) => {
-          this.entryDate = date;
+          const theUnixTime = date.getTime();
+          this.entryDate = theUnixTime;
+          //console.log(theUnixTime);
      }
 
      getBeerType = (selectedOption) => {

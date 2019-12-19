@@ -5,6 +5,8 @@ import Header from './components/Header.js';
 import HeaderTabs from './components/HeaderTabs.js';
 import Typography from '@material-ui/core/Typography';
 import Router from './components/Router.js';
+import LandingPage from './components/LandingPage';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import {createMuiTheme} from '@material-ui/core/styles';
@@ -57,9 +59,9 @@ const theme = createMuiTheme({
 class App extends React.Component {
 
      state = {
-         ownerUID: 'Test',
-         ownerEmail: 'chrisliubeers@gmail.com',
-         ownerName: 'Chris Liu-Beers',
+          loggedInID: '',
+          ownerID: '',
+          ownerEmail: '',
          completeBeerList: [],
          breweries: [],
          beerLog: [],
@@ -75,21 +77,14 @@ class App extends React.Component {
             base.syncState(`${params.journalID}/ownerEmail`, {
               context: this,
               state: 'ownerEmail',
-              defaultValue: 'chrisliubeers@gmail.com',
+              defaultValue: '',
               asArray: false
             });
 
-            base.syncState(`${params.journalID}/ownerName`, {
+            base.syncState(`${params.journalID}/ownerID`, {
               context: this,
-              state: 'ownerName',
-              defaultValue: 'Chris Liu-Beers',
-              asArray: false
-            });
-
-            base.syncState(`${params.journalID}/ownerUID`, {
-              context: this,
-              state: 'ownerUID',
-              defaultValue: 'Test',
+              state: 'ownerID',
+              defaultValue: '',
               asArray: false
             });
 
@@ -117,31 +112,6 @@ class App extends React.Component {
               defaultValue: 'Alphabetical',
               asArray: false
             });
-
-            // base.syncState(`completeBeerList`, {
-            //   context: this,
-            //   state: 'completeBeerList',
-            //   asArray: true
-            // });
-            //
-            // base.syncState(`breweries`, {
-            //   context: this,
-            //   state: 'breweries',
-            //   asArray: true
-            // });
-            //
-            // base.syncState(`beerLog`, {
-            //   context: this,
-            //   state: 'beerLog',
-            //   asArray: true
-            // });
-            //
-            // base.syncState(`beerCardView`, {
-            //   context: this,
-            //   state: 'beerCardView',
-            //   defaultValue: 'Alphabetical',
-            //   asArray: false
-            // });
 
        }
 
@@ -227,6 +197,7 @@ class App extends React.Component {
           console.log("PREV COUNT: " + previousCount);
           console.log("NEW COUNT: " + newCount);
           clbPreviousBeerListState[index].count = newCount;
+
           this.setState({ completeBeerList: clbPreviousBeerListState });
 
          this.setState(prevState => ({
@@ -269,7 +240,16 @@ class App extends React.Component {
     }
 
 
+    registerNewUser = (user) => {
+         const newUserID = user.user.uid;
+          console.log(newUserID);
+         this.setState({ ownerUID: newUserID });
 
+
+         //console.log(user.uid);
+         //this.setState({ ownerUID: user.uid });
+         //console.log("Register New User: " + user.email);
+    }
 
 
 
@@ -291,18 +271,27 @@ class App extends React.Component {
             return (
               <div className="App">
                <MuiThemeProvider theme={theme}>
-                <HeaderTabs
-                    beerList={beerList}
-                    breweries={breweries}
-                    addNewBeer={this.addNewBeer}
-                    addNewBrewery={this.addNewBrewery}
-                    addLogEntry={this.addLogEntry}
-                    removeBeer={this.removeBeer}
-                    beerLog={beerLog}
-                    beerCardView={beerCardView}
-                    changeBeerCardView={this.changeBeerCardView}
-               />
-               JournalID: {journalID}
+
+               { this.state.loggedIn ? (
+
+                    <>
+                    <HeaderTabs
+                       beerList={beerList}
+                       breweries={breweries}
+                       addNewBeer={this.addNewBeer}
+                       addNewBrewery={this.addNewBrewery}
+                       addLogEntry={this.addLogEntry}
+                       removeBeer={this.removeBeer}
+                       beerLog={beerLog}
+                       beerCardView={beerCardView}
+                       changeBeerCardView={this.changeBeerCardView}
+                  />
+
+                  <p>JournalID: {journalID}</p>
+                  </>
+
+               ) : <LandingPage registerNewUser={this.registerNewUser} /> }
+
               <div className="clb-footer">
                  <Typography variant="body1">
                  <a href="https://github.com/tomatillodesign/beer-notes" target="_blank">Version 0.6</a> &middot; By Chris Liu-Beers, <a href="http://tomatillodesign.com" target="_blank">Tomatillo Design</a>

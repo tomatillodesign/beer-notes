@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router-dom';
 import { firebaseApp } from '../base';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -15,22 +16,37 @@ const useStyles = makeStyles(theme => ({
 
 
 class Register extends React.Component {
- state = {
-   email: '',
-   password: '',
-   error: null,
- };
+     constructor(props) {
+          super(props);
+          this.state = {
+            email: '',
+            password: '',
+            error: null,
+          };
+
+          console.log(this.props);
+     }
+
+
 handleInputChange = (event) => {
    this.setState({ [event.target.name]: event.target.value });
+   console.log(event.target.value);
  };
+
 handleSubmit = (event) => {
    event.preventDefault();
+   console.log('Registration submitted');
    const { email, password } = this.state;
+   console.log(this.state);
 firebaseApp
      .auth()
      .createUserWithEmailAndPassword(email, password)
      .then((user) => {
-       this.props.history.push('/');
+          //console.log(user);
+          //this.props.history.push('/');
+
+          // add new user to App-->state and Firebase
+          this.props.registerNewUser(user);
      })
      .catch((error) => {
        this.setState({ error: error });
@@ -39,8 +55,9 @@ firebaseApp
 
      render() {
 
-          const classes = useStyles();
+          //const classes = useStyles();
           const { email, password, error } = this.state;
+          //console.log(this.props.registerNewUser);
 
           return (
                <div className="login-form-area">
@@ -54,36 +71,30 @@ firebaseApp
                ) : null}
 
                <form id="registration-form" onSubmit={this.handleSubmit}>
-                    <div className="login-area">
-                         <TextField
-                             id="login-form-name"
-                             label="Name"
-                             required
-                             fullwidth
-                             value={email}
-                             onChange={this.handleInputChange}
-                             />
-                   </div>
-                    <div className="login-area">
+                    <div className="registration-area">
                          <TextField
                              id="login-form-email"
+                             name="email"
                              label="Email"
                              required
                              fullwidth
-                             // onChange={}
+                             value={this.email}
+                             onChange={this.handleInputChange}
                              />
                         </div>
-                        <div className="login-area">
+                        <div className="registration-area">
                              <TextField
                                  id="login-form-password"
+                                 name="password"
                                  label="Password"
                                  required
                                  fullwidth
                                  placeholder="Password"
-                                value={password}
+                                 value={this.password}
                                 onChange={this.handleInputChange}
                                  />
                        </div>
+                       <Button variant="contained" color="primary" type="submit">Register Now</Button>
                        </form>
              </div>
           );
