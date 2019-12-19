@@ -2,8 +2,8 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import NewBeerForm from './NewBeerForm';
-import { hexToRgbA } from '../helpers';
+import NewBeerForm from '../newBeer/NewBeerForm';
+import { hexToRgbA } from '../../helpers';
 
 export default function EditBeer(props) {
   const [show, setShow] = React.useState(false);

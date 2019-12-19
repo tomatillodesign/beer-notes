@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
-//import { beers, domestics, completeBeerList } from '../data/beers.js';
 
 class SelectBeer extends React.Component {
 

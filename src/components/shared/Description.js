@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
-class BeerLogNotes extends React.Component {
+class Description extends React.Component {
 
      useStyles = makeStyles(theme => ({
        root: {
@@ -61,4 +61,4 @@ render() {
 
 }
 
-export default BeerLogNotes;
+export default Description;

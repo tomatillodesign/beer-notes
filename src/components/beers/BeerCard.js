@@ -7,10 +7,10 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import LogEntry from './LogEntry';
-import { getBrewery, lightenDarkenColor } from '../helpers';
+import LogEntry from '../shared/LogEntry';
+import { getBrewery, lightenDarkenColor } from '../../helpers';
 
-import ExampleModal from './ExampleModal';
+import BeerModal from './BeerModal';
 import EditBeer from './EditBeer';
 
 const useStyles = makeStyles(theme => ({
@@ -129,7 +129,7 @@ export default function BeerCard(props) {
                  </Button>}
 
                  {logCount > 0 &&
-                     <ExampleModal beerName={beerName} breweryName={breweryName} beerLog={matchingLogNotes} logCount={logCount} />
+                     <BeerModal beerName={beerName} breweryName={breweryName} beerLog={matchingLogNotes} logCount={logCount} />
                    }
                    {logCount === 0 &&
                       <Button variant="outlined" disabled title="You haven't logged this beer yet!" className="clb-light-border-outline-button">

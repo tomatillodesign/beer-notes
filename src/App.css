@@ -229,9 +229,13 @@ button.clb-light-border-outline-button {
 
 .complete-log li.single-entry p, .modal-log-notes {
      margin: 0;
-     margin-top: 12px;
+     margin-top: 6px;
      font-size: .75em;
      font-style: italic;
+}
+
+.modal-log-notes {
+     margin-top: 0;
 }
 
 .complete-log h3 {

@@ -10,8 +10,7 @@ import Creatable, { makeCreatableSelect } from 'react-select/creatable';
 import SelectUSState from './SelectUSState';
 import NameOfBrewery from './NameOfBrewery';
 import BreweryCity from './BreweryCity';
-import BeerABV from './BeerABV';
-import { slugify } from '../helpers';
+import { slugify } from '../../helpers';
 
 const shortid = require('shortid');
 

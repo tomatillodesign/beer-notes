@@ -7,13 +7,13 @@ import Snackbar from '@material-ui/core/Snackbar';
 import Select from 'react-select';
 import Creatable, { makeCreatableSelect } from 'react-select/creatable';
 import { SliderPicker } from 'react-color';
-import SelectBrewery from './SelectBrewery';
-import BeerLogNotes from './BeerLogNotes';
+import SelectBrewery from '../shared/SelectBrewery';
+import Description from '../shared/Description';
 import NameOfBeer from './NameOfBeer';
 import BeerABV from './BeerABV';
-import SelectRating from './SelectRating';
+import SelectRating from '../shared/SelectRating';
 import ColorPickerSwitch from './ColorPickerSwitch';
-import { slugify } from '../helpers';
+import { slugify } from '../../helpers';
 
 ///////////////////////////////////////////////////////////////////////
 
@@ -162,7 +162,7 @@ render() {
                         </div>
                         <ColorPickerSwitch defaultColor={defaultColor} onChangeComplete={ this.handleColorChangeComplete } manualHexSelection={this.manualHexSelection} />
 
-                   <BeerLogNotes placeholder={placeholder} defaultValue={defaultValue} getNotes={this.getBeerDescription} edit={edit} />
+                   <Description placeholder={placeholder} defaultValue={defaultValue} getNotes={this.getBeerDescription} edit={edit} />
                    <Button variant="contained" color="primary" type="submit">{actionButtonText}</Button>
               </form>
 

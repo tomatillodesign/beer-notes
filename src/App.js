@@ -1,35 +1,27 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Header from './components/Header.js';
-import HeaderTabs from './components/HeaderTabs.js';
+
+// my components
+import HeaderTabs from './components/HeaderTabs';
+import LandingPage from './components/registration/LandingPage';
+
+// styles & additional packages
 import Typography from '@material-ui/core/Typography';
-import Router from './components/Router.js';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import {createMuiTheme} from '@material-ui/core/styles';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
-import orange from '@material-ui/core/colors/orange';
-import deepPurple from '@material-ui/core/colors/deepPurple';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { beers, domestics, completeBeerList, beerListUpdated, breweryList } from './data/beers.js';
+//import { beers, domestics, completeBeerList, beerListUpdated, breweryList } from './data/beers.js';
 
-//import fire from './fire';
 import base from './base';
-
-// const theme = createMuiTheme({
-//      palette: {
-//        primary: deepPurple,
-//        secondary: orange,
-//      },
-// });
-
 
 const theme = createMuiTheme({
   palette: {
     primary: {
       // light: will be calculated from palette.primary.main,
-      main: '#30336C',
+      main: '#478e6e',
       // dark: will be calculated from palette.primary.main,
       // contrastText: will be calculated to contrast with palette.primary.main
     },
@@ -64,36 +56,47 @@ const theme = createMuiTheme({
 class App extends React.Component {
 
      state = {
-         completeBeerList: beerListUpdated,
-         breweries: breweryList,
-         beerLog: [],
-         beerCardView: 'Alphabetical',
+          loggedInID: '',
+          ownerID: 'FDRIeT8Yh7baDzJdHuD3pBpH5sC2',
+          ownerEmail: '',
+          completeBeerList: [],
+          breweries: [],
+          beerLog: [],
+          beerCardView: 'Alphabetical',
        };
 
 
        componentDidMount(){
 
             console.log("componentDidMount");
+            const ownerID = this.state.ownerID;
 
-            base.syncState(`completeBeerList`, {
+            base.syncState(`${ownerID}/ownerID`, {
+              context: this,
+              state: 'ownerID',
+              defaultValue: 'FDRIeT8Yh7baDzJdHuD3pBpH5sC2',
+              asArray: false
+            });
+
+            base.syncState(`${ownerID}/completeBeerList`, {
               context: this,
               state: 'completeBeerList',
               asArray: true
             });
 
-            base.syncState(`breweries`, {
+            base.syncState(`${ownerID}/breweries`, {
               context: this,
               state: 'breweries',
               asArray: true
             });
 
-            base.syncState(`beerLog`, {
+            base.syncState(`${ownerID}/beerLog`, {
               context: this,
               state: 'beerLog',
               asArray: true
             });
 
-            base.syncState(`beerCardView`, {
+            base.syncState(`${ownerID}/beerCardView`, {
               context: this,
               state: 'beerCardView',
               defaultValue: 'Alphabetical',
@@ -107,15 +110,6 @@ class App extends React.Component {
 
      addNewBeer = (newBeer) => {
           console.log(newBeer);
-          // 1. take a copy of existing state
-          //const prevBeerList = { ...this.state.completeBeerList };
-          // 2. add our new fish to that fishes variable
-          //completeBeerList[`newBeer_${Date.now()}`] = newBeer;
-          //completeBeerList[newBeer[0]] = newBeer[1];
-          // 3. Set the new fishes object to state
-          // this.setState({
-          //      completeBeerList: completeBeerList
-          // })
 
           if( newBeer.editCurrentBeer ) {
                console.log("EDITING THIS BEER: " + newBeer.beer_name);
@@ -226,7 +220,16 @@ class App extends React.Component {
     }
 
 
+    registerNewUser = (user) => {
+             const newUserID = user.user.uid;
+              console.log(newUserID);
+             this.setState({ ownerUID: newUserID });
 
+
+             //console.log(user.uid);
+             //this.setState({ ownerUID: user.uid });
+             //console.log("Register New User: " + user.email);
+        }
 
 
 
@@ -239,26 +242,38 @@ class App extends React.Component {
           const breweries = this.state.breweries;
           const beerLog = this.state.beerLog;
           const beerCardView = this.state.beerCardView;
+          const ownerID = this.state.ownerID;
 
           console.log(beerList);
           console.log(breweries);
           console.log(beerLog);
           console.log(beerCardView);
+          console.log(ownerID);
 
             return (
+
               <div className="App">
                <MuiThemeProvider theme={theme}>
-                <HeaderTabs
-                    beerList={beerList}
-                    breweries={breweries}
-                    addNewBeer={this.addNewBeer}
-                    addNewBrewery={this.addNewBrewery}
-                    addLogEntry={this.addLogEntry}
-                    removeBeer={this.removeBeer}
-                    beerLog={beerLog}
-                    beerCardView={beerCardView}
-                    changeBeerCardView={this.changeBeerCardView}
-               />
+
+               { true ? (
+
+                   <>
+                   <HeaderTabs
+                     beerList={beerList}
+                     breweries={breweries}
+                     addNewBeer={this.addNewBeer}
+                     addNewBrewery={this.addNewBrewery}
+                     addLogEntry={this.addLogEntry}
+                     removeBeer={this.removeBeer}
+                     beerLog={beerLog}
+                     beerCardView={beerCardView}
+                     changeBeerCardView={this.changeBeerCardView}
+                 />
+
+                 <p>ownerID: {ownerID}</p>
+                 </>
+
+              ) : <LandingPage registerNewUser={this.registerNewUser} /> }
 
               <div className="clb-footer">
                  <Typography variant="body1">

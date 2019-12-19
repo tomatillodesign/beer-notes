@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
 import LogNewEntry from './LogNewEntry';
-import LogEntry from './LogEntry';
+import LogEntry from '../shared/LogEntry';
 
 //import { beers, domestics, completeBeerList } from '../data/beers.js';
 

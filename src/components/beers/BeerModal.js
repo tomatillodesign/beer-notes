@@ -2,9 +2,9 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import LogEntry from './LogEntry';
+import LogEntry from '../shared/LogEntry';
 
-export default function ExampleModal(props) {
+export default function BeerModal(props) {
   const [show, setShow] = React.useState(false);
 
   const handleClose = () => setShow(false);

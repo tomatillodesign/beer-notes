@@ -7,10 +7,10 @@ import Select from 'react-select';
 import Creatable, { makeCreatableSelect } from 'react-select/creatable';
 
 import BeerLogDate from './BeerLogDate';
-import SelectBeer from './SelectBeer';
-import SelectBrewery from './SelectBrewery';
-import BeerLogNotes from './BeerLogNotes';
-import { slugify } from '../helpers';
+import SelectBeer from '../shared/SelectBeer';
+//import SelectBrewery from './SelectBrewery';
+import Description from '../shared/Description';
+import { slugify } from '../../helpers';
 
 class LogNewEntry extends React.Component {
      constructor(props) {
@@ -54,7 +54,8 @@ class LogNewEntry extends React.Component {
      }
 
      getEntryDate = (date) => {
-          this.entryDate = date;
+          const theUnixTime = date.getTime();
+          this.entryDate = theUnixTime;
      }
 
      getBeerType = (selectedOption) => {
@@ -93,7 +94,7 @@ render() {
                    <div className="clb-one-col">
                         <SelectBeer beerList={beerList} breweries={breweries} getBeerType={this.getBeerType} />
                    </div>
-                   <BeerLogNotes placeholder='Notes' defaultValue={''} getNotes={this.getNotes} />
+                   <Description placeholder='Notes' defaultValue={''} getNotes={this.getNotes} />
                    <Button variant="contained" color="primary" type="submit">Add Entry</Button>
               </form>
          </div>

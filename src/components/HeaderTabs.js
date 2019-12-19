@@ -1,19 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+import BeerLog from './log/BeerLog';
+import NewBeerForm from './newBeer/NewBeerForm';
+import NewBreweryForm from './newBrewery/NewBreweryForm';
+import NewBeerCards from './beers/NewBeerCards';
+
 import { makeStyles } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
-import BeerHome from './BeerHome';
-import BeerLog from './BeerLog';
-import NewBeerForm from './NewBeerForm';
-import NewBreweryForm from './NewBreweryForm';
-import NewBeerCards from './NewBeerCards';
 
-import { createMuiTheme } from '@material-ui/core/styles';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

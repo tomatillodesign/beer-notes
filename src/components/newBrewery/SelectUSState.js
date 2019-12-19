@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
-import { usStates } from '../data/usstates.js';
+import { usStates } from '../../data/usstates.js';
 
 class SelectUSState extends React.Component {
 render() {
