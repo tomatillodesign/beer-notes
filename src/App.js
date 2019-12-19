@@ -17,13 +17,6 @@ import deepPurple from '@material-ui/core/colors/deepPurple';
 //import fire from './fire';
 import base from './base';
 
-// const theme = createMuiTheme({
-//      palette: {
-//        primary: deepPurple,
-//        secondary: orange,
-//      },
-// });
-
 
 const theme = createMuiTheme({
   palette: {
@@ -64,6 +57,9 @@ const theme = createMuiTheme({
 class App extends React.Component {
 
      state = {
+         ownerUID: 'Test',
+         ownerEmail: 'chrisliubeers@gmail.com',
+         ownerName: 'Chris Liu-Beers',
          completeBeerList: [],
          breweries: [],
          beerLog: [],
@@ -75,6 +71,27 @@ class App extends React.Component {
 
             console.log("componentDidMount");
             const { params } = this.props.match;
+
+            base.syncState(`${params.journalID}/ownerEmail`, {
+              context: this,
+              state: 'ownerEmail',
+              defaultValue: 'chrisliubeers@gmail.com',
+              asArray: false
+            });
+
+            base.syncState(`${params.journalID}/ownerName`, {
+              context: this,
+              state: 'ownerName',
+              defaultValue: 'Chris Liu-Beers',
+              asArray: false
+            });
+
+            base.syncState(`${params.journalID}/ownerUID`, {
+              context: this,
+              state: 'ownerUID',
+              defaultValue: 'Test',
+              asArray: false
+            });
 
             base.syncState(`${params.journalID}/completeBeerList`, {
               context: this,
@@ -258,8 +275,6 @@ class App extends React.Component {
 
 
      render() {
-
-          //fire.database().ref('beerLog').set( this.state.beerLog );
 
           const journalID = this.props.match.params.journalID;
 
