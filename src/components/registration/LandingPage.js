@@ -123,7 +123,7 @@ export default function LandingPage(props) {
              </Tabs>
            </AppBar>
            <TabPanel value={value} index={0}>
-             <Login authenticate={authenticate} />
+             <Login authenticateUser={props.authenticateUser} />
            </TabPanel>
            <TabPanel value={value} index={1}>
                <Register registerNewUser={props.registerNewUser} />

@@ -47,9 +47,16 @@ class NewBeerForm extends React.Component {
                console.log('SHORT ID: ' + customID);
           }
 
-          if( this.count === undefined ) {
-               this.count = 0;
-          }
+          // Make sure no fields cause "undefined" errors even if missing info
+               if( this.count === undefined ) { this.count = 0; }
+               if( this.brewery_name === undefined ) {
+                    this.brewery_name = '';
+                    this.brewery_slug = '';
+               }
+               if( this.backgroundColor === undefined ) { this.backgroundColor = ''; }
+               if( this.beerABV === undefined ) { this.beerABV = ''; }
+               if( this.my_rating === undefined ) { this.my_rating = ''; }
+               if( this.description === undefined ) { this.description = ''; }
 
           const entry = {
                               id: customID,
@@ -92,6 +99,7 @@ class NewBeerForm extends React.Component {
      }
 
      getBrewery = (selectedOption) => {
+          console.log('getBrewery');
           if(selectedOption) {
                this.brewery_slug = slugify(selectedOption.label);
                this.brewery_name = selectedOption.label;

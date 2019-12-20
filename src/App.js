@@ -16,6 +16,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 //import { beers, domestics, completeBeerList, beerListUpdated, breweryList } from './data/beers.js';
 
 import base from './base';
+import { firebaseApp } from './base';
 
 const theme = createMuiTheme({
   palette: {
@@ -63,6 +64,7 @@ class App extends React.Component {
           breweries: [],
           beerLog: [],
           beerCardView: 'Alphabetical',
+          viewLogin: false,
        };
 
 
@@ -75,6 +77,13 @@ class App extends React.Component {
               context: this,
               state: 'ownerID',
               defaultValue: 'FDRIeT8Yh7baDzJdHuD3pBpH5sC2',
+              asArray: false
+            });
+
+            base.syncState(`${ownerID}/ownerEmail`, {
+              context: this,
+              state: 'ownerEmail',
+              defaultValue: '',
               asArray: false
             });
 
@@ -222,8 +231,12 @@ class App extends React.Component {
 
     registerNewUser = (user) => {
              const newUserID = user.user.uid;
+             const newUserEmail = user.user.email;
               console.log(newUserID);
-             this.setState({ ownerUID: newUserID });
+             this.setState({
+                  ownerUID: newUserID,
+                  ownerEmail: newUserEmail,
+              });
 
 
              //console.log(user.uid);
@@ -232,9 +245,65 @@ class App extends React.Component {
         }
 
 
+        authenticateUser = (user) => {
+                 const loggedInID = user.user.uid;
+                 console.log("Logged in: " + loggedInID);
+                 this.setState({ loggedInID: loggedInID });
+            }
+
+
+
+   authHandler = async authData => {
+        const userObject = await base.fetch('FDRIeT8Yh7baDzJdHuD3pBpH5sC2', { context: this });
+        console.log("App.js authHandler");
+        console.log(userObject);
+        if( Object.entries(userObject).length === 0 ) { console.log("No user found"); }
+
+   }
+
+
+
+   swapViews = event => {
+        this.setState(prevState => ({
+            viewLogin: !prevState.viewLogin
+          }));
+   }
 
 
      render() {
+
+
+          // const user = firebaseApp.auth().currentUser;
+          // console.log(user);
+          // let userUID = null;
+
+          const user = firebaseApp.auth().currentUser;
+          // console.log(user);
+          // return(user);
+          //
+          // let user = this.authHandler();
+          // console.log(user);
+          let userUID = null;
+
+           if (user) {
+             // User is signed in.
+             console.log("User is signed in.");
+             console.log(user.email);
+             if (user != null) {
+                 console.log(user.displayName);
+                 console.log(user.email);
+                 console.log(user.emailVerified);
+                 console.log(user.uid);  // The user's ID, unique to the Firebase project. Do NOT use
+                                  // this value to authenticate with your backend server, if
+                                  // you have one. Use User.getToken() instead.
+
+               userUID = user.uid;
+
+               }
+           } else {
+             // No user is signed in.
+             console.log("No user is signed in.");
+           }
 
           //fire.database().ref('beerLog').set( this.state.beerLog );
 
@@ -243,11 +312,13 @@ class App extends React.Component {
           const beerLog = this.state.beerLog;
           const beerCardView = this.state.beerCardView;
           const ownerID = this.state.ownerID;
+          const viewLogin = this.state.viewLogin;
 
           console.log(beerList);
           console.log(breweries);
           console.log(beerLog);
           console.log(beerCardView);
+          console.log(userUID);
           console.log(ownerID);
 
             return (
@@ -255,7 +326,10 @@ class App extends React.Component {
               <div className="App">
                <MuiThemeProvider theme={theme}>
 
-               { true ? (
+               <button onClick={this.authHandler}>AuthHandler</button>
+               <button onClick={this.swapViews}>Swap Views</button>
+
+               { ( userUID === ownerID ) ? (
 
                    <>
                    <HeaderTabs
@@ -269,11 +343,11 @@ class App extends React.Component {
                      beerCardView={beerCardView}
                      changeBeerCardView={this.changeBeerCardView}
                  />
-
+                 <p>visitorID: {userUID}</p>
                  <p>ownerID: {ownerID}</p>
                  </>
 
-              ) : <LandingPage registerNewUser={this.registerNewUser} /> }
+              ) : <LandingPage registerNewUser={this.registerNewUser}  authenticateUser={this.authenticateUser} /> }
 
               <div className="clb-footer">
                  <Typography variant="body1">

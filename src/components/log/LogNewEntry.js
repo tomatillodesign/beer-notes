@@ -45,7 +45,7 @@ class LogNewEntry extends React.Component {
           this.props.addLogEntry(entry);
           // refresh the form
           event.currentTarget.reset();
-          this.beerNotes = null;
+          //this.beerNotes = null;
      }
 
      getNotes = (event) => {

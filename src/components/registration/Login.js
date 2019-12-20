@@ -21,7 +21,7 @@ const Login = (props) => {
      return (
           <div className="login-form-area">
           <h2>Login Below</h2>
-          <form className="login-area" onSubmit={props.authenticate} >
+          <form className="login-area" onSubmit={props.authenticateUser} >
           <div className="login-item">
           <TextField
               id="login-form-email"
