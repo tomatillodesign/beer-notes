@@ -15,6 +15,7 @@ import Box from '@material-ui/core/Box';
 
 import Login from './Login';
 import Register from './Register';
+import Logout from './Logout';
 
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
@@ -24,7 +25,7 @@ const theme = createMuiTheme({
   palette: {
     primary: {
       // light: will be calculated from palette.primary.main,
-      main: '#30336C',
+      main: '#478e6e',
       // dark: will be calculated from palette.primary.main,
       // contrastText: will be calculated to contrast with palette.primary.main
     },
@@ -129,6 +130,7 @@ export default function LandingPage(props) {
                <Register registerNewUser={props.registerNewUser} />
              </TabPanel>
          </div>
+         
          </MuiThemeProvider>
          </div>
        );

@@ -5,6 +5,7 @@ import './App.css';
 // my components
 import HeaderTabs from './components/HeaderTabs';
 import LandingPage from './components/registration/LandingPage';
+import Logout from './components/registration/Logout';
 
 // styles & additional packages
 import Typography from '@material-ui/core/Typography';
@@ -55,10 +56,12 @@ const theme = createMuiTheme({
 
 
 class App extends React.Component {
+     constructor(props) {
+          super(props);
 
-     state = {
+     this.state = {
           loggedInID: '',
-          ownerID: 'FDRIeT8Yh7baDzJdHuD3pBpH5sC2',
+          ownerID: '',
           ownerEmail: '',
           completeBeerList: [],
           breweries: [],
@@ -67,23 +70,32 @@ class App extends React.Component {
           viewLogin: false,
        };
 
+     }
+
 
        componentDidMount(){
 
             console.log("componentDidMount");
-            const ownerID = this.state.ownerID;
+
+            // get currentUser
+           const user = firebaseApp.auth().currentUser;
+           const ownerID = user.uid;
+           console.log(ownerID);
+
+            //const ownerID = this.state.ownerID;
+
 
             base.syncState(`${ownerID}/ownerID`, {
               context: this,
               state: 'ownerID',
-              defaultValue: 'FDRIeT8Yh7baDzJdHuD3pBpH5sC2',
+              defaultValue: ownerID,
               asArray: false
             });
 
             base.syncState(`${ownerID}/ownerEmail`, {
               context: this,
               state: 'ownerEmail',
-              defaultValue: '',
+              defaultValue: this.state.ownerEmail,
               asArray: false
             });
 
@@ -233,6 +245,7 @@ class App extends React.Component {
              const newUserID = user.user.uid;
              const newUserEmail = user.user.email;
               console.log(newUserID);
+
              this.setState({
                   ownerUID: newUserID,
                   ownerEmail: newUserEmail,
@@ -242,22 +255,72 @@ class App extends React.Component {
              //console.log(user.uid);
              //this.setState({ ownerUID: user.uid });
              //console.log("Register New User: " + user.email);
+
+             // Create new Journal view if it doesn't exist yet for this user
+              firebaseApp.database().ref().update({
+                 [newUserID]: {
+                      ownerID: newUserID,
+                      ownerEmail: newUserEmail,
+                      completeBeerList: [],
+                      breweries: [],
+                      beerLog: [],
+                      beerCardView: 'Alphabetical',
+                 },
+              });
+
+              //const checkForExistingData = await base.fetch(user.user.uid, { context: this });
+              // var checkFor ExistingData = firebaseApp.auth().user.user.uid;
+              // console.log(checkForExistingData);
+
         }
 
 
-        authenticateUser = (user) => {
-                 const loggedInID = user.user.uid;
-                 console.log("Logged in: " + loggedInID);
-                 this.setState({ loggedInID: loggedInID });
-            }
+        authenticateUser = (email, password) => {
+
+                 console.log("AuthenticateUser: " + email);
+                 // const loggedInID = user.user.uid;
+
+               firebaseApp
+                    .auth()
+                    .signInWithEmailAndPassword(email, password)
+                    .then((user) => {
+                      console.log("User successfully LOGGED IN");
+
+                      this.setState({
+                           ownerID: user.user.uid,
+                           loggedInID: user.user.uid
+                      });
+
+                      console.log("Logged in: " + user.user.uid);
+
+
+
+                    })
+                    .catch((error) => {
+                      console.log("ERROR: User trying to log in");
+                    });
+
+
+
+                }
 
 
 
    authHandler = async authData => {
-        const userObject = await base.fetch('FDRIeT8Yh7baDzJdHuD3pBpH5sC2', { context: this });
-        console.log("App.js authHandler");
-        console.log(userObject);
-        if( Object.entries(userObject).length === 0 ) { console.log("No user found"); }
+
+        const user = firebaseApp.auth().currentUser;
+        console.log(user);
+        if( user !== null ) {
+             const userUID = user.uid;
+             // const userObject = await base.fetch(userUID, { context: this });
+             // console.log("App.js authHandler");
+             console.log("Current User ID: " + userUID);
+             console.log("Current User Email: " + user.email);
+             //if( Object.entries(userObject).length === 0 ) { console.log("No user found"); }
+
+        } else {
+             console.log("authHandler == no user found");
+        }
 
    }
 
@@ -314,20 +377,17 @@ class App extends React.Component {
           const ownerID = this.state.ownerID;
           const viewLogin = this.state.viewLogin;
 
-          console.log(beerList);
-          console.log(breweries);
-          console.log(beerLog);
-          console.log(beerCardView);
-          console.log(userUID);
-          console.log(ownerID);
+          // console.log(beerList);
+          // console.log(breweries);
+          // console.log(beerLog);
+          // console.log(beerCardView);
+          console.log("UserUID: " + userUID);
+          console.log("OwnerID: " + ownerID);
 
             return (
 
               <div className="App">
                <MuiThemeProvider theme={theme}>
-
-               <button onClick={this.authHandler}>AuthHandler</button>
-               <button onClick={this.swapViews}>Swap Views</button>
 
                { ( userUID === ownerID ) ? (
 
@@ -349,9 +409,13 @@ class App extends React.Component {
 
               ) : <LandingPage registerNewUser={this.registerNewUser}  authenticateUser={this.authenticateUser} /> }
 
+              <button onClick={this.authHandler}>AuthHandler</button>
+              <button onClick={this.swapViews}>Swap Views</button>
+              <Logout />
+
               <div className="clb-footer">
                  <Typography variant="body1">
-                 <a href="https://github.com/tomatillodesign/beer-notes" target="_blank">Version 0.6</a> &middot; By Chris Liu-Beers, <a href="http://tomatillodesign.com" target="_blank">Tomatillo Design</a>
+                 <a href="https://github.com/tomatillodesign/beer-notes" target="_blank">Version 0.7</a> &middot; By Chris Liu-Beers, <a href="http://tomatillodesign.com" target="_blank">Tomatillo Design</a>
                  </Typography>
                  </div>
                  </MuiThemeProvider>
