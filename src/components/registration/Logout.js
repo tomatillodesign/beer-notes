@@ -5,19 +5,8 @@ import { firebaseApp } from '../../base';
 
 const Logout = (props) => {
 
-     function logOutUser(event) {
-          firebaseApp.auth().signOut().then(function() {
-            // Sign-out successful.
-            console.log("Logged OUT successful");
-          }).catch(function(error) {
-            // An error happened.
-            console.log("ERROR: Trying to log out");
-          });
-
-     }
-
      return (
-          <button onClick={logOutUser}>Log Out</button>
+          <button onClick={props.logOutUser}>Log Out</button>
      );
 
 }

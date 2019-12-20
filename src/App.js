@@ -6,6 +6,7 @@ import './App.css';
 import HeaderTabs from './components/HeaderTabs';
 import LandingPage from './components/registration/LandingPage';
 import Logout from './components/registration/Logout';
+import OwnerID from './components/OwnerID';
 
 // styles & additional packages
 import Typography from '@material-ui/core/Typography';
@@ -76,19 +77,15 @@ class App extends React.Component {
        componentDidMount(){
 
             console.log("componentDidMount");
+            
 
-            // get currentUser
-           const user = firebaseApp.auth().currentUser;
-           const ownerID = user.uid;
-           console.log(ownerID);
-
-            //const ownerID = this.state.ownerID;
-
+            const ownerID = this.state.ownerID;
+            console.log("ownerID:" + ownerID);
 
             base.syncState(`${ownerID}/ownerID`, {
               context: this,
               state: 'ownerID',
-              defaultValue: ownerID,
+              defaultValue: '',
               asArray: false
             });
 
@@ -105,6 +102,7 @@ class App extends React.Component {
               asArray: true
             });
 
+            //base.syncState(`${ownerID}/breweries`, {
             base.syncState(`${ownerID}/breweries`, {
               context: this,
               state: 'breweries',
@@ -247,7 +245,7 @@ class App extends React.Component {
               console.log(newUserID);
 
              this.setState({
-                  ownerUID: newUserID,
+                  ownerID: newUserID,
                   ownerEmail: newUserEmail,
               });
 
@@ -318,9 +316,40 @@ class App extends React.Component {
              console.log("Current User Email: " + user.email);
              //if( Object.entries(userObject).length === 0 ) { console.log("No user found"); }
 
+             //update state
+             this.setState({
+                  loggedInID: userUID,
+                  ownerID: userUID,
+                    });
+
         } else {
              console.log("authHandler == no user found");
         }
+
+        const ownerID = this.state.ownerID;
+        console.log(ownerID);
+
+   }
+
+
+
+
+   logOutUser = event => {
+
+        firebaseApp.auth().signOut().then(function() {
+          // Sign-out successful.
+          console.log("Logged OUT successful");
+
+        }).catch(function(error) {
+          // An error happened.
+          console.log("ERROR: Trying to log out");
+        });
+
+        //update state
+        this.setState({
+             loggedInID: '',
+             ownerID: ''
+        });
 
    }
 
@@ -334,6 +363,8 @@ class App extends React.Component {
 
 
      render() {
+
+
 
 
           // const user = firebaseApp.auth().currentUser;
@@ -374,6 +405,7 @@ class App extends React.Component {
           const breweries = this.state.breweries;
           const beerLog = this.state.beerLog;
           const beerCardView = this.state.beerCardView;
+          const loggedInID = this.state.loggedInID;
           const ownerID = this.state.ownerID;
           const viewLogin = this.state.viewLogin;
 
@@ -381,15 +413,17 @@ class App extends React.Component {
           // console.log(breweries);
           // console.log(beerLog);
           // console.log(beerCardView);
+          console.log("loggedInID: " + loggedInID);
           console.log("UserUID: " + userUID);
           console.log("OwnerID: " + ownerID);
+
 
             return (
 
               <div className="App">
                <MuiThemeProvider theme={theme}>
 
-               { ( userUID === ownerID ) ? (
+               { ( (loggedInID === ownerID) && (ownerID !== '') ) ? (
 
                    <>
                    <HeaderTabs
@@ -409,9 +443,11 @@ class App extends React.Component {
 
               ) : <LandingPage registerNewUser={this.registerNewUser}  authenticateUser={this.authenticateUser} /> }
 
+              <OwnerID ownerID={ownerID} />
+
               <button onClick={this.authHandler}>AuthHandler</button>
               <button onClick={this.swapViews}>Swap Views</button>
-              <Logout />
+              <Logout logOutUser={this.logOutUser}/>
 
               <div className="clb-footer">
                  <Typography variant="body1">

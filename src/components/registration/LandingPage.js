@@ -118,7 +118,7 @@ export default function LandingPage(props) {
                 <Typography variant="h1" className={classes.title + " clb-header"}>
                  Welcome to the Beer Journal
                </Typography>
-             <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+             <Tabs className="clb-landing-tabs" value={value} onChange={handleChange} aria-label="simple tabs example">
                <Tab label="Login" {...a11yProps(0)} />
                <Tab label="Register" {...a11yProps(1)} />
              </Tabs>
@@ -130,7 +130,7 @@ export default function LandingPage(props) {
                <Register registerNewUser={props.registerNewUser} />
              </TabPanel>
          </div>
-         
+
          </MuiThemeProvider>
          </div>
        );
