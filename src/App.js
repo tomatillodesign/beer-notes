@@ -77,45 +77,47 @@ class App extends React.Component {
        componentDidMount(){
 
             console.log("componentDidMount");
-            
-
             const ownerID = this.state.ownerID;
             console.log("ownerID:" + ownerID);
 
-            base.syncState(`${ownerID}/ownerID`, {
+            // trying to use LoggedInID instead....
+            const loggedInID = this.state.loggedInID;
+            console.log("loggedInID:" + loggedInID);
+
+            base.syncState(`${loggedInID}/ownerID`, {
               context: this,
               state: 'ownerID',
               defaultValue: '',
               asArray: false
             });
 
-            base.syncState(`${ownerID}/ownerEmail`, {
+            base.syncState(`${loggedInID}/ownerEmail`, {
               context: this,
               state: 'ownerEmail',
               defaultValue: this.state.ownerEmail,
               asArray: false
             });
 
-            base.syncState(`${ownerID}/completeBeerList`, {
+            base.syncState(`${loggedInID}/completeBeerList`, {
               context: this,
               state: 'completeBeerList',
               asArray: true
             });
 
             //base.syncState(`${ownerID}/breweries`, {
-            base.syncState(`${ownerID}/breweries`, {
+            base.syncState(`${loggedInID}/breweries`, {
               context: this,
               state: 'breweries',
               asArray: true
             });
 
-            base.syncState(`${ownerID}/beerLog`, {
+            base.syncState(`${loggedInID}/beerLog`, {
               context: this,
               state: 'beerLog',
               asArray: true
             });
 
-            base.syncState(`${ownerID}/beerCardView`, {
+            base.syncState(`${loggedInID}/beerCardView`, {
               context: this,
               state: 'beerCardView',
               defaultValue: 'Alphabetical',
@@ -125,6 +127,16 @@ class App extends React.Component {
        }
 
 
+       getOwner = () => {
+            base.fetch('WHpmtCwnpNOWqrTJslWEAyCT7vl2', {
+              context: this,
+              asArray: true
+            }).then(data => {
+              console.log(data);
+            }).catch(error => {
+              //handle error
+            })
+          }
 
 
      addNewBeer = (newBeer) => {
@@ -291,45 +303,40 @@ class App extends React.Component {
 
                       console.log("Logged in: " + user.user.uid);
 
-
-
                     })
                     .catch((error) => {
                       console.log("ERROR: User trying to log in");
                     });
 
-
-
                 }
 
 
 
-   authHandler = async authData => {
+      authHandler = async authData => {
 
-        const user = firebaseApp.auth().currentUser;
-        console.log(user);
-        if( user !== null ) {
-             const userUID = user.uid;
-             // const userObject = await base.fetch(userUID, { context: this });
-             // console.log("App.js authHandler");
-             console.log("Current User ID: " + userUID);
-             console.log("Current User Email: " + user.email);
-             //if( Object.entries(userObject).length === 0 ) { console.log("No user found"); }
+           console.log(authData);
+           const user = firebaseApp.auth().currentUser;
 
-             //update state
-             this.setState({
-                  loggedInID: userUID,
-                  ownerID: userUID,
-                    });
+           console.log(user);
+           if( user !== null ) {
+                const userUID = user.uid;
+                // const userObject = await base.fetch(userUID, { context: this });
+                // console.log("App.js authHandler");
+                console.log("Current User ID: " + userUID);
+                console.log("Current User Email: " + user.email);
+                //if( Object.entries(userObject).length === 0 ) { console.log("No user found"); }
 
-        } else {
-             console.log("authHandler == no user found");
-        }
+                //update state
+                this.setState({
+                     loggedInID: userUID,
+                     ownerID: userUID,
+                       });
 
-        const ownerID = this.state.ownerID;
-        console.log(ownerID);
+           } else {
+                console.log("authHandler == no user found");
+           }
 
-   }
+      }
 
 
 
@@ -351,6 +358,8 @@ class App extends React.Component {
              ownerID: ''
         });
 
+        base.reset();
+
    }
 
 
@@ -362,6 +371,16 @@ class App extends React.Component {
    }
 
 
+   // updateUserInState = (userUID) => {
+   //      console.log("updateUserInState");
+   //      //update state
+   //      this.setState({
+   //           loggedInID: userUID,
+   //           ownerID: userUID
+   //      });
+   // }
+
+
      render() {
 
 
@@ -371,33 +390,26 @@ class App extends React.Component {
           // console.log(user);
           // let userUID = null;
 
-          const user = firebaseApp.auth().currentUser;
-          // console.log(user);
-          // return(user);
+          // const user = firebaseApp.auth().currentUser;
+          // let userUID = null;
           //
-          // let user = this.authHandler();
-          // console.log(user);
-          let userUID = null;
-
-           if (user) {
-             // User is signed in.
-             console.log("User is signed in.");
-             console.log(user.email);
-             if (user != null) {
-                 console.log(user.displayName);
-                 console.log(user.email);
-                 console.log(user.emailVerified);
-                 console.log(user.uid);  // The user's ID, unique to the Firebase project. Do NOT use
-                                  // this value to authenticate with your backend server, if
-                                  // you have one. Use User.getToken() instead.
-
-               userUID = user.uid;
-
-               }
-           } else {
-             // No user is signed in.
-             console.log("No user is signed in.");
-           }
+          //  if (user) {
+          //    // User is signed in.
+          //    console.log("User is signed in.");
+          //    console.log(user.email);
+          //    if (user != null) {
+          //        console.log(user.email);
+          //        console.log(user.uid);  // The user's ID, unique to the Firebase project. Do NOT use
+          //                         // this value to authenticate with your backend server, if
+          //                         // you have one. Use User.getToken() instead.
+          //
+          //      userUID = user.uid;
+          //
+          //      }
+          //  } else {
+          //    // No user is signed in.
+          //    console.log("No user is signed in.");
+          //  }
 
           //fire.database().ref('beerLog').set( this.state.beerLog );
 
@@ -414,7 +426,7 @@ class App extends React.Component {
           // console.log(beerLog);
           // console.log(beerCardView);
           console.log("loggedInID: " + loggedInID);
-          console.log("UserUID: " + userUID);
+          //console.log("UserUID: " + userUID);
           console.log("OwnerID: " + ownerID);
 
 
@@ -422,6 +434,10 @@ class App extends React.Component {
 
               <div className="App">
                <MuiThemeProvider theme={theme}>
+
+               { ( loggedInID ) &&
+                    <button onClick={this.authHandler}>Click Here to Enter Your Journal</button>
+               }
 
                { ( (loggedInID === ownerID) && (ownerID !== '') ) ? (
 
@@ -437,7 +453,7 @@ class App extends React.Component {
                      beerCardView={beerCardView}
                      changeBeerCardView={this.changeBeerCardView}
                  />
-                 <p>visitorID: {userUID}</p>
+                 <p>loggedInID: {loggedInID}</p>
                  <p>ownerID: {ownerID}</p>
                  </>
 

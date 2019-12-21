@@ -66,7 +66,6 @@ render() {
              name="password"
              label="Password"
              required
-             fullwidth
              type="password"
              onChange={this.handlePWChange}
              />

@@ -63,7 +63,7 @@ export default function HeaderTabs(props) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" >
            <Typography variant="h1" className={classes.title + " clb-header"}>
             Beer Journal
           </Typography>

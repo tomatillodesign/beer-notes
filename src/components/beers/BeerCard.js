@@ -118,7 +118,7 @@ export default function BeerCard(props) {
              </CardContent>
              <CardActions>
 
-                {myRating !== null &&
+                {myRating !== undefined &&
                      <Button variant="outlined" className="clb-light-border-outline-button my-rating-button">
                        {myRatingToPublish}
                     </Button>
