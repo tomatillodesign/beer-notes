@@ -47,9 +47,15 @@ class Login extends React.Component {
 
 render() {
 
+     const loginError = this.props.loginError;
+
      return (
           <div className="login-form-area">
-          <h2>Login Below</h2>
+          { loginError === true ?
+               <h2>Incorrect email/password combination. Please try again:</h2>
+               :
+               <h2>Login Below:</h2>
+          }
           <form className="login-area" onSubmit={this.handleSubmit} >
           <div className="login-item">
           <TextField

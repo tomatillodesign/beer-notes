@@ -1,22 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+// my components
+import Login from './Login';
+import Register from './Register';
+import Logout from './Logout';
+
+// styles & additional packages
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-
-// import BeerHome from './BeerHome';
-// import BeerLog from './BeerLog';
-// import NewBeerForm from './NewBeerForm';
-// import NewBreweryForm from './NewBreweryForm';
-// import NewBeerCards from './NewBeerCards';
-
-import Login from './Login';
-import Register from './Register';
-import Logout from './Logout';
-
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 
@@ -102,14 +98,6 @@ export default function LandingPage(props) {
   };
 
 
-  const authenticate = () => {
-       alert('Yeah');
- }
-
-
-//console.log(props.registerNewUser);
-
-
        return (
             <div className="App">
             <MuiThemeProvider theme={theme}>
@@ -124,7 +112,7 @@ export default function LandingPage(props) {
              </Tabs>
            </AppBar>
            <TabPanel value={value} index={0}>
-             <Login authenticateUser={props.authenticateUser} />
+             <Login authenticateUser={props.authenticateUser} loginError={props.loginError} />
            </TabPanel>
            <TabPanel value={value} index={1}>
                <Register registerNewUser={props.registerNewUser} />

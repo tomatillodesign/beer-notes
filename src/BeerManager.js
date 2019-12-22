@@ -360,69 +360,26 @@ class BeerManager extends React.Component {
 
      render() {
 
-
-
-
-          // const user = firebaseApp.auth().currentUser;
-          // console.log(user);
-          // let userUID = null;
-
-          // const user = firebaseApp.auth().currentUser;
-          // let userUID = null;
-          //
-          //  if (user) {
-          //    // User is signed in.
-          //    console.log("User is signed in.");
-          //    console.log(user.email);
-          //    if (user != null) {
-          //        console.log(user.email);
-          //        console.log(user.uid);  // The user's ID, unique to the Firebase project. Do NOT use
-          //                         // this value to authenticate with your backend server, if
-          //                         // you have one. Use User.getToken() instead.
-          //
-          //      userUID = user.uid;
-          //
-          //      }
-          //  } else {
-          //    // No user is signed in.
-          //    console.log("No user is signed in.");
-          //  }
-
-          //fire.database().ref('beerLog').set( this.state.beerLog );
-
           const beerList = this.state.completeBeerList;
           const breweries = this.state.breweries;
           const beerLog = this.state.beerLog;
           const beerCardView = this.state.beerCardView;
-          const loggedInID = this.state.loggedInID;
-          const ownerID = this.state.ownerID;
-          const viewLogin = this.state.viewLogin;
-
-          // console.log(beerList);
-          // console.log(breweries);
-          // console.log(beerLog);
-          // console.log(beerCardView);
-          console.log("loggedInID: " + loggedInID);
-          //console.log("UserUID: " + userUID);
-          console.log("OwnerID: " + ownerID);
-
+          const loggedInID = this.props.loggedInID;
 
             return (
 
                    <>
                    <HeaderTabs
-                     beerList={beerList}
-                     breweries={breweries}
-                     addNewBeer={this.addNewBeer}
-                     addNewBrewery={this.addNewBrewery}
-                     addLogEntry={this.addLogEntry}
-                     removeBeer={this.removeBeer}
-                     beerLog={beerLog}
-                     beerCardView={beerCardView}
-                     changeBeerCardView={this.changeBeerCardView}
-                 />
-                 <p>loggedInID: {loggedInID}</p>
-                 <p>ownerID: {ownerID}</p>
+                          beerList={beerList}
+                          breweries={breweries}
+                          addNewBeer={this.addNewBeer}
+                          addNewBrewery={this.addNewBrewery}
+                          addLogEntry={this.addLogEntry}
+                          removeBeer={this.removeBeer}
+                          beerLog={beerLog}
+                          beerCardView={beerCardView}
+                          changeBeerCardView={this.changeBeerCardView}
+                   />
                  </>
 
             );

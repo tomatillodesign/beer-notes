@@ -175,22 +175,17 @@ class App extends React.Component {
               <div className="App">
                <MuiThemeProvider theme={theme}>
 
-               { loginError === true &&
-                    <h3>Incorrect email/password combination. Please try again.</h3>
-               }
-
                   { loggedInID !== '' ?
                   <div>
-                    <p>Logged in: {loggedInID}</p>
                     <BeerManager loggedInID={loggedInID} />
                   </div>
              :
-                    <div className="logged-out-area">
-                  <p>
-                    Logged out
-                  </p>
-
-                  <LandingPage registerNewUser={this.registerNewUser}  authenticateUser={this.authenticateUser} />
+               <div className="logged-out-area">
+                  <LandingPage
+                         registerNewUser={this.registerNewUser}
+                         authenticateUser={this.authenticateUser}
+                         loginError={loginError}
+                    />
                   </div>
              }
 

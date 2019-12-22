@@ -65,13 +65,14 @@ export default function HeaderTabs(props) {
     <div className={classes.root}>
       <AppBar position="static" >
            <Typography variant="h1" className={classes.title + " clb-header"}>
-            Beer Journal
+            My Beer Journal
           </Typography>
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab label="Beers" {...a11yProps(0)} />
           <Tab label="Log" {...a11yProps(1)} />
           <Tab label="New Beer" {...a11yProps(2)} />
           <Tab label="New Brewery" {...a11yProps(3)} />
+          <Tab label="Account" {...a11yProps(4)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -96,6 +97,10 @@ export default function HeaderTabs(props) {
       <TabPanel value={value} index={3}>
           <h2>Add New Brewery</h2>
          <NewBreweryForm addNewBrewery={props.addNewBrewery} />
+      </TabPanel>
+      <TabPanel value={value} index={4}>
+          <h2>Account Settings</h2>
+         <p>Coming soon</p>
       </TabPanel>
     </div>
   );
