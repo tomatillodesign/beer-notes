@@ -7,6 +7,7 @@ import HeaderTabs from './components/HeaderTabs';
 import LandingPage from './components/registration/LandingPage';
 import Logout from './components/registration/Logout';
 import OwnerID from './components/OwnerID';
+import BeerManager from './BeerManager';
 
 // styles & additional packages
 import Typography from '@material-ui/core/Typography';
@@ -61,210 +62,20 @@ class App extends React.Component {
           super(props);
 
      this.state = {
-          loggedInID: '',
-          ownerID: '',
-          ownerEmail: '',
-          completeBeerList: [],
-          breweries: [],
-          beerLog: [],
-          beerCardView: 'Alphabetical',
-          viewLogin: false,
+         loggedInID: '',
+         loginError: false,
        };
 
      }
 
 
-       componentDidMount(){
-
-            console.log("componentDidMount");
-            const ownerID = this.state.ownerID;
-            console.log("ownerID:" + ownerID);
-
-            // trying to use LoggedInID instead....
-            const loggedInID = this.state.loggedInID;
-            console.log("loggedInID:" + loggedInID);
-
-            base.syncState(`${loggedInID}/ownerID`, {
-              context: this,
-              state: 'ownerID',
-              defaultValue: '',
-              asArray: false
-            });
-
-            base.syncState(`${loggedInID}/ownerEmail`, {
-              context: this,
-              state: 'ownerEmail',
-              defaultValue: this.state.ownerEmail,
-              asArray: false
-            });
-
-            base.syncState(`${loggedInID}/completeBeerList`, {
-              context: this,
-              state: 'completeBeerList',
-              asArray: true
-            });
-
-            //base.syncState(`${ownerID}/breweries`, {
-            base.syncState(`${loggedInID}/breweries`, {
-              context: this,
-              state: 'breweries',
-              asArray: true
-            });
-
-            base.syncState(`${loggedInID}/beerLog`, {
-              context: this,
-              state: 'beerLog',
-              asArray: true
-            });
-
-            base.syncState(`${loggedInID}/beerCardView`, {
-              context: this,
-              state: 'beerCardView',
-              defaultValue: 'Alphabetical',
-              asArray: false
-            });
-
-       }
-
-
-       getOwner = () => {
-            base.fetch('WHpmtCwnpNOWqrTJslWEAyCT7vl2', {
-              context: this,
-              asArray: true
-            }).then(data => {
-              console.log(data);
-            }).catch(error => {
-              //handle error
-            })
-          }
-
-
-     addNewBeer = (newBeer) => {
-          console.log(newBeer);
-
-          if( newBeer.editCurrentBeer ) {
-               console.log("EDITING THIS BEER: " + newBeer.beer_name);
-               let beerID = newBeer.id;
-               let beerName = newBeer.beer_name;
-               let clbCustomPreviousState = [...this.state.completeBeerList];
-               let getBeerObjInState = clbCustomPreviousState.filter(obj => {
-                 return obj.id === beerID
-            });
-               //console.log(getBeerObjInState);
-
-               let index = clbCustomPreviousState.map(function(e) { return e.id; }).indexOf(beerID);
-               //console.log(index);
-
-               let ids = [...this.state.completeBeerList];     // create the copy of state array
-               ids[index] = newBeer;                  //new value
-               //console.log(ids[index]);
-               this.setState({ completeBeerList: ids });            //update the value
-
-          } else {
-
-               // make sure none of the object's properties are undefined, to prevent errors
-               if (typeof newBeer.brewery_name === 'undefined') { newBeer.brewery_name = null; }
-               if (typeof newBeer.brewery_slug === 'undefined') { newBeer.brewery_slug = null; }
-               if (typeof newBeer.backgroundColor === 'undefined') { newBeer.backgroundColor = null; }
-               if (typeof newBeer.abv === 'undefined') { newBeer.abv = null; }
-               if (typeof newBeer.my_rating === 'undefined') { newBeer.my_rating = null; }
-               if (typeof newBeer.description === 'undefined') { newBeer.description = null; }
-               newBeer.editCurrentBeer = false;
-
-               this.setState(prevState => ({
-                 completeBeerList: [...prevState.completeBeerList, newBeer]
-            }));
-
-           }
-     }
-
-     addNewBrewery = (newBrewery) => {
-          console.log(newBrewery);
-          // 1. take a copy of existing state
-          //const breweries = { ...this.state.breweries };
-          // 2. add our new fish to that fishes variable
-          //completeBeerList[`newBeer_${Date.now()}`] = newBeer;
-          //breweries[] = newBrewery;
-          // 3. Set the new fishes object to state
-          // this.setState({
-          //      breweries: breweries
-          // })
-          this.setState(prevState => ({
-            breweries: [...prevState.breweries, newBrewery]
-          }))
-     }
-
-     addLogEntry = (logEntry) => {
-          console.log(logEntry);
-
-          // Update the completeBeerList state to add 1 to this beer's count
-          let beerID = logEntry.beerID;
-          let clbPreviousBeerListState = [...this.state.completeBeerList];
-          let getBeerObjInState = clbPreviousBeerListState.filter(obj => {
-            return obj.id === beerID
-          });
-          let index = clbPreviousBeerListState.map(function(e) { return e.id; }).indexOf(beerID);
-          let previousCount = clbPreviousBeerListState[index].count;
-          let newCount = previousCount + 1;
-          console.log("PREV COUNT: " + previousCount);
-          console.log("NEW COUNT: " + newCount);
-          clbPreviousBeerListState[index].count = newCount;
-          this.setState({ completeBeerList: clbPreviousBeerListState });
-
-         this.setState(prevState => ({
-           beerLog: [...prevState.beerLog, logEntry]
-         }))
-
-         //fire.database().ref('beerLog').set( this.state.beerLog );
-
-    }
-
-
-    removeBeer = (beerObj) => {
-         console.log(beerObj);
-         console.log("Removed: " + beerObj.beer_name);
-         let beerID = beerObj.id;
-         let beerName = beerObj.beer_name;
-         let clbCopyBeerState = [...this.state.completeBeerList];
-         let getBeerObjInState = clbCopyBeerState.filter(obj => {
-           return obj.id === beerID
-          });
-
-          let index = clbCopyBeerState.map(function(e) { return e.id; }).indexOf(beerID);
-          clbCopyBeerState.splice(index, 1);
-
-          this.setState({ completeBeerList: clbCopyBeerState });
-
-    }
-
-
-    changeBeerCardView = (newViewString) => {
-         console.log('CHANGE BEER CARD VIEW');
-         console.log(newViewString);
-         let newBeerCardView = 'Alphabetical';
-         if( newViewString === 'view-high-count' ) { newBeerCardView = 'High Count'; }
-         if( newViewString === 'view-rating' ) { newBeerCardView = 'Rating'; }
-         if( newViewString === 'view-recently-added' ) { newBeerCardView = 'Recently Added'; }
-
-         this.setState({ beerCardView: newBeerCardView });
-
-    }
 
 
     registerNewUser = (user) => {
+
              const newUserID = user.user.uid;
              const newUserEmail = user.user.email;
               console.log(newUserID);
-
-             this.setState({
-                  ownerID: newUserID,
-                  ownerEmail: newUserEmail,
-              });
-
-
-             //console.log(user.uid);
-             //this.setState({ ownerUID: user.uid });
-             //console.log("Register New User: " + user.email);
 
              // Create new Journal view if it doesn't exist yet for this user
               firebaseApp.database().ref().update({
@@ -278,9 +89,8 @@ class App extends React.Component {
                  },
               });
 
-              //const checkForExistingData = await base.fetch(user.user.uid, { context: this });
-              // var checkFor ExistingData = firebaseApp.auth().user.user.uid;
-              // console.log(checkForExistingData);
+              this.setState({ loggedInID: newUserID });
+              console.log("REGISTERED AND Logged in: " + newUserID);
 
         }
 
@@ -294,18 +104,12 @@ class App extends React.Component {
                     .auth()
                     .signInWithEmailAndPassword(email, password)
                     .then((user) => {
-                      console.log("User successfully LOGGED IN");
-
-                      this.setState({
-                           ownerID: user.user.uid,
-                           loggedInID: user.user.uid
-                      });
-
-                      console.log("Logged in: " + user.user.uid);
-
+                      console.log("User successfully LOGGED IN" + user.user.uid);
+                      this.setState({ loggedInID: user.user.uid, loginError: false });
                     })
                     .catch((error) => {
                       console.log("ERROR: User trying to log in");
+                      this.setState({ loginError: true });
                     });
 
                 }
@@ -314,7 +118,7 @@ class App extends React.Component {
 
       authHandler = async authData => {
 
-           console.log(authData);
+           //console.log(authData);
            const user = firebaseApp.auth().currentUser;
 
            console.log(user);
@@ -328,8 +132,7 @@ class App extends React.Component {
 
                 //update state
                 this.setState({
-                     loggedInID: userUID,
-                     ownerID: userUID,
+                     loggedInID: userUID
                        });
 
            } else {
@@ -353,10 +156,7 @@ class App extends React.Component {
         });
 
         //update state
-        this.setState({
-             loggedInID: '',
-             ownerID: ''
-        });
+        this.setState({ loggedInID: '' });
 
         base.reset();
 
@@ -364,105 +164,37 @@ class App extends React.Component {
 
 
 
-   swapViews = event => {
-        this.setState(prevState => ({
-            viewLogin: !prevState.viewLogin
-          }));
-   }
-
-
-   // updateUserInState = (userUID) => {
-   //      console.log("updateUserInState");
-   //      //update state
-   //      this.setState({
-   //           loggedInID: userUID,
-   //           ownerID: userUID
-   //      });
-   // }
-
-
      render() {
 
-
-
-
-          // const user = firebaseApp.auth().currentUser;
-          // console.log(user);
-          // let userUID = null;
-
-          // const user = firebaseApp.auth().currentUser;
-          // let userUID = null;
-          //
-          //  if (user) {
-          //    // User is signed in.
-          //    console.log("User is signed in.");
-          //    console.log(user.email);
-          //    if (user != null) {
-          //        console.log(user.email);
-          //        console.log(user.uid);  // The user's ID, unique to the Firebase project. Do NOT use
-          //                         // this value to authenticate with your backend server, if
-          //                         // you have one. Use User.getToken() instead.
-          //
-          //      userUID = user.uid;
-          //
-          //      }
-          //  } else {
-          //    // No user is signed in.
-          //    console.log("No user is signed in.");
-          //  }
-
-          //fire.database().ref('beerLog').set( this.state.beerLog );
-
-          const beerList = this.state.completeBeerList;
-          const breweries = this.state.breweries;
-          const beerLog = this.state.beerLog;
-          const beerCardView = this.state.beerCardView;
           const loggedInID = this.state.loggedInID;
-          const ownerID = this.state.ownerID;
-          const viewLogin = this.state.viewLogin;
-
-          // console.log(beerList);
-          // console.log(breweries);
-          // console.log(beerLog);
-          // console.log(beerCardView);
+          const loginError = this.state.loginError;
           console.log("loggedInID: " + loggedInID);
-          //console.log("UserUID: " + userUID);
-          console.log("OwnerID: " + ownerID);
-
 
             return (
 
               <div className="App">
                <MuiThemeProvider theme={theme}>
 
-               { ( loggedInID ) &&
-                    <button onClick={this.authHandler}>Click Here to Enter Your Journal</button>
+               { loginError === true &&
+                    <h3>Incorrect email/password combination. Please try again.</h3>
                }
 
-               { ( (loggedInID === ownerID) && (ownerID !== '') ) ? (
+                  { loggedInID !== '' ?
+                  <div>
+                    <p>Logged in: {loggedInID}</p>
+                    <BeerManager loggedInID={loggedInID} />
+                  </div>
+             :
+                    <div className="logged-out-area">
+                  <p>
+                    Logged out
+                  </p>
 
-                   <>
-                   <HeaderTabs
-                     beerList={beerList}
-                     breweries={breweries}
-                     addNewBeer={this.addNewBeer}
-                     addNewBrewery={this.addNewBrewery}
-                     addLogEntry={this.addLogEntry}
-                     removeBeer={this.removeBeer}
-                     beerLog={beerLog}
-                     beerCardView={beerCardView}
-                     changeBeerCardView={this.changeBeerCardView}
-                 />
-                 <p>loggedInID: {loggedInID}</p>
-                 <p>ownerID: {ownerID}</p>
-                 </>
-
-              ) : <LandingPage registerNewUser={this.registerNewUser}  authenticateUser={this.authenticateUser} /> }
-
-              <OwnerID ownerID={ownerID} />
+                  <LandingPage registerNewUser={this.registerNewUser}  authenticateUser={this.authenticateUser} />
+                  </div>
+             }
 
               <button onClick={this.authHandler}>AuthHandler</button>
-              <button onClick={this.swapViews}>Swap Views</button>
               <Logout logOutUser={this.logOutUser}/>
 
               <div className="clb-footer">
