@@ -5,6 +5,7 @@ import BeerLog from './log/BeerLog';
 import NewBeerForm from './newBeer/NewBeerForm';
 import NewBreweryForm from './newBrewery/NewBreweryForm';
 import NewBeerCards from './beers/NewBeerCards';
+import AccountSettings from './registration/AccountSettings';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -99,8 +100,11 @@ export default function HeaderTabs(props) {
          <NewBreweryForm addNewBrewery={props.addNewBrewery} />
       </TabPanel>
       <TabPanel value={value} index={4}>
-          <h2>Account Settings</h2>
-         <p>Coming soon</p>
+          <AccountSettings
+               logOutUser={props.logOutUser}
+               loggedInEmail={props.loggedInEmail}
+               permanentlyDeleteUserAndInfo={props.permanentlyDeleteUserAndInfo}
+          />
       </TabPanel>
     </div>
   );

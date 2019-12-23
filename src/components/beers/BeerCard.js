@@ -77,8 +77,14 @@ export default function BeerCard(props) {
      let breweryToPublish = null;
      let breweryName = null;
      if(getBreweryObj) {
-          breweryToPublish = <div className="clb-brewery-to-publish">
-        {getBreweryObj.brewery}
+          breweryToPublish =
+          <div className="clb-brewery-to-publish">
+               <div className="brewery-name">
+                    {getBreweryObj.brewery}
+               </div>
+          <div className="brewery-location">
+               {getBreweryObj.city}, {getBreweryObj.state}
+          </div>
       </div>;
 
           breweryName = getBreweryObj.brewery;
@@ -119,17 +125,23 @@ export default function BeerCard(props) {
              <CardActions>
 
                 {myRating !== undefined &&
-                     <Button variant="outlined" className="clb-light-border-outline-button my-rating-button">
+                     <div className="clb-light-border-outline-button my-rating-button">
                        {myRatingToPublish}
-                    </Button>
+                    </div>
                 }
                  {beerABV !== null &&
-                  <Button variant="outlined" disabled className="clb-light-border-outline-button">
+                  <Button variant="outlined" disabled className="clb-light-border-outline-button beer-abv">
                     ABV: {beerABV}
                  </Button>}
 
                  {logCount > 0 &&
-                     <BeerModal beerName={beerName} breweryName={breweryName} beerLog={matchingLogNotes} logCount={logCount} />
+                     <BeerModal
+                         beerName={beerName}
+                         breweryName={breweryName}
+                         beerLog={matchingLogNotes}
+                         logCount={logCount}
+                         backgroundColor={backgroundColor}
+                         />
                    }
                    {logCount === 0 &&
                       <Button variant="outlined" disabled title="You haven't logged this beer yet!" className="clb-light-border-outline-button">

@@ -30,8 +30,8 @@ const theme = createMuiTheme({
       // contrastText: will be calculated to contrast with palette.primary.main
     },
     secondary: {
-      light: '#B4DFE5',
-      main: '#CC683B',
+      light: '#88c3a9',
+      main: '#88c3a9',
       // dark: will be calculated from palette.secondary.main,
       contrastText: '#FFF',
     },
@@ -63,6 +63,7 @@ class App extends React.Component {
 
      this.state = {
          loggedInID: '',
+         loggedInEmail: '',
          loginError: false,
        };
 
@@ -89,7 +90,10 @@ class App extends React.Component {
                  },
               });
 
-              this.setState({ loggedInID: newUserID });
+              this.setState({
+                   loggedInID: newUserID,
+                   loggedInEmail: newUserEmail,
+               });
               console.log("REGISTERED AND Logged in: " + newUserID);
 
         }
@@ -105,7 +109,10 @@ class App extends React.Component {
                     .signInWithEmailAndPassword(email, password)
                     .then((user) => {
                       console.log("User successfully LOGGED IN" + user.user.uid);
-                      this.setState({ loggedInID: user.user.uid, loginError: false });
+                      this.setState({
+                           loggedInID: user.user.uid,
+                           loggedInEmail: user.user.email,
+                           loginError: false });
                     })
                     .catch((error) => {
                       console.log("ERROR: User trying to log in");
@@ -132,7 +139,8 @@ class App extends React.Component {
 
                 //update state
                 this.setState({
-                     loggedInID: userUID
+                     loggedInID: userUID,
+                     loggedInEmail: user.email,
                        });
 
            } else {
@@ -156,19 +164,47 @@ class App extends React.Component {
         });
 
         //update state
-        this.setState({ loggedInID: '' });
+        this.setState({
+             loggedInID: '',
+             loggedInEmail: '',
+          });
 
         base.reset();
 
    }
 
 
+   permanentlyDeleteUserAndInfo = user => {
+
+        console.log(user);
+        const userUID = user.uid;
+
+             base.remove(userUID)
+            .then(() => {
+              console.log("User " + userUID + " permanently deleted");
+
+            })
+            .catch(error => {
+              //handle error
+            });
+
+            //update state
+           this.setState({
+                loggedInID: '',
+                loggedInEmail: '',
+             });
+
+       }
+
 
      render() {
 
           const loggedInID = this.state.loggedInID;
+          const loggedInEmail = this.state.loggedInEmail;
           const loginError = this.state.loginError;
+
           console.log("loggedInID: " + loggedInID);
+          console.log("loggedInEmail: " + loggedInEmail);
 
             return (
 
@@ -177,7 +213,12 @@ class App extends React.Component {
 
                   { loggedInID !== '' ?
                   <div>
-                    <BeerManager loggedInID={loggedInID} />
+                    <BeerManager
+                         loggedInID={loggedInID}
+                         loggedInEmail={loggedInEmail}
+                         logOutUser={this.logOutUser}
+                         permanentlyDeleteUserAndInfo={this.permanentlyDeleteUserAndInfo}
+                    />
                   </div>
              :
                <div className="logged-out-area">
@@ -190,11 +231,10 @@ class App extends React.Component {
              }
 
               <button onClick={this.authHandler}>AuthHandler</button>
-              <Logout logOutUser={this.logOutUser}/>
 
               <div className="clb-footer">
                  <Typography variant="body1">
-                 <a href="https://github.com/tomatillodesign/beer-notes" target="_blank">Version 0.7</a> &middot; By Chris Liu-Beers, <a href="http://tomatillodesign.com" target="_blank">Tomatillo Design</a>
+                 <a href="https://github.com/tomatillodesign/beer-notes" target="_blank">Version 0.8</a> &middot; By Chris Liu-Beers, <a href="http://tomatillodesign.com" target="_blank">Tomatillo Design</a>
                  </Typography>
                  </div>
                  </MuiThemeProvider>

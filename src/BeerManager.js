@@ -318,46 +318,6 @@ class BeerManager extends React.Component {
 
 
 
-   logOutUser = event => {
-
-        firebaseApp.auth().signOut().then(function() {
-          // Sign-out successful.
-          console.log("Logged OUT successful");
-
-        }).catch(function(error) {
-          // An error happened.
-          console.log("ERROR: Trying to log out");
-        });
-
-        //update state
-        this.setState({
-             loggedInID: '',
-             ownerID: ''
-        });
-
-        base.reset();
-
-   }
-
-
-
-   swapViews = event => {
-        this.setState(prevState => ({
-            viewLogin: !prevState.viewLogin
-          }));
-   }
-
-
-   // updateUserInState = (userUID) => {
-   //      console.log("updateUserInState");
-   //      //update state
-   //      this.setState({
-   //           loggedInID: userUID,
-   //           ownerID: userUID
-   //      });
-   // }
-
-
      render() {
 
           const beerList = this.state.completeBeerList;
@@ -365,6 +325,9 @@ class BeerManager extends React.Component {
           const beerLog = this.state.beerLog;
           const beerCardView = this.state.beerCardView;
           const loggedInID = this.props.loggedInID;
+          const loggedInEmail = this.props.loggedInEmail;
+          const logOutUser= this.props.logOutUser;
+          const permanentlyDeleteUserAndInfo = this.props.permanentlyDeleteUserAndInfo;
 
             return (
 
@@ -379,6 +342,9 @@ class BeerManager extends React.Component {
                           beerLog={beerLog}
                           beerCardView={beerCardView}
                           changeBeerCardView={this.changeBeerCardView}
+                          loggedInEmail={loggedInEmail}
+                          logOutUser={logOutUser}
+                          permanentlyDeleteUserAndInfo={permanentlyDeleteUserAndInfo}
                    />
                  </>
 

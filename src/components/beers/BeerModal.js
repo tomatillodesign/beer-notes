@@ -11,10 +11,11 @@ export default function BeerModal(props) {
   const handleShow = () => setShow(true);
 
   const beerLog = props.beerLog;
+  const logEntriesByDate = [...beerLog].sort((a, b) => (a.entryDate < b.entryDate) ? 1 : -1);
 
   return (
     <>
-      <Button variant="contained" color="primary" onClick={handleShow} title="View Log">
+      <Button variant="contained" color="primary" onClick={handleShow} title="View Log" style={{backgroundColor: props.backgroundColor}}>
         {props.logCount}
       </Button>
 
@@ -24,11 +25,11 @@ export default function BeerModal(props) {
         </Modal.Header>
         <Modal.Body>
              <ul className="log-entry-area">
-                  {Object.keys(beerLog).map(key => <LogEntry key={key} details={beerLog[key]} modal={true} />)}
+                  {Object.keys(logEntriesByDate).map(key => <LogEntry key={key} details={logEntriesByDate[key]} modal={true} />)}
              </ul>
         </Modal.Body>
         <Modal.Footer>
-          <div className="clb-modal-subheader"><Typography variant="overline" display="block" gutterBottom>By {props.breweryName}</Typography></div>
+          <div className="clb-modal-subheader"><Typography variant="overline" display="block" gutterBottom><span className="brewery-credit">By {props.breweryName}</span></Typography></div>
           <Button variant="contained" color="secondary" onClick={handleClose}>
             Close
           </Button>
