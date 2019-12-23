@@ -70,6 +70,9 @@ class App extends React.Component {
      }
 
 
+     componentDidMount() {
+          console.log("App.js mounted");
+     }
 
 
     registerNewUser = (user) => {
@@ -94,6 +97,7 @@ class App extends React.Component {
                    loggedInID: newUserID,
                    loggedInEmail: newUserEmail,
                });
+               localStorage.setItem('beerJournal.loggedInID', newUserID);
               console.log("REGISTERED AND Logged in: " + newUserID);
 
         }
@@ -113,6 +117,7 @@ class App extends React.Component {
                            loggedInID: user.user.uid,
                            loggedInEmail: user.user.email,
                            loginError: false });
+                      localStorage.setItem('beerJournal.loggedInID', user.user.uid);
                     })
                     .catch((error) => {
                       console.log("ERROR: User trying to log in");
@@ -142,6 +147,7 @@ class App extends React.Component {
                      loggedInID: userUID,
                      loggedInEmail: user.email,
                        });
+               localStorage.setItem('beerJournal.loggedInID', userUID);
 
            } else {
                 console.log("authHandler == no user found");
@@ -168,6 +174,7 @@ class App extends React.Component {
              loggedInID: '',
              loggedInEmail: '',
           });
+        localStorage.removeItem('beerJournal.loggedInID');
 
         base.reset();
 
@@ -193,18 +200,22 @@ class App extends React.Component {
                 loggedInID: '',
                 loggedInEmail: '',
              });
+           localStorage.removeItem('beerJournal.loggedInID');
 
        }
 
 
      render() {
 
-          const loggedInID = this.state.loggedInID;
+          let loggedInID = this.state.loggedInID;
           const loggedInEmail = this.state.loggedInEmail;
           const loginError = this.state.loginError;
 
-          console.log("loggedInID: " + loggedInID);
-          console.log("loggedInEmail: " + loggedInEmail);
+          const loggedInIDLocal = localStorage.getItem('beerJournal.loggedInID');
+          console.log("LOCAL STORAGE: " + loggedInIDLocal);
+
+          if( loggedInIDLocal !== null ) { loggedInID = loggedInIDLocal; }
+
 
             return (
 
@@ -229,8 +240,6 @@ class App extends React.Component {
                     />
                   </div>
              }
-
-              <button onClick={this.authHandler}>AuthHandler</button>
 
               <div className="clb-footer">
                  <Typography variant="body1">

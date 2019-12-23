@@ -181,11 +181,11 @@ class BeerManager extends React.Component {
             return obj.id === beerID
           });
           let index = clbPreviousBeerListState.map(function(e) { return e.id; }).indexOf(beerID);
-          let previousCount = clbPreviousBeerListState[index].count;
-          let newCount = previousCount + 1;
-          console.log("PREV COUNT: " + previousCount);
-          console.log("NEW COUNT: " + newCount);
-          clbPreviousBeerListState[index].count = newCount;
+          // let previousCount = clbPreviousBeerListState[index].count;
+          // let newCount = previousCount + 1;
+          // console.log("PREV COUNT: " + previousCount);
+          // console.log("NEW COUNT: " + newCount);
+          // clbPreviousBeerListState[index].count = newCount;
           this.setState({ completeBeerList: clbPreviousBeerListState });
 
          this.setState(prevState => ({
