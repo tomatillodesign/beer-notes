@@ -22,8 +22,8 @@ This project was created by Chris Liu-Beers of [Tomatillo Design](http://www.tom
 
 ## To Do's
 
-- Upon loading, if user is already logged in, go straight to the Tabs
 - Main Beer view, add transition/animations for smooth switching
+- ~~Upon loading, if user is already logged in, go straight to the Tabs~~
 - ~~Persist state with Firebase~~
 - ~~Add authentication/security to Firebase~~
 - ~~Allow new users to sign up and create their own log~~
