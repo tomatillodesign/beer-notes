@@ -25,13 +25,14 @@ const theme = createMuiTheme({
   palette: {
     primary: {
       // light: will be calculated from palette.primary.main,
-      main: '#478e6e',
+      //main: '#478e6e',
+      main: '#45484d',
       // dark: will be calculated from palette.primary.main,
       // contrastText: will be calculated to contrast with palette.primary.main
     },
     secondary: {
-      light: '#88c3a9',
-      main: '#88c3a9',
+      light: '#478e6e',
+      main: '#478e6e',
       // dark: will be calculated from palette.secondary.main,
       contrastText: '#FFF',
     },
@@ -98,6 +99,7 @@ class App extends React.Component {
                    loggedInEmail: newUserEmail,
                });
                localStorage.setItem('beerJournal.loggedInID', newUserID);
+               localStorage.setItem('beerJournal.loggedInEmail', newUserEmail);
               console.log("REGISTERED AND Logged in: " + newUserID);
 
         }
@@ -118,6 +120,7 @@ class App extends React.Component {
                            loggedInEmail: user.user.email,
                            loginError: false });
                       localStorage.setItem('beerJournal.loggedInID', user.user.uid);
+                      localStorage.setItem('beerJournal.loggedInEmail', email);
                     })
                     .catch((error) => {
                       console.log("ERROR: User trying to log in");
@@ -148,6 +151,7 @@ class App extends React.Component {
                      loggedInEmail: user.email,
                        });
                localStorage.setItem('beerJournal.loggedInID', userUID);
+               localStorage.setItem('beerJournal.loggedInEmail', user.email);
 
            } else {
                 console.log("authHandler == no user found");
@@ -175,6 +179,7 @@ class App extends React.Component {
              loggedInEmail: '',
           });
         localStorage.removeItem('beerJournal.loggedInID');
+        localStorage.removeItem('beerJournal.loggedInEmail');
 
         base.reset();
 
@@ -201,6 +206,7 @@ class App extends React.Component {
                 loggedInEmail: '',
              });
            localStorage.removeItem('beerJournal.loggedInID');
+           localStorage.removeItem('beerJournal.loggedInEmail');
 
        }
 
@@ -208,13 +214,16 @@ class App extends React.Component {
      render() {
 
           let loggedInID = this.state.loggedInID;
-          const loggedInEmail = this.state.loggedInEmail;
+          let loggedInEmail = this.state.loggedInEmail;
+          //const loggedInEmail = localStorage.getItem('beerJournal.loggedInEmail');
           const loginError = this.state.loginError;
 
           const loggedInIDLocal = localStorage.getItem('beerJournal.loggedInID');
+          const loggedInEmailLocal = localStorage.getItem('beerJournal.loggedInEmail');
           console.log("LOCAL STORAGE: " + loggedInIDLocal);
 
           if( loggedInIDLocal !== null ) { loggedInID = loggedInIDLocal; }
+          if( loggedInEmailLocal !== null ) { loggedInEmail = loggedInEmailLocal; }
 
 
             return (
@@ -223,14 +232,14 @@ class App extends React.Component {
                <MuiThemeProvider theme={theme}>
 
                   { loggedInID !== '' ?
-                  <div>
+                  <>
                     <BeerManager
                          loggedInID={loggedInID}
                          loggedInEmail={loggedInEmail}
                          logOutUser={this.logOutUser}
                          permanentlyDeleteUserAndInfo={this.permanentlyDeleteUserAndInfo}
                     />
-                  </div>
+                  </>
              :
                <div className="logged-out-area">
                   <LandingPage
@@ -243,7 +252,7 @@ class App extends React.Component {
 
               <div className="clb-footer">
                  <Typography variant="body1">
-                 <a href="https://github.com/tomatillodesign/beer-notes" target="_blank">Version 0.8</a> &middot; By Chris Liu-Beers, <a href="http://tomatillodesign.com" target="_blank">Tomatillo Design</a>
+                 <a href="https://github.com/tomatillodesign/beer-notes" target="_blank">Version 0.9</a> &middot; By Chris Liu-Beers, <a href="http://tomatillodesign.com" target="_blank">Tomatillo Design</a>
                  </Typography>
                  </div>
                  </MuiThemeProvider>

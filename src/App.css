@@ -171,7 +171,7 @@
 .clb-footer {
      padding: 20px;
      color: #fff;
-     background: #478e6e;
+     background: #45484d;
 }
 
 .clb-footer p {
@@ -348,7 +348,41 @@ body {
      margin: 8px;
 }
 
+.color-picker-area h4 {
+     text-align: left;
+     font-family: 'Open Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+     font-weight: 700;
+}
 
+.color-picker-area #swapper {
+     font-size: .75rem;
+}
+
+
+
+/* #main-content-area {
+  min-height: calc(100vh) !important;
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.clb-footer {
+  margin-top: -58px;
+} */
+
+html, .App, #main-content-area {
+  height: 100% !important;
+}
+.App {
+  display: flex !important;
+  flex-direction: column !important;
+}
+#main-content-area {
+  flex: 1 0 auto !important;
+}
+.clb-footer {
+  flex-shrink: 0 !important;
+}
 
 
 /* ----- React Transitions ------ */

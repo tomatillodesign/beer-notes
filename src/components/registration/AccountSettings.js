@@ -58,10 +58,13 @@ class AccountSettings extends React.Component {
      render() {
 
           const emailedResetLink = this.state.emailedResetLink;
+          const loggedInEmail = this.props.loggedInEmail;
+          console.log("loggedInEmail: " + loggedInEmail);
 
           return (
                <>
-               <h2>Account Settings</h2>
+               <h2>Manage Your Account</h2>
+               <p>Your email: {loggedInEmail}</p>
                { emailedResetLink &&
                     <div className="account-action-message emailed-reset-link successful-added-message">
                          We've emailed you a link to reset your password. Please check your inbox.

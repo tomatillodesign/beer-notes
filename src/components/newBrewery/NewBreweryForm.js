@@ -80,7 +80,7 @@ render() {
                         <BreweryCity getBreweryCity={this.getBreweryCity} />
                         <SelectUSState getBreweryState={this.getBreweryState} />
                         </div>
-                   <Button variant="contained" color="primary" type="submit">Add New Brewery</Button>
+                   <Button variant="contained" color="secondary" type="submit">Add New Brewery</Button>
               </form>
          </div>
          {this.newBeersAdded > 1 &&

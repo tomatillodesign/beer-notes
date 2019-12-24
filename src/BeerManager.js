@@ -329,7 +329,9 @@ class BeerManager extends React.Component {
           const logOutUser= this.props.logOutUser;
           const permanentlyDeleteUserAndInfo = this.props.permanentlyDeleteUserAndInfo;
 
-            return (
+          console.log("Logged in Email: " + loggedInEmail);
+
+          return (
 
                    <>
                    <HeaderTabs

@@ -22,6 +22,7 @@ export default function ColorPickerSwitch(props) {
 
   return (
        <div className="color-picker-area">
+          <h4>Choose a Color for your Beer Card</h4>
          <FormGroup row>
            <FormControlLabel
              control={

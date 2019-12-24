@@ -2,7 +2,6 @@ import 'date-fns';
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import Snackbar from '@material-ui/core/Snackbar';
 
 import Select from 'react-select';
 import Creatable, { makeCreatableSelect } from 'react-select/creatable';
@@ -154,10 +153,10 @@ render() {
        return (
             <>
             <div className="new-beer-area">
-
             {((this.newBeersAdded < 2 && edit === true) || edit !== true ) &&
 
                <form className="new-beer" onSubmit={this.createNewBeer} >
+               <p>If you're adding a beer from a new brewery, make sure you add the brewery first. Then you'll be ready to go!</p>
                     <div className="clb-flex-row-three-fourths">
                         <NameOfBeer getBeerName={this.getBeerName} beerName={beerName}/>
                         <BeerABV getABV={this.getABV} currentABV={currentABV} />
@@ -171,7 +170,7 @@ render() {
                         <ColorPickerSwitch defaultColor={defaultColor} onChangeComplete={ this.handleColorChangeComplete } manualHexSelection={this.manualHexSelection} />
 
                    <Description placeholder={placeholder} defaultValue={defaultValue} getNotes={this.getBeerDescription} edit={edit} />
-                   <Button variant="contained" color="primary" type="submit">{actionButtonText}</Button>
+                   <Button variant="contained" color="secondary" type="submit">{actionButtonText}</Button>
               </form>
 
          }

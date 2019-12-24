@@ -14,6 +14,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
 
 
 
@@ -62,22 +63,26 @@ export default function HeaderTabs(props) {
     setValue(newValue);
   };
 
+  console.log(props.beerList.length);
+  console.log("loggedInEmail: " + props.loggedInEmail);
+
   return (
-    <div className={classes.root}>
+       <div className={classes.root} id="main-content-area">
       <AppBar position="static" >
            <Typography variant="h1" className={classes.title + " clb-header"}>
             My Beer Journal
           </Typography>
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-          <Tab label="Beers" {...a11yProps(0)} />
-          <Tab label="Log" {...a11yProps(1)} />
+          <Tab label="My Beers" {...a11yProps(0)} />
+          <Tab label="New Entry" {...a11yProps(1)} />
           <Tab label="New Beer" {...a11yProps(2)} />
           <Tab label="New Brewery" {...a11yProps(3)} />
           <Tab label="Account" {...a11yProps(4)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <NewBeerCards
+      { props.beerList.length > 0 ?
+            <NewBeerCards
                beerList={props.beerList}
                breweries={props.breweries}
                beerLog={props.beerLog}
@@ -86,9 +91,23 @@ export default function HeaderTabs(props) {
                beerCardView={props.beerCardView}
                changeBeerCardView={props.changeBeerCardView}
                 />
+           :
+          <div className="new-entry welcome-explainer">
+               <div>Welcome to your new Beer Journal! Use the tabs at the top to add new breweries, beers, and journal entries anytime you grab a drink.</div>
+               <div>Over time, you'll build up a nice collection. Cheers! 🍻</div>
+               <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => setValue(3)}
+                    id="get-started-button">
+                    Click here to get started with a new brewery
+               </Button>
+          </div>
+
+      }
       </TabPanel>
       <TabPanel value={value} index={1}>
-          <h2>Log New Entry</h2>
+          <h2>New Journal Entry</h2>
         <BeerLog beerList={props.beerList} breweries={props.breweries} beerLog={props.beerLog} addLogEntry={props.addLogEntry}/>
       </TabPanel>
       <TabPanel value={value} index={2}>
@@ -106,6 +125,6 @@ export default function HeaderTabs(props) {
                permanentlyDeleteUserAndInfo={props.permanentlyDeleteUserAndInfo}
           />
       </TabPanel>
-    </div>
+      </div>
   );
 }
