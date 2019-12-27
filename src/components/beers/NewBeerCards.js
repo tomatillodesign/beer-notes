@@ -5,11 +5,19 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 
+import { Flipper, Flipped } from "react-flip-toolkit";
+import shuffle from "lodash.shuffle";
+
+var shortid = require('shortid');
 
 class NewBeerCards extends React.Component {
 
      constructor(props){
-        super(props)
+        super(props);
+        this.state = {
+            data: this.props.beerList,
+            flipKey: shortid.generate()
+      };
     }
 
 
@@ -24,8 +32,16 @@ class NewBeerCards extends React.Component {
           console.log(event.currentTarget.id)
           let newView = event.currentTarget.id;
           this.props.changeBeerCardView(newView);
+
+          this.setState(({ data }) => ({
+               flipKey: shortid.generate()
+         }));
      }
 
+     shuffle = () =>
+         this.setState(({ data }) => ({
+              flipKey: shortid.generate()
+         }));
 
      render() {
 
@@ -38,6 +54,7 @@ class NewBeerCards extends React.Component {
           var orderedBeers = null;
 
           console.log(this.props.beerCardView);
+          console.log(this.state.flipKey);
 
                if( this.props.beerCardView === 'Alphabetical') {
                     orderedBeers = [...beerList].sort((a, b) => (a.beer_name > b.beer_name) ? 1 : -1);
@@ -145,19 +162,27 @@ class NewBeerCards extends React.Component {
                            </ButtonGroup>
                            </div>
 
-                           <div className="clb-beer-card-area">
-                              { Object.keys(orderedBeers).map(key => (
-                                        <BeerCard
-                                             beer={orderedBeers[key]}
-                                             key={key}
-                                             beerList={beerList}
-                                             breweries={breweries}
-                                             beerLog={beerLog}
-                                             addNewBeer={addNewBeer}
-                                             removeBeer={removeBeer}
-                                        />
+                           <Flipper
+                              flipKey={this.state.flipKey}
+                              element="div"
+                              className="clb-beer-card-area"
+                            >
+                              { this.state.data.map(({ key, beer_name, id, description }) => (
+                                   <Flipped>
+                                        {flippedProps =>
+                                             <BeerCard
+                                                  flippedProps={flippedProps}
+                                                  beer={orderedBeers[key]}
+                                                  key={key}
+                                                  beerList={beerList}
+                                                  breweries={breweries}
+                                                  beerLog={beerLog}
+                                                  addNewBeer={addNewBeer}
+                                                  removeBeer={removeBeer}
+                                             />}
+                                   </Flipped>
                               )) }
-                         </div>
+                              </Flipper>
                     </div>
                     );
 

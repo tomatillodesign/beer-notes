@@ -36,6 +36,7 @@ export default function BeerCard(props) {
 
 
      // get props and set variables
+     const beerID = props.id;
      const beerObj = props.beer;
      const beerName = props.beer.beer_name;
      const description = props.beer.description;
@@ -100,8 +101,11 @@ export default function BeerCard(props) {
 
      const matchingLogNotes = getLogObj;
 
+     console.log("BeerCard ID: " + props.beer.key);
+     console.log("BeerCard flippedProps: " + JSON.stringify(props.flippedProps));
+
      return (
-         <Card className={classes.card + ' clb-single-beer-card ' + isActiveClass} elevation={2} >
+         <Card data-flip-id={props.beer.key} className={classes.card + ' clb-single-beer-card ' + isActiveClass} elevation={2} {...props.flippedProps} >
          <Typography gutterBottom variant="h5" component="h2" style={{background: backgroundColor}} >
               <EditBeer
                   beerObj={beerObj}
