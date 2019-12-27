@@ -358,6 +358,18 @@ body {
      font-size: .75rem;
 }
 
+.add-brewery-first {
+     background: yellow;
+}
+
+.clb-extra-margin-top {
+     margin-top: 20px;
+}
+
+.clb-new-beer-title input {
+     font-size: 3rem !important;
+}
+
 
 
 /* #main-content-area {
@@ -383,6 +395,7 @@ html, .App, #main-content-area {
 .clb-footer {
   flex-shrink: 0 !important;
 }
+
 
 
 /* ----- React Transitions ------ */

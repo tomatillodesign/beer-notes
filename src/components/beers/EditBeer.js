@@ -12,6 +12,7 @@ export default function EditBeer(props) {
   const handleShow = () => setShow(true);
 
   const beerLog = props.beerLog;
+  const typeOfBeer = props.typeOfBeer;
   const breweries = props.breweries;
   const beerObj = props.beerObj;
   const beerName = props.beerName;
@@ -45,6 +46,7 @@ export default function EditBeer(props) {
                     breweries={breweries}
                     actionButtonText={'Save Changes'}
                     defaultValue={beerObj.description}
+                    typeOfBeer={typeOfBeer}
                     beerName={beerName}
                     currentABV={currentABV}
                     edit={true}

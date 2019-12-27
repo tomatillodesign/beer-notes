@@ -18,11 +18,15 @@ This project was created by Chris Liu-Beers of [Tomatillo Design](http://www.tom
 - [MaterialUI](https://material-ui.com/)
 - [React Bootstrap](https://react-bootstrap.github.io/)
 - [ReactSelect](https://react-select.com/home)
+- [React Flip Toolkit](https://github.com/aholachek/react-flip-toolkit)
 - [GitHub Pages](https://github.com/gitname/react-gh-pages)
 
 ## To Do's
 
-- Main Beer view, add transition/animations for smooth switching
+- Prevent empty log entry from being added accidentally
+- Add beer type to dropdown select (including ability to add your own)
+- Sticky footer to bottom of page
+- ~~Main Beer view, add transition/animations for smooth switching~~
 - ~~Upon loading, if user is already logged in, go straight to the Tabs~~
 - ~~Persist state with Firebase~~
 - ~~Add authentication/security to Firebase~~

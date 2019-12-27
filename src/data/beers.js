@@ -141,3 +141,26 @@ export const breweryList = [
           timestamp: Date.now(),
      },
 ];
+
+
+
+
+
+export const beerTypes = [
+     'American Imperial Red Ale',
+     'American Imperial Stout',
+     'American IPA',
+     'American Lager',
+     'American Pale Ale',
+     'American Sour',
+     'American Stout',
+     'American-Style Wheat Wine Ale',
+     'American Wheat',
+     'Baltic-Style Porter',
+     'Barrel-Aged Beer',
+     'Belgian-Style Blonde Ale',
+     'Belgian-Style Dubbel',
+     'Belgian-Style Flanders',
+     'Belgian-Style Fruit Lambic',
+     'Belgian-Style Golden Strong Ale',
+]

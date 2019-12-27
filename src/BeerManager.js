@@ -140,6 +140,7 @@ class BeerManager extends React.Component {
           } else {
 
                // make sure none of the object's properties are undefined, to prevent errors
+               if (typeof newBeer.type_of_beer === 'undefined') { newBeer.type_of_beer = null; }
                if (typeof newBeer.brewery_name === 'undefined') { newBeer.brewery_name = null; }
                if (typeof newBeer.brewery_slug === 'undefined') { newBeer.brewery_slug = null; }
                if (typeof newBeer.backgroundColor === 'undefined') { newBeer.backgroundColor = null; }

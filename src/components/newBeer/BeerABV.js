@@ -28,6 +28,7 @@ render() {
                label="ABV"
                defaultValue={this.props.currentABV}
                fullWidth
+               size="large"
                onChange={this.props.getABV}
                />
 

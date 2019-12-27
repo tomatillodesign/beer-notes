@@ -11,6 +11,7 @@ import Description from '../shared/Description';
 import NameOfBeer from './NameOfBeer';
 import BeerABV from './BeerABV';
 import SelectRating from '../shared/SelectRating';
+import SelectBeerType from '../shared/SelectBeerType';
 import ColorPickerSwitch from './ColorPickerSwitch';
 import { slugify } from '../../helpers';
 
@@ -25,6 +26,7 @@ class NewBeerForm extends React.Component {
      id = this.props.id;
      timestamp = Date.now();
      beerName = this.props.beerName;
+     type_of_beer = this.props.typeOfBeer;
      brewery_name = this.props.breweryName;
      brewery_slug = this.props.brewerySlug;
      backgroundColor = this.props.backgroundColor;
@@ -48,6 +50,7 @@ class NewBeerForm extends React.Component {
 
           // Make sure no fields cause "undefined" errors even if missing info
                if( this.count === undefined ) { this.count = 0; }
+               if( this.type_of_beer === undefined ) { this.type_of_beer = ''; }
                if( this.brewery_name === undefined ) {
                     this.brewery_name = '';
                     this.brewery_slug = '';
@@ -61,6 +64,7 @@ class NewBeerForm extends React.Component {
                               id: customID,
                               timestamp: this.timestamp,
                               beer_name: this.beerName,
+                              type_of_beer: this.type_of_beer,
                               brewery_name: this.brewery_name,
                               brewery_slug: this.brewery_slug,
                               backgroundColor: this.backgroundColor,
@@ -95,6 +99,15 @@ class NewBeerForm extends React.Component {
      getEntryDate = (date) => {
           this.entryDate = date;
           console.log("ENTRY DATE: " + this.entryDate);
+     }
+
+     getTypeOfBeer = (selectedOption) => {
+          console.log('getTypeOfBeer');
+          if(selectedOption) {
+               this.type_of_beer = selectedOption.label;
+          } else {
+               this.type_of_beer = '';
+          }
      }
 
      getBrewery = (selectedOption) => {
@@ -137,6 +150,8 @@ render() {
      if( !defaultValue ) { defaultValue = ''; }
      console.log( defaultValue );
 
+     let defaultBeerType = this.props.typeOfBeer;
+
      let defaultBrewery = this.props.defaultBrewery;
      let defaultRating = this.props.defaultRating;
 
@@ -156,20 +171,23 @@ render() {
             {((this.newBeersAdded < 2 && edit === true) || edit !== true ) &&
 
                <form className="new-beer" onSubmit={this.createNewBeer} >
-               <p>If you're adding a beer from a new brewery, make sure you add the brewery first. Then you'll be ready to go!</p>
-                    <div className="clb-flex-row-three-fourths">
+               <p>If you're adding a beer from a new brewery, make sure you <span className="add-brewery-first">add the brewery first</span>. Then you'll be ready to go!</p>
+                    <div className="clb-new-beer-title">
                         <NameOfBeer getBeerName={this.getBeerName} beerName={beerName}/>
-                        <BeerABV getABV={this.getABV} currentABV={currentABV} />
                    </div>
                          <div className="clb-left-align">
-                              <div className="clb-flex-row-two-thirds">
-                              <SelectBrewery breweries={breweries} getBrewery={this.getBrewery} edit={edit} defaultBrewery={defaultBrewery} />
-                              <SelectRating setRating={this.setRating} reset={this.reset} edit={edit} defaultRating={defaultRating} />
+                         <div className="clb-flex-row-two-thirds">
+                              <SelectBeerType getTypeOfBeer={this.getTypeOfBeer} defaultBeerType={defaultBeerType} edit={edit} />
+                              <BeerABV getABV={this.getABV} currentABV={currentABV} />
+                         </div>
+                              <div className="clb-flex-row-two-thirds clb-extra-margin-top">
+                                   <SelectBrewery breweries={breweries} getBrewery={this.getBrewery} edit={edit} defaultBrewery={defaultBrewery} />
+                                   <SelectRating setRating={this.setRating} reset={this.reset} edit={edit} defaultRating={defaultRating} />
                               </div>
                         </div>
-                        <ColorPickerSwitch defaultColor={defaultColor} onChangeComplete={ this.handleColorChangeComplete } manualHexSelection={this.manualHexSelection} />
-
                    <Description placeholder={placeholder} defaultValue={defaultValue} getNotes={this.getBeerDescription} edit={edit} />
+                   <ColorPickerSwitch defaultColor={defaultColor} onChangeComplete={ this.handleColorChangeComplete } manualHexSelection={this.manualHexSelection} />
+
                    <Button variant="contained" color="secondary" type="submit">{actionButtonText}</Button>
               </form>
 
