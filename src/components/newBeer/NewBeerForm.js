@@ -168,7 +168,7 @@ render() {
           placeholder='Description';
      }
 
-     //this.newBeersAdded++;
+     this.newBeersAdded++;
 
        return (
             <>

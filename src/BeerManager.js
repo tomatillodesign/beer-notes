@@ -127,14 +127,14 @@ class BeerManager extends React.Component {
                let getBeerObjInState = clbCustomPreviousState.filter(obj => {
                  return obj.id === beerID
             });
-               //console.log(getBeerObjInState);
+               console.log(getBeerObjInState);
 
                let index = clbCustomPreviousState.map(function(e) { return e.id; }).indexOf(beerID);
                //console.log(index);
 
                let ids = [...this.state.completeBeerList];     // create the copy of state array
                ids[index] = newBeer;                  //new value
-               //console.log(ids[index]);
+               console.log(ids[index]);
 
                if (typeof newBeer.type_of_beer === 'undefined') { newBeer.type_of_beer = null; }
                if (typeof newBeer.brewery_name === 'undefined') { newBeer.brewery_name = null; }
@@ -187,10 +187,11 @@ class BeerManager extends React.Component {
           console.log("PREV COUNT: " + previousCount);
           console.log("NEW COUNT: " + newCount);
           clbPreviousBeerListState[index].count = newCount;
-          this.setState({ completeBeerList: clbPreviousBeerListState });
+          //this.setState({ completeBeerList: clbPreviousBeerListState });
 
          this.setState(prevState => ({
-           beerLog: [...prevState.beerLog, logEntry]
+              completeBeerList: clbPreviousBeerListState,
+              beerLog: [...prevState.beerLog, logEntry]
          }))
 
          //fire.database().ref('beerLog').set( this.state.beerLog );

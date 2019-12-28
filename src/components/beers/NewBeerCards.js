@@ -46,7 +46,7 @@ class NewBeerCards extends React.Component {
      render() {
 
           const beerList = this.props.beerList;
-          //console.log(beerList);
+          console.log(beerList);
           const breweries = this.props.breweries;
           const beerLog = this.props.beerLog;
           const addNewBeer = this.props.addNewBeer;

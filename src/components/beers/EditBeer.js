@@ -18,6 +18,7 @@ export default function EditBeer(props) {
   const beerTypes = props.beerTypes;
   const beerObj = props.beerObj;
   const beerName = props.beerName;
+  const count = props.count;
   const currentABV = beerObj.abv;
   const addNewBeer = props.addNewBeer;
   const editCurrentBeer=props.editCurrentBeer;
@@ -48,6 +49,7 @@ export default function EditBeer(props) {
                     breweries={breweries}
                     actionButtonText={'Save Changes'}
                     defaultValue={beerObj.description}
+                    count={count}
                     beerTypes={beerTypes}
                     typeOfBeer={typeOfBeer}
                     beerName={beerName}

@@ -42,6 +42,7 @@ export default function BeerCard(props) {
      const typeOfBeer = props.beer.type_of_beer;
      const beerTypes = props.beerTypes;
      const addNewTypeOfBeer = props.addNewTypeOfBeer;
+     const count = props.beer.count;
      const description = props.beer.description;
      const brewerySlug = props.beer.brewery_slug;
      const myRating = props.beer.my_rating;
@@ -115,6 +116,7 @@ export default function BeerCard(props) {
                   beerName={beerName}
                   typeOfBeer={typeOfBeer}
                   addNewTypeOfBeer={addNewTypeOfBeer}
+                  count={count}
                   breweries={breweries}
                   beerList={beerList}
                   beerTypes={beerTypes}
