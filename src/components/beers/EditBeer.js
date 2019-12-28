@@ -13,6 +13,7 @@ export default function EditBeer(props) {
 
   const beerLog = props.beerLog;
   const typeOfBeer = props.typeOfBeer;
+  const addNewTypeOfBeer = props.addNewTypeOfBeer;
   const breweries = props.breweries;
   const beerTypes = props.beerTypes;
   const beerObj = props.beerObj;
@@ -65,6 +66,7 @@ export default function EditBeer(props) {
                     addNewBeer={addNewBeer}
                     backgroundColor={beerObj.backgroundColor}
                     editCurrentBeer={editCurrentBeer}
+                    addNewTypeOfBeer={addNewTypeOfBeer}
                />
         </Modal.Body>
         <Modal.Footer>

@@ -65,7 +65,7 @@ export default function HeaderTabs(props) {
 
   // console.log(props.beerList.length);
   // console.log("loggedInEmail: " + props.loggedInEmail);
-  console.log("beerTypes: " + props.beerTypes);
+  //console.log("beerTypes: " + props.beerTypes);
 
   return (
        <div className={classes.root} id="main-content-area">
@@ -92,6 +92,7 @@ export default function HeaderTabs(props) {
                removeBeer={props.removeBeer}
                beerCardView={props.beerCardView}
                changeBeerCardView={props.changeBeerCardView}
+               addNewTypeOfBeer={props.addNewTypeOfBeer}
                 />
            :
           <div className="new-entry welcome-explainer">

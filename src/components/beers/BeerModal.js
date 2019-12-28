@@ -24,6 +24,12 @@ export default function BeerModal(props) {
           <Modal.Title>{props.beerName}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+               {props.description &&
+                           <div className="clb-beer-description">
+                              <h3>My Notes</h3>
+                             {props.description}
+                         </div>
+               }
              <ul className="log-entry-area">
                   {Object.keys(logEntriesByDate).map(key => <LogEntry key={key} details={logEntriesByDate[key]} modal={true} />)}
              </ul>

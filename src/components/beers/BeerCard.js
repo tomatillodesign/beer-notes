@@ -39,8 +39,9 @@ export default function BeerCard(props) {
      const beerID = props.id;
      const beerObj = props.beer;
      const beerName = props.beer.beer_name;
-     const type_of_beer = props.beer.type_of_beer;
+     const typeOfBeer = props.beer.type_of_beer;
      const beerTypes = props.beerTypes;
+     const addNewTypeOfBeer = props.addNewTypeOfBeer;
      const description = props.beer.description;
      const brewerySlug = props.beer.brewery_slug;
      const myRating = props.beer.my_rating;
@@ -54,7 +55,7 @@ export default function BeerCard(props) {
           if( myRating === '2' ) { myRatingToPublish = '👍'; }
           if( myRating === '1' ) { myRatingToPublish = '👎'; }
 
-          console.log(myRating);
+          //console.log(myRating);
 
      if( backgroundColor ) {
           var lightBackground = lightenDarkenColor(backgroundColor, 200);
@@ -112,7 +113,8 @@ export default function BeerCard(props) {
               <EditBeer
                   beerObj={beerObj}
                   beerName={beerName}
-                  typeOfBeer={type_of_beer}
+                  typeOfBeer={typeOfBeer}
+                  addNewTypeOfBeer={addNewTypeOfBeer}
                   breweries={breweries}
                   beerList={beerList}
                   beerTypes={beerTypes}
@@ -126,24 +128,32 @@ export default function BeerCard(props) {
              <CardContent>
 
                {breweryToPublish}
-               <Typography variant="body2" color="textSecondary" component="p">
-                 {description}
-               </Typography>
+
+                    {typeOfBeer &&
+                      <div className="clb-type-of-beer">
+                      <Typography variant="body2" color="textSecondary" component="p">
+                        {typeOfBeer}
+                        </Typography>
+                    </div>
+                   }
+
              </CardContent>
+
              <CardActions>
 
-                {myRating !== undefined &&
+                {myRating !== '' &&
                      <div className="clb-light-border-outline-button my-rating-button">
                        {myRatingToPublish}
                     </div>
                 }
-                 {beerABV !== null &&
+                 {beerABV !== '' &&
                   <Button variant="outlined" disabled className="clb-light-border-outline-button beer-abv">
                     ABV: {beerABV}
                  </Button>}
 
                  {logCount > 0 &&
                      <BeerModal
+                         description={description}
                          beerName={beerName}
                          breweryName={breweryName}
                          beerLog={matchingLogNotes}

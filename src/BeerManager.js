@@ -78,7 +78,7 @@ class BeerManager extends React.Component {
             const loggedInID = this.props.loggedInID;
             console.log("loggedInID:" + loggedInID);
 
-            console.log(beerTypes);
+            //console.log(beerTypes);
 
 
             base.syncState(`${loggedInID}/completeBeerList`, {
@@ -114,17 +114,6 @@ class BeerManager extends React.Component {
 
        }
 
-
-       // getOwner = () => {
-       //      base.fetch('WHpmtCwnpNOWqrTJslWEAyCT7vl2', {
-       //        context: this,
-       //        asArray: true
-       //      }).then(data => {
-       //        console.log(data);
-       //      }).catch(error => {
-       //        //handle error
-       //      })
-       //    }
 
 
      addNewBeer = (newBeer) => {
@@ -178,15 +167,6 @@ class BeerManager extends React.Component {
 
      addNewBrewery = (newBrewery) => {
           console.log(newBrewery);
-          // 1. take a copy of existing state
-          //const breweries = { ...this.state.breweries };
-          // 2. add our new fish to that fishes variable
-          //completeBeerList[`newBeer_${Date.now()}`] = newBeer;
-          //breweries[] = newBrewery;
-          // 3. Set the new fishes object to state
-          // this.setState({
-          //      breweries: breweries
-          // })
           this.setState(prevState => ({
             breweries: [...prevState.breweries, newBrewery]
           }))
@@ -202,11 +182,11 @@ class BeerManager extends React.Component {
             return obj.id === beerID
           });
           let index = clbPreviousBeerListState.map(function(e) { return e.id; }).indexOf(beerID);
-          // let previousCount = clbPreviousBeerListState[index].count;
-          // let newCount = previousCount + 1;
-          // console.log("PREV COUNT: " + previousCount);
-          // console.log("NEW COUNT: " + newCount);
-          // clbPreviousBeerListState[index].count = newCount;
+          let previousCount = clbPreviousBeerListState[index].count;
+          let newCount = previousCount + 1;
+          console.log("PREV COUNT: " + previousCount);
+          console.log("NEW COUNT: " + newCount);
+          clbPreviousBeerListState[index].count = newCount;
           this.setState({ completeBeerList: clbPreviousBeerListState });
 
          this.setState(prevState => ({
@@ -252,100 +232,21 @@ class BeerManager extends React.Component {
     addNewTypeOfBeer = (newTypeofBeer) => {
 
          console.log('Add New Type of Beer: ' + newTypeofBeer);
-         this.setState(prevState => ({
-           beerTypes: [...prevState.beerTypes, newTypeofBeer]
-         }));
+         let previousBeerTypes = [...this.state.beerTypes];
+         let included = previousBeerTypes.includes(newTypeofBeer);
+         console.log(included);
+         if( included === false ) {
+
+              // Sort all beer types, then update state
+              let updatedBeerTypes = [...previousBeerTypes, newTypeofBeer];
+              let orderedBeerTypes = [...updatedBeerTypes].sort();
+
+              this.setState(prevState => ({
+                beerTypes: orderedBeerTypes
+              }));
+         }
 
     }
-
-
-    registerNewUser = (user) => {
-             const newUserID = user.user.uid;
-             const newUserEmail = user.user.email;
-              console.log(newUserID);
-
-             this.setState({
-                  ownerID: newUserID,
-                  ownerEmail: newUserEmail,
-              });
-
-
-             //console.log(user.uid);
-             //this.setState({ ownerUID: user.uid });
-             //console.log("Register New User: " + user.email);
-
-             // Create new Journal view if it doesn't exist yet for this user
-              firebaseApp.database().ref().update({
-                 [newUserID]: {
-                      ownerID: newUserID,
-                      ownerEmail: newUserEmail,
-                      completeBeerList: [],
-                      breweries: [],
-                      beerLog: [],
-                      beerCardView: 'Alphabetical',
-                 },
-              });
-
-              //const checkForExistingData = await base.fetch(user.user.uid, { context: this });
-              // var checkFor ExistingData = firebaseApp.auth().user.user.uid;
-              // console.log(checkForExistingData);
-
-        }
-
-
-        authenticateUser = (email, password) => {
-
-                 console.log("AuthenticateUser: " + email);
-                 // const loggedInID = user.user.uid;
-
-               firebaseApp
-                    .auth()
-                    .signInWithEmailAndPassword(email, password)
-                    .then((user) => {
-                      console.log("User successfully LOGGED IN");
-
-                      this.setState({
-                           ownerID: user.user.uid,
-                           loggedInID: user.user.uid
-                      });
-
-                      console.log("Logged in: " + user.user.uid);
-
-                    })
-                    .catch((error) => {
-                      console.log("ERROR: User trying to log in");
-                    });
-
-                }
-
-
-
-      authHandler = async authData => {
-
-           console.log(authData);
-           const user = firebaseApp.auth().currentUser;
-
-           console.log(user);
-           if( user !== null ) {
-                const userUID = user.uid;
-                // const userObject = await base.fetch(userUID, { context: this });
-                // console.log("App.js authHandler");
-                console.log("Current User ID: " + userUID);
-                console.log("Current User Email: " + user.email);
-                //if( Object.entries(userObject).length === 0 ) { console.log("No user found"); }
-
-                //update state
-                this.setState({
-                     loggedInID: userUID,
-                     ownerID: userUID,
-                       });
-
-           } else {
-                console.log("authHandler == no user found");
-           }
-
-      }
-
 
 
 
@@ -361,7 +262,7 @@ class BeerManager extends React.Component {
           const logOutUser= this.props.logOutUser;
           const permanentlyDeleteUserAndInfo = this.props.permanentlyDeleteUserAndInfo;
 
-          console.log("beerTypes: " + beerTypes);
+          //console.log("beerTypes: " + beerTypes);
 
           return (
 

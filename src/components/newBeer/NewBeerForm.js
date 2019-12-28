@@ -26,7 +26,7 @@ class NewBeerForm extends React.Component {
      id = this.props.id;
      timestamp = Date.now();
      beerName = this.props.beerName;
-     type_of_beer = this.props.beerTypes;
+     type_of_beer = this.props.typeOfBeer;
      brewery_name = this.props.breweryName;
      brewery_slug = this.props.brewerySlug;
      backgroundColor = this.props.backgroundColor;
@@ -81,7 +81,7 @@ class NewBeerForm extends React.Component {
           this.props.addNewBeer(entry);
           // refresh the form
           event.currentTarget.reset();
-          
+
      }
 
      getBeerName = (event) => {
@@ -106,12 +106,10 @@ class NewBeerForm extends React.Component {
           console.log('getTypeOfBeer');
           if(selectedOption) {
                this.type_of_beer = selectedOption.label;
+               this.props.addNewTypeOfBeer(selectedOption.label);
           } else {
                this.type_of_beer = '';
           }
-
-          this.props.addNewTypeOfBeer(selectedOption.label);
-
      }
 
      getBrewery = (selectedOption) => {
@@ -178,7 +176,7 @@ render() {
             {((this.newBeersAdded < 2 && edit === true) || edit !== true ) &&
 
                <form className="new-beer" onSubmit={this.createNewBeer} >
-               <p>If you're adding a beer from a new brewery, make sure you <span className="add-brewery-first">add the brewery first</span>. Then you'll be ready to go!</p>
+               <p className="intro-explainer-adding-a-brewery">If you're adding a beer from a new brewery, make sure you <span className="add-brewery-first">add the brewery first</span>. Then you'll be ready to go!</p>
                     <div className="clb-new-beer-title">
                         <NameOfBeer getBeerName={this.getBeerName} beerName={beerName}/>
                    </div>

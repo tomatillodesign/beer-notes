@@ -46,15 +46,16 @@ class NewBeerCards extends React.Component {
      render() {
 
           const beerList = this.props.beerList;
-          console.log(beerList);
+          //console.log(beerList);
           const breweries = this.props.breweries;
           const beerLog = this.props.beerLog;
           const addNewBeer = this.props.addNewBeer;
           const removeBeer = this.props.removeBeer;
           const beerTypes = this.props.beerTypes;
           var orderedBeers = null;
+          const addNewTypeOfBeer = this.props.addNewTypeOfBeer;
 
-          console.log(beerTypes);
+          //console.log(beerTypes);
           //console.log(this.state.flipKey);
 
                if( this.props.beerCardView === 'Alphabetical') {
@@ -147,7 +148,7 @@ class NewBeerCards extends React.Component {
 
 
 
-          console.log(orderedBeers);
+          //console.log(orderedBeers);
 
           if( orderedBeers ) {
 
@@ -181,6 +182,7 @@ class NewBeerCards extends React.Component {
                                                   beerTypes={beerTypes}
                                                   addNewBeer={addNewBeer}
                                                   removeBeer={removeBeer}
+                                                  addNewTypeOfBeer={addNewTypeOfBeer}
                                              />}
                                    </Flipped>
                               )) }

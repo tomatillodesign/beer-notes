@@ -370,7 +370,21 @@ body {
      font-size: 3rem !important;
 }
 
+.clb-beer-description h3 {
+     font-family: 'Open Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+     font-weight: 700;
+     font-size: 1rem;
+     font-style: normal;
+}
 
+.clb-beer-description {
+     font-style: italic;
+     margin-bottom: 30px;
+}
+
+.modal p.intro-explainer-adding-a-brewery {
+     display: none;
+}
 
 /* #main-content-area {
   min-height: calc(100vh) !important;
