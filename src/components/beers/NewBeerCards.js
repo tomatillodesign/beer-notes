@@ -51,10 +51,11 @@ class NewBeerCards extends React.Component {
           const beerLog = this.props.beerLog;
           const addNewBeer = this.props.addNewBeer;
           const removeBeer = this.props.removeBeer;
+          const beerTypes = this.props.beerTypes;
           var orderedBeers = null;
 
-          console.log(this.props.beerCardView);
-          console.log(this.state.flipKey);
+          console.log(beerTypes);
+          //console.log(this.state.flipKey);
 
                if( this.props.beerCardView === 'Alphabetical') {
                     orderedBeers = [...beerList].sort((a, b) => (a.beer_name > b.beer_name) ? 1 : -1);
@@ -168,7 +169,7 @@ class NewBeerCards extends React.Component {
                               className="clb-beer-card-area"
                             >
                               { this.state.data.map(({ key, beer_name, id, description }) => (
-                                   <Flipped>
+                                   <Flipped key={id}>
                                         {flippedProps =>
                                              <BeerCard
                                                   flippedProps={flippedProps}
@@ -177,6 +178,7 @@ class NewBeerCards extends React.Component {
                                                   beerList={beerList}
                                                   breweries={breweries}
                                                   beerLog={beerLog}
+                                                  beerTypes={beerTypes}
                                                   addNewBeer={addNewBeer}
                                                   removeBeer={removeBeer}
                                              />}

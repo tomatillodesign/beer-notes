@@ -1,19 +1,27 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
-import { beerTypes } from '../../data/beers.js';
+import Creatable, { makeCreatableSelect } from 'react-select/creatable';
+import CreatableSelect from 'react-select/creatable';
 
 class SelectBeerType extends React.Component {
 
      constructor(props) {
           super(props);
-
+          this.state = {
+            };
      }
 
+     handleCreateLabel = (inputValue: any, actionMeta: any) => {
+          console.log("handleCreateLabel");
+          return 'Create "' + inputValue + '"';
+     }
 
 
      render() {
 
+          const beerTypes = this.props.beerTypes;
           const defaultBeerTypeRaw = this.props.defaultBeerType;
+          console.log(beerTypes);
           console.log(defaultBeerTypeRaw);
 
           let beerTypesToSelect = [];
@@ -29,12 +37,13 @@ class SelectBeerType extends React.Component {
                const defaultBeerTypeSelect = { value: defaultBeerTypeRaw, label: defaultBeerTypeRaw }
 
                return (
-                 <Select
+                 <CreatableSelect
                     placeholder='Type of Beer'
                     options={beerTypesToSelect}
                     defaultValue={defaultBeerTypeSelect}
                     isClearable
                     isSearchable
+                    formatCreateLabel={this.handleCreateLabel}
                     onChange={this.props.getTypeOfBeer}
                  />
                );
@@ -42,11 +51,12 @@ class SelectBeerType extends React.Component {
           } else {
 
                return (
-                 <Select
+                 <CreatableSelect
                       placeholder='Type of Beer'
                       options={beerTypesToSelect}
                     isClearable
                     isSearchable
+                    formatCreateLabel={this.handleCreateLabel}
                     onChange={this.props.getTypeOfBeer}
                  />
                );

@@ -8,6 +8,7 @@ import LandingPage from './components/registration/LandingPage';
 import Logout from './components/registration/Logout';
 import OwnerID from './components/OwnerID';
 import BeerManager from './BeerManager';
+import { beerTypes } from './data/beers.js';
 
 // styles & additional packages
 import Typography from '@material-ui/core/Typography';
@@ -91,12 +92,14 @@ class App extends React.Component {
                       breweries: [],
                       beerLog: [],
                       beerCardView: 'Alphabetical',
+                      beerTypes: beerTypes
                  },
               });
 
               this.setState({
                    loggedInID: newUserID,
                    loggedInEmail: newUserEmail,
+                   beerTypes: beerTypes
                });
                localStorage.setItem('beerJournal.loggedInID', newUserID);
                localStorage.setItem('beerJournal.loggedInEmail', newUserEmail);

@@ -63,8 +63,9 @@ export default function HeaderTabs(props) {
     setValue(newValue);
   };
 
-  console.log(props.beerList.length);
-  console.log("loggedInEmail: " + props.loggedInEmail);
+  // console.log(props.beerList.length);
+  // console.log("loggedInEmail: " + props.loggedInEmail);
+  console.log("beerTypes: " + props.beerTypes);
 
   return (
        <div className={classes.root} id="main-content-area">
@@ -86,6 +87,7 @@ export default function HeaderTabs(props) {
                beerList={props.beerList}
                breweries={props.breweries}
                beerLog={props.beerLog}
+               beerTypes={props.beerTypes}
                addNewBeer={props.addNewBeer}
                removeBeer={props.removeBeer}
                beerCardView={props.beerCardView}
@@ -112,7 +114,13 @@ export default function HeaderTabs(props) {
       </TabPanel>
       <TabPanel value={value} index={2}>
           <h2>Add New Beer</h2>
-         <NewBeerForm beerList={props.beerList} addNewBeer={props.addNewBeer} breweries={props.breweries} />
+               <NewBeerForm
+                    beerList={props.beerList}
+                    addNewBeer={props.addNewBeer}
+                    breweries={props.breweries}
+                    beerTypes={props.beerTypes}
+                    addNewTypeOfBeer={props.addNewTypeOfBeer}
+               />
       </TabPanel>
       <TabPanel value={value} index={3}>
           <h2>Add New Brewery</h2>

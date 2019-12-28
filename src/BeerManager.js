@@ -7,6 +7,7 @@ import HeaderTabs from './components/HeaderTabs';
 import LandingPage from './components/registration/LandingPage';
 import Logout from './components/registration/Logout';
 import OwnerID from './components/OwnerID';
+import { beerTypes } from './data/beers.js';
 
 // styles & additional packages
 import Typography from '@material-ui/core/Typography';
@@ -64,7 +65,8 @@ class BeerManager extends React.Component {
           completeBeerList: [],
           breweries: [],
           beerLog: [],
-          beerCardView: 'Alphabetical'
+          beerCardView: 'Alphabetical',
+          beerTypes: []
        };
 
      }
@@ -75,6 +77,9 @@ class BeerManager extends React.Component {
             console.log("componentDidMount");
             const loggedInID = this.props.loggedInID;
             console.log("loggedInID:" + loggedInID);
+
+            console.log(beerTypes);
+
 
             base.syncState(`${loggedInID}/completeBeerList`, {
               context: this,
@@ -94,6 +99,12 @@ class BeerManager extends React.Component {
               asArray: true
             });
 
+            base.syncState(`${loggedInID}/beerTypes`, {
+              context: this,
+              state: 'beerTypes',
+              asArray: true
+            });
+
             base.syncState(`${loggedInID}/beerCardView`, {
               context: this,
               state: 'beerCardView',
@@ -104,16 +115,16 @@ class BeerManager extends React.Component {
        }
 
 
-       getOwner = () => {
-            base.fetch('WHpmtCwnpNOWqrTJslWEAyCT7vl2', {
-              context: this,
-              asArray: true
-            }).then(data => {
-              console.log(data);
-            }).catch(error => {
-              //handle error
-            })
-          }
+       // getOwner = () => {
+       //      base.fetch('WHpmtCwnpNOWqrTJslWEAyCT7vl2', {
+       //        context: this,
+       //        asArray: true
+       //      }).then(data => {
+       //        console.log(data);
+       //      }).catch(error => {
+       //        //handle error
+       //      })
+       //    }
 
 
      addNewBeer = (newBeer) => {
@@ -135,6 +146,15 @@ class BeerManager extends React.Component {
                let ids = [...this.state.completeBeerList];     // create the copy of state array
                ids[index] = newBeer;                  //new value
                //console.log(ids[index]);
+
+               if (typeof newBeer.type_of_beer === 'undefined') { newBeer.type_of_beer = null; }
+               if (typeof newBeer.brewery_name === 'undefined') { newBeer.brewery_name = null; }
+               if (typeof newBeer.brewery_slug === 'undefined') { newBeer.brewery_slug = null; }
+               if (typeof newBeer.backgroundColor === 'undefined') { newBeer.backgroundColor = null; }
+               if (typeof newBeer.abv === 'undefined') { newBeer.abv = null; }
+               if (typeof newBeer.my_rating === 'undefined') { newBeer.my_rating = null; }
+               if (typeof newBeer.description === 'undefined') { newBeer.description = null; }
+
                this.setState({ completeBeerList: ids });            //update the value
 
           } else {
@@ -225,6 +245,16 @@ class BeerManager extends React.Component {
          if( newViewString === 'view-recently-added' ) { newBeerCardView = 'Recently Added'; }
 
          this.setState({ beerCardView: newBeerCardView });
+
+    }
+
+
+    addNewTypeOfBeer = (newTypeofBeer) => {
+
+         console.log('Add New Type of Beer: ' + newTypeofBeer);
+         this.setState(prevState => ({
+           beerTypes: [...prevState.beerTypes, newTypeofBeer]
+         }));
 
     }
 
@@ -325,12 +355,13 @@ class BeerManager extends React.Component {
           const breweries = this.state.breweries;
           const beerLog = this.state.beerLog;
           const beerCardView = this.state.beerCardView;
+          const beerTypes =  this.state.beerTypes;
           const loggedInID = this.props.loggedInID;
           const loggedInEmail = this.props.loggedInEmail;
           const logOutUser= this.props.logOutUser;
           const permanentlyDeleteUserAndInfo = this.props.permanentlyDeleteUserAndInfo;
 
-          console.log("Logged in Email: " + loggedInEmail);
+          console.log("beerTypes: " + beerTypes);
 
           return (
 
@@ -343,10 +374,12 @@ class BeerManager extends React.Component {
                           addLogEntry={this.addLogEntry}
                           removeBeer={this.removeBeer}
                           beerLog={beerLog}
+                          beerTypes={beerTypes}
                           beerCardView={beerCardView}
                           changeBeerCardView={this.changeBeerCardView}
                           loggedInEmail={loggedInEmail}
                           logOutUser={logOutUser}
+                          addNewTypeOfBeer={this.addNewTypeOfBeer}
                           permanentlyDeleteUserAndInfo={permanentlyDeleteUserAndInfo}
                    />
                  </>

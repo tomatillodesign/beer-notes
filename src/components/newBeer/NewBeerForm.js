@@ -26,7 +26,7 @@ class NewBeerForm extends React.Component {
      id = this.props.id;
      timestamp = Date.now();
      beerName = this.props.beerName;
-     type_of_beer = this.props.typeOfBeer;
+     type_of_beer = this.props.beerTypes;
      brewery_name = this.props.breweryName;
      brewery_slug = this.props.brewerySlug;
      backgroundColor = this.props.backgroundColor;
@@ -81,6 +81,7 @@ class NewBeerForm extends React.Component {
           this.props.addNewBeer(entry);
           // refresh the form
           event.currentTarget.reset();
+          
      }
 
      getBeerName = (event) => {
@@ -108,6 +109,9 @@ class NewBeerForm extends React.Component {
           } else {
                this.type_of_beer = '';
           }
+
+          this.props.addNewTypeOfBeer(selectedOption.label);
+
      }
 
      getBrewery = (selectedOption) => {
@@ -139,6 +143,8 @@ render() {
 
      const beerList = this.props.beerList;
      const breweries = this.props.breweries;
+     const beerTypes = this.props.beerTypes;
+     console.log( beerTypes );
 
      let beerName = this.props.beerName;
      let currentABV = this.props.currentABV;
@@ -149,6 +155,7 @@ render() {
      let defaultValue = this.props.defaultValue;
      if( !defaultValue ) { defaultValue = ''; }
      console.log( defaultValue );
+
 
      let defaultBeerType = this.props.typeOfBeer;
 
@@ -163,7 +170,7 @@ render() {
           placeholder='Description';
      }
 
-     this.newBeersAdded++;
+     //this.newBeersAdded++;
 
        return (
             <>
@@ -177,7 +184,13 @@ render() {
                    </div>
                          <div className="clb-left-align">
                          <div className="clb-flex-row-two-thirds">
-                              <SelectBeerType getTypeOfBeer={this.getTypeOfBeer} defaultBeerType={defaultBeerType} edit={edit} />
+                              <SelectBeerType
+                                   beerTypes={beerTypes}
+                                   getTypeOfBeer={this.getTypeOfBeer}
+                                   defaultBeerType={defaultBeerType}
+                                   edit={edit}
+                                   addNewTypeOfBeer={this.props.addNewTypeOfBeer}
+                              />
                               <BeerABV getABV={this.getABV} currentABV={currentABV} />
                          </div>
                               <div className="clb-flex-row-two-thirds clb-extra-margin-top">
