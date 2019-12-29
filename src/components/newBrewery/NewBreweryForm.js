@@ -16,6 +16,13 @@ const shortid = require('shortid');
 
 class NewBreweryForm extends React.Component {
 
+     constructor(props) {
+          super(props);
+          this.state = {
+               breweryState: null
+          }
+     }
+
      timestamp = Date.now();
      id = this.props.id;
      breweryName = null;
@@ -49,6 +56,11 @@ class NewBreweryForm extends React.Component {
           this.props.addNewBrewery(entry);
           // refresh the form
           event.currentTarget.reset();
+          this.setState({ breweryState: null });
+          this.breweryName = null;
+          this.brewerySlug = null;
+          this.breweryCity = null;
+          this.breweryState = null;
      }
 
      getBreweryName = (event) => {
@@ -63,6 +75,9 @@ class NewBreweryForm extends React.Component {
      getBreweryState = (selectedOption) => {
           if(selectedOption) {
                this.breweryState = selectedOption.label;
+               this.setState({ breweryState: selectedOption.label });
+          } else {
+               this.setState({ breweryState: null });
           }
      }
 
@@ -78,7 +93,10 @@ render() {
                         <NameOfBrewery getBreweryName={this.getBreweryName} />
                         <div className="clb-flex-row-fifty-fifty">
                         <BreweryCity getBreweryCity={this.getBreweryCity} />
-                        <SelectUSState getBreweryState={this.getBreweryState} />
+                        <SelectUSState
+                              getBreweryState={this.getBreweryState}
+                              selectedState={this.state.breweryState}
+                         />
                         </div>
                    <Button variant="contained" color="secondary" type="submit">Add New Brewery</Button>
               </form>

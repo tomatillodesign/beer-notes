@@ -88,7 +88,9 @@ export default function BeerCard(props) {
                     {getBreweryObj.brewery}
                </div>
           <div className="brewery-location">
-               {getBreweryObj.city}, {getBreweryObj.state}
+               {getBreweryObj.city}{(getBreweryObj.city && getBreweryObj.state) &&
+                    <span className="city-state-sep">,</span>
+               } {getBreweryObj.state}
           </div>
       </div>;
 
