@@ -19,10 +19,11 @@ class SelectRating extends React.Component {
                if( defaultRating === '2' ) { myRatingToPublish = '👍 Good'; }
                if( defaultRating === '1' ) { myRatingToPublish = '👎 Not Good'; }
 
-          const defaultRatingPublish = {
+          let defaultRatingPublish = {
                value: defaultRating,
                label: myRatingToPublish
           };
+          if( defaultRating === null ) { defaultRatingPublish = null; }
           console.log(defaultRating);
 
           const ratingOptions = [
@@ -49,6 +50,7 @@ class SelectRating extends React.Component {
                return (
                  <Select
                     placeholder='Rating'
+                    value={defaultRatingPublish}
                     options={ratingOptions}
                     isClearable
                     isSearchable

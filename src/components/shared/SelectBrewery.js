@@ -43,11 +43,17 @@ class SelectBrewery extends React.Component {
           console.log(defaultBrewery);
           console.log(edit);
 
+          let selectedToDisplay = null;
+          if( defaultBrewery !== null ) {
+               selectedToDisplay = { value: defaultBrewery, label: defaultBrewery};
+          }
+
           return (
             <Select
                placeholder='Select Brewery'
                options={currentBreweryOptions}
-               defaultValue={defaultBrewery}
+               //defaultValue={defaultBrewery}
+               value={selectedToDisplay}
                isClearable
                isSearchable
                onChange={this.props.getBrewery}

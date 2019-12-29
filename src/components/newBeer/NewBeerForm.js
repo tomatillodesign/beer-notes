@@ -23,6 +23,26 @@ const shortid = require('shortid');
 
 class NewBeerForm extends React.Component {
 
+     constructor(props) {
+          super(props);
+          this.state = {
+               typeOfBeer: this.props.typeOfBeer,
+               breweryName: this.props.breweryName,
+               myRating: this.props.defaultRating
+          }
+     }
+
+     componentDidMount() {
+          if( this.props.typeOfBeer === undefined ) {
+               this.setState({
+                    typeOfBeer: null,
+                    breweryName: null,
+                    myRating: null
+               });
+          }
+
+     }
+
      id = this.props.id;
      timestamp = Date.now();
      beerName = this.props.beerName;
@@ -82,6 +102,12 @@ class NewBeerForm extends React.Component {
           // refresh the form
           event.currentTarget.reset();
 
+          this.setState({
+               typeOfBeer: null,
+               breweryName: null,
+               myRating: null
+          });
+
      }
 
      getBeerName = (event) => {
@@ -107,8 +133,10 @@ class NewBeerForm extends React.Component {
           if(selectedOption) {
                this.type_of_beer = selectedOption.label;
                this.props.addNewTypeOfBeer(selectedOption.label);
+               this.setState({ typeOfBeer: selectedOption.label });
           } else {
                this.type_of_beer = '';
+               this.setState({ typeOfBeer: null });
           }
      }
 
@@ -117,13 +145,21 @@ class NewBeerForm extends React.Component {
           if(selectedOption) {
                this.brewery_slug = slugify(selectedOption.label);
                this.brewery_name = selectedOption.label;
+               this.setState({ breweryName: selectedOption.label });
+          } else {
+               this.setState({ breweryName: null });
           }
+
      }
 
      setRating = (selectedOption) => {
           if(selectedOption) {
                this.my_rating = selectedOption.value;
+               this.setState({ myRating: selectedOption.value });
+          } else {
+               this.setState({ myRating: null });
           }
+
      }
 
      handleColorChangeComplete = (color, event) => {
@@ -170,6 +206,10 @@ render() {
 
      this.newBeersAdded++;
 
+     console.log("--- NEW BEER FROM STATE ---");
+     console.log(this.state);
+     console.log(this.state.myRating);
+
        return (
             <>
             <div className="new-beer-area">
@@ -185,15 +225,29 @@ render() {
                               <SelectBeerType
                                    beerTypes={beerTypes}
                                    getTypeOfBeer={this.getTypeOfBeer}
-                                   defaultBeerType={defaultBeerType}
+                                   //defaultBeerType={defaultBeerType}
+                                   defaultBeerType={this.state.typeOfBeer}
                                    edit={edit}
                                    addNewTypeOfBeer={this.props.addNewTypeOfBeer}
                               />
                               <BeerABV getABV={this.getABV} currentABV={currentABV} />
                          </div>
                               <div className="clb-flex-row-two-thirds clb-extra-margin-top">
-                                   <SelectBrewery breweries={breweries} getBrewery={this.getBrewery} edit={edit} defaultBrewery={defaultBrewery} />
-                                   <SelectRating setRating={this.setRating} reset={this.reset} edit={edit} defaultRating={defaultRating} />
+                                   <SelectBrewery
+                                        breweries={breweries}
+                                        getBrewery={this.getBrewery}
+                                        edit={edit}
+                                        //defaultBrewery={defaultBrewery}
+                                        defaultBrewery={this.state.breweryName}
+                                        //selectedBrewery={this.state.breweryName}
+                                   />
+                                   <SelectRating
+                                        setRating={this.setRating}
+                                        reset={this.reset}
+                                        edit={edit}
+                                        //defaultRating={defaultRating}
+                                        defaultRating={this.state.myRating}
+                                   />
                               </div>
                         </div>
                    <Description placeholder={placeholder} defaultValue={defaultValue} getNotes={this.getBeerDescription} edit={edit} />

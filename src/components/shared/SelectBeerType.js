@@ -32,7 +32,7 @@ class SelectBeerType extends React.Component {
           // console.log(beerTypesToSelect);
           // console.log(this.props.defaultBeerType);
 
-          if( defaultBeerTypeRaw !== '' ) {
+          if( defaultBeerTypeRaw !== null ) {
 
                const defaultBeerTypeSelect = { value: defaultBeerTypeRaw, label: defaultBeerTypeRaw }
 
@@ -56,6 +56,7 @@ class SelectBeerType extends React.Component {
                       options={beerTypesToSelect}
                     isClearable
                     isSearchable
+                    value={null}
                     formatCreateLabel={this.handleCreateLabel}
                     onChange={this.props.getTypeOfBeer}
                  />

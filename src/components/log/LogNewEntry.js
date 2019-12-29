@@ -99,7 +99,7 @@ render() {
           logButton = <Button variant="contained" color="secondary" type="submit">Add Entry</Button>
      }
 
-     console.log(this.state.selectedBeer);
+     //console.log(this.state.selectedBeer);
 
        return (
             <div className="log-new-entry">
