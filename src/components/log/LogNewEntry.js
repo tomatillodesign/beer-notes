@@ -110,6 +110,7 @@ render() {
                               beerList={beerList}
                               breweries={breweries}
                               getBeerType={this.getBeerType}
+                              selectedBeer={this.state.selectedBeer}
                          />
                    </div>
                    <Description placeholder='Notes' defaultValue={''} getNotes={this.getNotes} />

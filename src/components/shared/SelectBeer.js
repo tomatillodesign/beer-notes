@@ -42,8 +42,10 @@ class SelectBeer extends React.Component {
     };
 
     handleChange = (selectedOption) => {
+         console.log(selectedOption);
          this.props.getBeerType(selectedOption);
          this.setValue(selectedOption);
+
     }
 
     handleClick = () => {
@@ -54,27 +56,25 @@ class SelectBeer extends React.Component {
 render() {
 
      let currentBeerOptions = this.getBeers();
-     console.log(this.state.value);
+     //console.log(this.state.select);
 
-     let test = { value: 'Test', label: 'Test Label' };
+     const selectedBeer = this.props.selectedBeer;
+     console.log(selectedBeer);
+     let selectedToDisplay = null;
+     if( selectedBeer !== null ) {
+          selectedToDisplay = { value: selectedBeer, label: selectedBeer};
+     }
+
 
      return(
-
-          <>
-          <button type="button" onClick={this.handleClick}>
-            Reset value
-          </button>
-
        <Select
           placeholder='Select Beer'
-          onChange={this.props.getBeerType}
+          onChange={this.handleChange}
           options={currentBeerOptions}
-          value={this.state.value}
+          value={selectedToDisplay}
           isClearable
           isSearchable
         />
-
-        </>
    );
 
 }
