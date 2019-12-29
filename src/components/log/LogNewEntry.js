@@ -15,6 +15,9 @@ import { slugify } from '../../helpers';
 class LogNewEntry extends React.Component {
      constructor(props) {
           super(props);
+          this.state = {
+               selectedBeer: null
+          }
      }
 
      beerList = this.props.beerList;
@@ -29,7 +32,6 @@ class LogNewEntry extends React.Component {
      createNewEntry = (event) => {
           // 1. Stop the form from submitting
           event.preventDefault();
-
           console.log("BEER NOTES: " + this.beerNotes);
 
           const entry = {
@@ -46,6 +48,9 @@ class LogNewEntry extends React.Component {
           // refresh the form
           event.currentTarget.reset();
           //this.beerNotes = null;
+
+          this.setState({ selectedBeer: null });
+
      }
 
      getNotes = (event) => {
@@ -76,6 +81,8 @@ class LogNewEntry extends React.Component {
                this.beerID = currentBeerObj.id;
                //this.setState({ selection: selectedOption.value });
 
+               this.setState({ selectedBeer: this.beerType });
+
           }
      }
 
@@ -86,16 +93,27 @@ render() {
 
      const beerList = this.props.beerList;
      const breweries = this.props.breweries;
+     let logButton = <Button variant="contained" disabled>Select Beer Before Submitting Entry</Button>
+
+     if( this.state.selectedBeer !== null ) {
+          logButton = <Button variant="contained" color="secondary" type="submit">Add Entry</Button>
+     }
+
+     console.log(this.state.selectedBeer);
 
        return (
             <div className="log-new-entry">
                <form className="new-entry" onSubmit={this.createNewEntry} >
                    <BeerLogDate getEntryDate={this.getEntryDate} />
                    <div className="clb-one-col">
-                        <SelectBeer beerList={beerList} breweries={breweries} getBeerType={this.getBeerType} />
+                        <SelectBeer
+                              beerList={beerList}
+                              breweries={breweries}
+                              getBeerType={this.getBeerType}
+                         />
                    </div>
                    <Description placeholder='Notes' defaultValue={''} getNotes={this.getNotes} />
-                   <Button variant="contained" color="primary" type="submit">Add Entry</Button>
+                   {logButton}
               </form>
          </div>
        );
