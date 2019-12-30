@@ -73,7 +73,7 @@ firebaseApp
                              name="email"
                              label="Email"
                              required
-                             fullwidth
+                             //fullwidth
                              value={this.email}
                              onChange={this.handleInputChange}
                              />

@@ -26,6 +26,7 @@ class NewBeerForm extends React.Component {
      constructor(props) {
           super(props);
           this.state = {
+               currentlyEditing: true,
                typeOfBeer: this.props.typeOfBeer,
                breweryName: this.props.breweryName,
                myRating: this.props.defaultRating
@@ -103,6 +104,7 @@ class NewBeerForm extends React.Component {
           event.currentTarget.reset();
 
           this.setState({
+               currentlyEditing: false,
                typeOfBeer: null,
                breweryName: null,
                myRating: null
@@ -213,7 +215,7 @@ render() {
        return (
             <>
             <div className="new-beer-area">
-            {((this.newBeersAdded < 2 && edit === true) || edit !== true ) &&
+            {((this.state.currentlyEditing === true && edit === true) || edit !== true ) &&
 
                <form className="new-beer" onSubmit={this.createNewBeer} >
                <p className="intro-explainer-adding-a-brewery">If you're adding a beer from a new brewery, make sure you <span className="add-brewery-first">add the brewery first</span>. Then you'll be ready to go!</p>
@@ -258,13 +260,13 @@ render() {
 
          }
 
-         {(this.newBeersAdded >= 2 && edit === true) &&
+         {(this.state.currentlyEditing === false && edit === true) &&
              <div className="successful-edit-message">You successfully edited this beer!</div>
            }
 
          </div>
 
-              {(this.newBeersAdded > 1 && edit !== true) &&
+              {(this.state.currentlyEditing === false && edit !== true) &&
              <div className="successful-added-message">You added a new beer!</div>
            }
 

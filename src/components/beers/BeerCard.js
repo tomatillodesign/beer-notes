@@ -33,11 +33,13 @@ export default function BeerCard(props) {
     setExpanded(!expanded);
   };
 
-
+     //console.log(props);
 
      // get props and set variables
-     const beerID = props.id;
+     const beerID = props.beer.id;
+     //console.log(beerID);
      const beerObj = props.beer;
+     //console.log(beerObj);
      const beerName = props.beer.beer_name;
      const typeOfBeer = props.beer.type_of_beer;
      const beerTypes = props.beerTypes;

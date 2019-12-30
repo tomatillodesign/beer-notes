@@ -21,6 +21,7 @@ render() {
      const beerList = this.props.beerList;
      const breweries = this.props.breweries;
      const beerLog = this.props.beerLog;
+     const removeLogEntry = this.props.removeLogEntry;
 
      //console.log("UPDATED BEER LIST: " + JSON.stringify(beerList));
      //console.log("Log Entry: " + JSON.stringify(beerLog));
@@ -42,7 +43,7 @@ render() {
                        <ExpansionPanelDetails>
                          <div className="complete-log">
                               <ul className="log-entry-area">
-                                   {Object.keys(logEntriesByDate).map(key => <LogEntry key={key} details={logEntriesByDate[key]} />)}
+                                   {Object.keys(logEntriesByDate).map(key => <LogEntry key={key} details={logEntriesByDate[key]} removeLogEntry={removeLogEntry} />)}
                               </ul>
                          </div>
                        </ExpansionPanelDetails>

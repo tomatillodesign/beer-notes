@@ -19,6 +19,7 @@ class NewBreweryForm extends React.Component {
      constructor(props) {
           super(props);
           this.state = {
+               currentlyEditing: true,
                breweryState: null
           }
      }
@@ -56,7 +57,10 @@ class NewBreweryForm extends React.Component {
           this.props.addNewBrewery(entry);
           // refresh the form
           event.currentTarget.reset();
-          this.setState({ breweryState: null });
+          this.setState({
+               currentlyEditing: false,
+               breweryState: null
+          });
           this.breweryName = null;
           this.brewerySlug = null;
           this.breweryCity = null;
@@ -101,7 +105,7 @@ render() {
                    <Button variant="contained" color="secondary" type="submit">Add New Brewery</Button>
               </form>
          </div>
-         {this.newBeersAdded > 1 &&
+         {this.state.currentlyEditing === false &&
         <div className="successful-added-message">You added a new brewery!</div>
       }
       </>

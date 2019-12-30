@@ -90,6 +90,9 @@
      grid-template-columns: 1fr 1fr 1fr 1fr;
      grid-column-gap: 30px;
      grid-row-gap: 30px;
+     max-width: 1460px;
+     margin-left: auto;
+     margin-right: auto;
 }
 
 .clb-single-beer-card img {
@@ -385,6 +388,17 @@ body {
 .modal p.intro-explainer-adding-a-brewery {
      display: none;
 }
+
+.remove-log-entry {
+     float: right;
+     font-size: 0.5rem;
+}
+
+
+
+
+
+
 
 /* #main-content-area {
   min-height: calc(100vh) !important;

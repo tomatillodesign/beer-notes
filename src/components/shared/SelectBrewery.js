@@ -52,7 +52,6 @@ class SelectBrewery extends React.Component {
             <Select
                placeholder='Select Brewery'
                options={currentBreweryOptions}
-               //defaultValue={defaultBrewery}
                value={selectedToDisplay}
                isClearable
                isSearchable

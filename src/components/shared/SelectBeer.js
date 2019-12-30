@@ -20,10 +20,11 @@ class SelectBeer extends React.Component {
      getBeers() {
 
           const completeBeerList = this.props.beerList;
+          console.log(completeBeerList);
           const breweries = this.props.breweries;
           const options = [];
           for (let j = 0; j < completeBeerList.length; j++) {
-               options.push( {value: completeBeerList[j].beer_name, label: completeBeerList[j].beer_name + " (" + completeBeerList[j].brewery_name + ")" } );
+               options.push( {value: completeBeerList[j].id, label: completeBeerList[j].beer_name + " (" + completeBeerList[j].brewery_name + ")" } );
             }
 
           const alphabeticalBeers = [...options].sort((a, b) => (a.label > b.label) ? 1 : -1);
@@ -42,27 +43,23 @@ class SelectBeer extends React.Component {
     };
 
     handleChange = (selectedOption) => {
-         //console.log(selectedOption);
-         this.props.getBeerType(selectedOption);
+         this.props.getbeerName(selectedOption);
          this.setValue(selectedOption);
-
     }
-
-    handleClick = () => {
-         this.setValue(null);
-         //console.log("Set Value: NULL");
-    };
 
 render() {
 
      let currentBeerOptions = this.getBeers();
 
-     const selectedBeer = this.props.selectedBeer;
+     const selectedBeer = this.props.selectedBeerName;
+     console.log(selectedBeer);
      let selectedToDisplay = null;
      if( selectedBeer !== null ) {
           selectedToDisplay = { value: selectedBeer, label: selectedBeer};
      }
 
+     // console.log("selectedBeer: " + selectedBeer);
+     // console.log("selectedToDisplay: " + JSON.stringify(selectedToDisplay));
 
      return(
        <Select

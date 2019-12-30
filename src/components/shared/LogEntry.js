@@ -2,30 +2,43 @@ import React from 'react';
 
 class LogEntry extends React.Component {
 
+     constructor(props) {
+          super(props);
+
+          const removeLogEntry = props.removeLogEntry;
+          console.log(removeLogEntry);
+
+     }
+
+
+
+
+     nowRemoveLog = (event) => {
+          const logKey = event.currentTarget.dataset.logKey;
+          console.log(logKey);
+          this.props.removeLogEntry(logKey);
+     }
+
      render() {
 
-          console.log(this.props.details);
-
-          //console.log(this.props);
-
           const dateOptions = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
-          //console.log(event.toLocaleDateString('us-US', options));
 
           // use ES6 to destructure an object into single variables
-          const { timestamp, entryDate, beer, brewery_name, notes } = this.props.details;
-          //const entryDatePublish = JSON.stringify(entryDate);
+          const { timestamp, entryDate, beer, brewery_name, notes, key } = this.props.details;
           let newDate = new Date(entryDate);
-          //console.log(newDate);
           const entryDatePublish = newDate.toLocaleDateString('en-US', dateOptions);
-          //const entryDatePublish = entryDate.toISOString();
           const modal = this.props.modal;
-          //console.log(modal);
+
+          let breweryNameToPublish = null;
+          if( brewery_name ) {
+               breweryNameToPublish = '(' + brewery_name + ')';
+          }
 
           if(modal) {
 
           return (
                     <li className="modal-single-entry">
-                         <div className="modal-log-date">🍺 {entryDatePublish}</div>
+                         <div className="modal-log-date">🍺 {entryDatePublish}<span className="remove-log-entry"><button id={"remove-log-entry-" + key} data-log-key={key} onClick={this.nowRemoveLog}>x</button></span></div>
                          { notes &&
                             <div className="modal-log-notes">{notes}</div>
                          }
@@ -34,7 +47,7 @@ class LogEntry extends React.Component {
                } else {
                     return (
                          <li className="single-entry">
-                              <h3 className="beer-name">🍺 {beer} ({brewery_name}) &middot; {entryDatePublish}</h3>
+                              <h3 className="beer-name">🍺 {beer} {breweryNameToPublish} &middot; {entryDatePublish}<span className="remove-log-entry"><button id={"remove-log-entry-" + key} data-log-key={key} onClick={this.nowRemoveLog}>x</button></span></h3>
                               { notes &&
                                  <p>{notes}</p>
                               }

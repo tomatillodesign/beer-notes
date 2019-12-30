@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
-import { usStates } from '../../data/usstates.js';
+import { usStates, countries } from '../../data/usstates.js';
 
 class SelectUSState extends React.Component {
 
@@ -8,11 +8,27 @@ class SelectUSState extends React.Component {
           super(props);
      }
 
+     componentDidMount() {
+
+
+
+     }
+
 
      render() {
 
+          const countryObjs = countries.map(country => (
+               {
+                   value: country,
+                   label: country
+              }
+          ));
+          //console.log(countryObjs);
+
           const selectedState = this.props.selectedState;
           console.log(selectedState);
+
+          const listToPublish = usStates.concat(countryObjs);
 
           let selectedToDisplay = null;
           if( selectedState !== null ) {
@@ -21,8 +37,8 @@ class SelectUSState extends React.Component {
 
           return(
             <Select
-               placeholder='Select'
-               options={usStates}
+               placeholder='Select State or Country'
+               options={listToPublish}
                value={selectedToDisplay}
                isClearable
                isSearchable

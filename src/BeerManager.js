@@ -217,6 +217,23 @@ class BeerManager extends React.Component {
     }
 
 
+    removeLogEntry = (logEntry) => {
+         console.log(logEntry);
+         console.log("Removed: " + logEntry);
+         let logID = logEntry;
+         let clbCopyLogState = [...this.state.beerLog];
+         // let getBeerObjInState = clbCopyLogState.filter(obj => {
+         //   return obj.id === beerID
+         //  });
+
+          let index = clbCopyLogState.map(function(e) { return e.key; }).indexOf(logID);
+          clbCopyLogState.splice(index, 1);
+
+          this.setState({ beerLog: clbCopyLogState });
+
+    }
+
+
     changeBeerCardView = (newViewString) => {
          console.log('CHANGE BEER CARD VIEW');
          console.log(newViewString);
@@ -275,6 +292,7 @@ class BeerManager extends React.Component {
                           addNewBrewery={this.addNewBrewery}
                           addLogEntry={this.addLogEntry}
                           removeBeer={this.removeBeer}
+                          removeLogEntry={this.removeLogEntry}
                           beerLog={beerLog}
                           beerTypes={beerTypes}
                           beerCardView={beerCardView}

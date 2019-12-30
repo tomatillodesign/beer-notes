@@ -16,7 +16,8 @@ class LogNewEntry extends React.Component {
      constructor(props) {
           super(props);
           this.state = {
-               selectedBeer: null
+               selectedBeerName: null,
+               selectedBeerID: null,
           }
      }
 
@@ -24,7 +25,7 @@ class LogNewEntry extends React.Component {
 
      entryDate = Date.now();
      beerNotes = null;
-     beerType = null
+     beerName = null
      beerID = null;
      brewery_name = null;
      brewery_slug = null;
@@ -32,12 +33,13 @@ class LogNewEntry extends React.Component {
      createNewEntry = (event) => {
           // 1. Stop the form from submitting
           event.preventDefault();
-          console.log("BEER NOTES: " + this.beerNotes);
+          console.log(event.currentTarget);
+          console.log(this.state.selectedBeer);
 
           const entry = {
                timestamp: Date.now(),
                entryDate: this.entryDate,
-               beer: this.beerType,
+               beer: this.beerName,
                beerID: this.beerID,
                brewery_name: this.brewery_name,
                brewery_slug: this.brewery_slug,
@@ -49,7 +51,10 @@ class LogNewEntry extends React.Component {
           event.currentTarget.reset();
           //this.beerNotes = null;
 
-          this.setState({ selectedBeer: null });
+          this.setState({
+               selectedBeerName: null,
+               selectedBeerID: null,
+          });
 
      }
 
@@ -63,26 +68,38 @@ class LogNewEntry extends React.Component {
           this.entryDate = theUnixTime;
      }
 
-     getBeerType = (selectedOption) => {
+     getbeerName = (selectedOption) => {
           if(selectedOption) {
-               this.beerType = selectedOption.value;
-               console.log(this.beerType);
+               //this.beerName = selectedOption.label;
+               this.beerID = selectedOption.value;
+               console.log(this.beerName + ': ' + this.beerID);
 
-               // find the beer object matching this.beerType
+               // find the beer object matching this.beerName
                // then set the brewery_slug & brewery_name from that Object
                let beerListObj = this.beerList;
-               let currentBeerName = selectedOption.value;
+               let currentBeerID = selectedOption.value;
                let currentBeerObj = beerListObj.find(obj => {
-                 return obj.beer_name === currentBeerName
+                    return obj.id === currentBeerID
                })
+
                console.log(currentBeerObj);
-               this.brewery_name = currentBeerObj.brewery_name;
-               this.brewery_slug = currentBeerObj.brewery_slug;
-               this.beerID = currentBeerObj.id;
+
+               if( currentBeerObj !== undefined ) {
+                    this.beerName = currentBeerObj.beer_name;
+                    this.brewery_name = currentBeerObj.brewery_name;
+                    this.brewery_slug = currentBeerObj.brewery_slug;
+                    this.beerID = currentBeerObj.id;
+               }
                //this.setState({ selection: selectedOption.value });
-
-               this.setState({ selectedBeer: this.beerType });
-
+               this.setState({
+                    selectedBeerName: this.beerName,
+                    selectedBeerID: this.BeerID,
+               });
+          } else {
+               this.setState({
+                    selectedBeerName: null,
+                    selectedBeerID: null,
+               });
           }
      }
 
@@ -99,7 +116,7 @@ render() {
           logButton = <Button variant="contained" color="secondary" type="submit">Add Entry</Button>
      }
 
-     //console.log(this.state.selectedBeer);
+     console.log(this.state.selectedBeerName);
 
        return (
             <div className="log-new-entry">
@@ -109,8 +126,8 @@ render() {
                         <SelectBeer
                               beerList={beerList}
                               breweries={breweries}
-                              getBeerType={this.getBeerType}
-                              selectedBeer={this.state.selectedBeer}
+                              getbeerName={this.getbeerName}
+                              selectedBeerName={this.state.selectedBeerName}
                          />
                    </div>
                    <Description placeholder='Notes' defaultValue={''} getNotes={this.getNotes} />
