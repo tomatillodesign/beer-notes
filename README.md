@@ -8,8 +8,10 @@ This project was created by Chris Liu-Beers of [Tomatillo Design](http://www.tom
 
 ## Features
 
+- Personalized Journal for each visitor
+- Basic suite of account tools (registration, lost password, etc.)
 - Clean, clear navigation using menu tabs
-- Beer, breweries, and notes are all connected and instantly updated
+- Beer, breweries, types of beer, and journal entries are all connected and instantly updated
 - Filter main "Beer" view by different criteria
 
 ## Technical Credits

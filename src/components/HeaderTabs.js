@@ -87,6 +87,7 @@ export default function HeaderTabs(props) {
                beerList={props.beerList}
                breweries={props.breweries}
                beerLog={props.beerLog}
+               removeLogEntry={props.removeLogEntry}
                beerTypes={props.beerTypes}
                addNewBeer={props.addNewBeer}
                removeBeer={props.removeBeer}

@@ -180,7 +180,7 @@ render() {
      const beerList = this.props.beerList;
      const breweries = this.props.breweries;
      const beerTypes = this.props.beerTypes;
-     console.log( beerTypes );
+     //console.log( beerTypes );
 
      let beerName = this.props.beerName;
      let currentABV = this.props.currentABV;

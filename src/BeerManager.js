@@ -172,11 +172,13 @@ class BeerManager extends React.Component {
           }))
      }
 
+
      addLogEntry = (logEntry) => {
           console.log(logEntry);
 
           // Update the completeBeerList state to add 1 to this beer's count
           let beerID = logEntry.beerID;
+
           let clbPreviousBeerListState = [...this.state.completeBeerList];
           let getBeerObjInState = clbPreviousBeerListState.filter(obj => {
             return obj.id === beerID
@@ -218,18 +220,35 @@ class BeerManager extends React.Component {
 
 
     removeLogEntry = (logEntry) => {
-         console.log(logEntry);
-         console.log("Removed: " + logEntry);
-         let logID = logEntry;
-         let clbCopyLogState = [...this.state.beerLog];
-         // let getBeerObjInState = clbCopyLogState.filter(obj => {
-         //   return obj.id === beerID
-         //  });
 
-          let index = clbCopyLogState.map(function(e) { return e.key; }).indexOf(logID);
-          clbCopyLogState.splice(index, 1);
+         // Get the log item and remove it
+          console.log(logEntry);
+          console.log("Removed: " + logEntry);
+          let logID = logEntry;
+          let clbCopyLogState = [...this.state.beerLog];
+          let logIndex = clbCopyLogState.map(function(e) { return e.key; }).indexOf(logID);
+          clbCopyLogState.splice(logIndex, 1);
 
-          this.setState({ beerLog: clbCopyLogState });
+          // Get the beer and lower the count by 1
+          let beerID = this.state.beerLog[logEntry].beerID;
+          console.log(beerID);
+
+          let clbPreviousBeerListState = [...this.state.completeBeerList];
+          let getBeerObjInState = clbPreviousBeerListState.filter(obj => {
+            return obj.id === beerID
+          });
+          let beerIndex = clbPreviousBeerListState.map(function(e) { return e.id; }).indexOf(beerID);
+          let previousCount = clbPreviousBeerListState[beerIndex].count;
+          let newCount = previousCount - 1;
+          console.log("PREV COUNT: " + previousCount);
+          console.log("NEW COUNT: " + newCount);
+          clbPreviousBeerListState[beerIndex].count = newCount;
+
+          //this.setState({ beerLog: clbCopyLogState });
+          this.setState(prevState => ({
+              completeBeerList: clbPreviousBeerListState,
+              beerLog: clbCopyLogState
+         }))
 
     }
 

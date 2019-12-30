@@ -38,7 +38,7 @@ class LogEntry extends React.Component {
 
           return (
                     <li className="modal-single-entry">
-                         <div className="modal-log-date">🍺 {entryDatePublish}<span className="remove-log-entry"><button id={"remove-log-entry-" + key} data-log-key={key} onClick={this.nowRemoveLog}>x</button></span></div>
+                         <div className="modal-log-date">🍺 {entryDatePublish}<span className="remove-log-entry"><button id={"remove-log-entry-" + key} data-log-key={key} onClick={this.nowRemoveLog} title="Permanently delete this entry">x</button></span></div>
                          { notes &&
                             <div className="modal-log-notes">{notes}</div>
                          }
@@ -47,7 +47,7 @@ class LogEntry extends React.Component {
                } else {
                     return (
                          <li className="single-entry">
-                              <h3 className="beer-name">🍺 {beer} {breweryNameToPublish} &middot; {entryDatePublish}<span className="remove-log-entry"><button id={"remove-log-entry-" + key} data-log-key={key} onClick={this.nowRemoveLog}>x</button></span></h3>
+                              <h3 className="beer-name">🍺 {beer} {breweryNameToPublish} &middot; {entryDatePublish}<span className="remove-log-entry"><button id={"remove-log-entry-" + key} data-log-key={key} onClick={this.nowRemoveLog} title="Permanently delete this entry">x</button></span></h3>
                               { notes &&
                                  <p>{notes}</p>
                               }

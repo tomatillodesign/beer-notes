@@ -54,6 +54,7 @@ class NewBeerCards extends React.Component {
           const beerTypes = this.props.beerTypes;
           var orderedBeers = null;
           const addNewTypeOfBeer = this.props.addNewTypeOfBeer;
+          const removeLogEntry = this.props.removeLogEntry;
 
           //console.log(beerTypes);
           //console.log(this.state.flipKey);
@@ -171,7 +172,7 @@ class NewBeerCards extends React.Component {
                               element="div"
                               className="clb-beer-card-area"
                             >
-                              { this.props.beerList.map(({ key, beer_name, id, description }) => (                              
+                              { this.props.beerList.map(({ key, beer_name, id, description }) => (
                                    <Flipped key={id} stagger={true} >
                                         {flippedProps =>
                                              <BeerCard
@@ -181,6 +182,7 @@ class NewBeerCards extends React.Component {
                                                   beerList={beerList}
                                                   breweries={breweries}
                                                   beerLog={beerLog}
+                                                  removeLogEntry={removeLogEntry}
                                                   beerTypes={beerTypes}
                                                   addNewBeer={addNewBeer}
                                                   removeBeer={removeBeer}

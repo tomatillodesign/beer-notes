@@ -255,7 +255,7 @@ class App extends React.Component {
 
               <div className="clb-footer">
                  <Typography variant="body1">
-                 <a href="https://github.com/tomatillodesign/beer-notes" target="_blank">Version 0.9</a> &middot; By Chris Liu-Beers, <a href="http://tomatillodesign.com" target="_blank">Tomatillo Design</a>
+                 <a href="https://github.com/tomatillodesign/beer-notes" target="_blank">Version 1.0</a> &middot; By Chris Liu-Beers, <a href="http://tomatillodesign.com" target="_blank">Tomatillo Design</a>
                  </Typography>
                  </div>
                  </MuiThemeProvider>

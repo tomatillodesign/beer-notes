@@ -73,7 +73,6 @@ firebaseApp
                              name="email"
                              label="Email"
                              required
-                             //fullwidth
                              value={this.email}
                              onChange={this.handleInputChange}
                              />
@@ -84,13 +83,12 @@ firebaseApp
                                  name="password"
                                  label="Password"
                                  required
-                                 fullwidth
                                  placeholder="Password"
                                  value={this.password}
                                 onChange={this.handleInputChange}
                                  />
                        </div>
-                       <Button variant="contained" color="primary" type="submit">Register Now</Button>
+                       <Button variant="contained" color="secondary" type="submit">Register Now</Button>
                        </form>
              </div>
           );

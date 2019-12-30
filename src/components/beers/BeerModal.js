@@ -11,6 +11,7 @@ export default function BeerModal(props) {
   const handleShow = () => setShow(true);
 
   const beerLog = props.beerLog;
+  const removeLogEntry = props.removeLogEntry;
   const logEntriesByDate = [...beerLog].sort((a, b) => (a.entryDate < b.entryDate) ? 1 : -1);
 
   return (
@@ -31,7 +32,7 @@ export default function BeerModal(props) {
                          </div>
                }
              <ul className="log-entry-area">
-                  {Object.keys(logEntriesByDate).map(key => <LogEntry key={key} details={logEntriesByDate[key]} modal={true} />)}
+                  {Object.keys(logEntriesByDate).map(key => <LogEntry key={key} details={logEntriesByDate[key]} modal={true} removeLogEntry={removeLogEntry} />)}
              </ul>
         </Modal.Body>
         <Modal.Footer>

@@ -52,6 +52,7 @@ export default function BeerCard(props) {
      const backgroundColor = props.beer.backgroundColor;
      const addNewBeer = props.addNewBeer;
      const removeBeer = props.removeBeer;
+     const removeLogEntry = props.removeLogEntry;
 
           var myRatingToPublish = null;
           if( myRating === '3' ) { myRatingToPublish = '❤️'; }
@@ -164,6 +165,7 @@ export default function BeerCard(props) {
                          breweryName={breweryName}
                          beerLog={matchingLogNotes}
                          logCount={logCount}
+                         removeLogEntry={removeLogEntry}
                          backgroundColor={backgroundColor}
                          />
                    }
