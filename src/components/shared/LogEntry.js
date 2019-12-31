@@ -6,7 +6,7 @@ class LogEntry extends React.Component {
           super(props);
 
           const removeLogEntry = props.removeLogEntry;
-          console.log(removeLogEntry);
+          //console.log(removeLogEntry);
 
      }
 

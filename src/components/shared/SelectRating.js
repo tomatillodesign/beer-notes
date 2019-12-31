@@ -24,7 +24,7 @@ class SelectRating extends React.Component {
                label: myRatingToPublish
           };
           if( defaultRating === null ) { defaultRatingPublish = null; }
-          console.log(defaultRating);
+          //console.log(defaultRating);
 
           const ratingOptions = [
                { value: '3', label: '❤️ Great' },

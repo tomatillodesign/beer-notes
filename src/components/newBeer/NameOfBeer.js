@@ -22,7 +22,7 @@ class NameOfBeer extends React.Component {
 
 render() {
 
-     console.log(this.props.beerName);
+     //console.log(this.props.beerName);
 
        return (
 

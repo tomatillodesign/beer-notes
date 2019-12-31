@@ -153,7 +153,7 @@ class NewBeerCards extends React.Component {
 
           if( orderedBeers ) {
 
-               console.log(this.state.data);
+               //console.log(this.state.data);
 
                return (
 
@@ -173,7 +173,7 @@ class NewBeerCards extends React.Component {
                               className="clb-beer-card-area"
                             >
                               { this.props.beerList.map(({ key, beer_name, id, description }) => (
-                                   <Flipped key={id} stagger={true} >
+                                   <Flipped key={id} stagger={true} spring={"gentle"} >
                                         {flippedProps =>
                                              <BeerCard
                                                   flippedProps={flippedProps}

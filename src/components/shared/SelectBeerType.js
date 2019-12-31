@@ -21,8 +21,8 @@ class SelectBeerType extends React.Component {
 
           const beerTypes = this.props.beerTypes;
           const defaultBeerTypeRaw = this.props.defaultBeerType;
-          console.log(beerTypes);
-          console.log(defaultBeerTypeRaw);
+          // console.log(beerTypes);
+          // console.log(defaultBeerTypeRaw);
 
           let beerTypesToSelect = [];
           beerTypes.forEach(value =>

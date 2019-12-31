@@ -63,10 +63,10 @@ class NewBeerForm extends React.Component {
           event.preventDefault();
 
           let customID = this.props.id;
-          console.log('SHORT ID: ' + customID);
+          //console.log('SHORT ID: ' + customID);
           if( customID === undefined ) {
                customID = shortid.generate();
-               console.log('SHORT ID: ' + customID);
+               //console.log('SHORT ID: ' + customID);
           }
 
           // Make sure no fields cause "undefined" errors even if missing info
@@ -96,8 +96,8 @@ class NewBeerForm extends React.Component {
                               editCurrentBeer: this.props.editCurrentBeer,
                          }
 
-          console.log(entry);
-          console.log(this.props.editCurrentBeer);
+          // console.log(entry);
+          // console.log(this.props.editCurrentBeer);
           // 2 add the new beer to state (App.js)
           this.props.addNewBeer(entry);
           // refresh the form
@@ -114,7 +114,7 @@ class NewBeerForm extends React.Component {
 
      getBeerName = (event) => {
           this.beerName = (event.target.value);
-          console.log(this.beerName);
+          //console.log(this.beerName);
      }
 
      getBeerDescription = (event) => {
@@ -127,11 +127,11 @@ class NewBeerForm extends React.Component {
 
      getEntryDate = (date) => {
           this.entryDate = date;
-          console.log("ENTRY DATE: " + this.entryDate);
+          //console.log("ENTRY DATE: " + this.entryDate);
      }
 
      getTypeOfBeer = (selectedOption) => {
-          console.log('getTypeOfBeer');
+          //console.log('getTypeOfBeer');
           if(selectedOption) {
                this.type_of_beer = selectedOption.label;
                this.props.addNewTypeOfBeer(selectedOption.label);
@@ -143,7 +143,7 @@ class NewBeerForm extends React.Component {
      }
 
      getBrewery = (selectedOption) => {
-          console.log('getBrewery');
+          //console.log('getBrewery');
           if(selectedOption) {
                this.brewery_slug = slugify(selectedOption.label);
                this.brewery_name = selectedOption.label;
@@ -171,7 +171,7 @@ class NewBeerForm extends React.Component {
 
   manualHexSelection = (event) => {
        this.backgroundColor = '#' + (event.target.value);
-       console.log(this.backgroundColor);
+       //console.log(this.backgroundColor);
   }
 
 
@@ -190,7 +190,7 @@ render() {
 
      let defaultValue = this.props.defaultValue;
      if( !defaultValue ) { defaultValue = ''; }
-     console.log( defaultValue );
+     //console.log( defaultValue );
 
 
      let defaultBeerType = this.props.typeOfBeer;
@@ -208,9 +208,9 @@ render() {
 
      this.newBeersAdded++;
 
-     console.log("--- NEW BEER FROM STATE ---");
-     console.log(this.state);
-     console.log(this.state.myRating);
+     // console.log("--- NEW BEER FROM STATE ---");
+     // console.log(this.state);
+     // console.log(this.state.myRating);
 
        return (
             <>

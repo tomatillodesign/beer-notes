@@ -60,7 +60,7 @@ class LogNewEntry extends React.Component {
 
      getNotes = (event) => {
           this.beerNotes = (event.target.value);
-          console.log(this.beerNotes);
+          //console.log(this.beerNotes);
      }
 
      getEntryDate = (date) => {
@@ -72,7 +72,7 @@ class LogNewEntry extends React.Component {
           if(selectedOption) {
                //this.beerName = selectedOption.label;
                this.beerID = selectedOption.value;
-               console.log(this.beerName + ': ' + this.beerID);
+               //console.log(this.beerName + ': ' + this.beerID);
 
                // find the beer object matching this.beerName
                // then set the brewery_slug & brewery_name from that Object
@@ -82,7 +82,7 @@ class LogNewEntry extends React.Component {
                     return obj.id === currentBeerID
                })
 
-               console.log(currentBeerObj);
+               //console.log(currentBeerObj);
 
                if( currentBeerObj !== undefined ) {
                     this.beerName = currentBeerObj.beer_name;
@@ -116,7 +116,7 @@ render() {
           logButton = <Button variant="contained" color="secondary" type="submit">Add Entry</Button>
      }
 
-     console.log(this.state.selectedBeerName);
+     //console.log(this.state.selectedBeerName);
 
        return (
             <div className="log-new-entry">

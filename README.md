@@ -26,11 +26,11 @@ This project was created by Chris Liu-Beers of [Tomatillo Design](http://www.tom
 ## To Do's
 
 - Advanced filter views (eg view only IPA's, or beers from a specific state, ABV range, etc.)
-- More clear registration directions
 - Sticky footer to bottom of page
 - Fix CSS quirks
 - Mobile-friendly
 - Clean up code, remove console logs, etc.
+- ~~More clear registration directions~~
 - ~~Prevent empty log entry from being added accidentally~~
 - ~~Add beer type to dropdown select (including ability to add your own)~~
 - ~~Main Beer view, add transition/animations for smooth switching~~

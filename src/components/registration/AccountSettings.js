@@ -59,7 +59,7 @@ class AccountSettings extends React.Component {
 
           const emailedResetLink = this.state.emailedResetLink;
           const loggedInEmail = this.props.loggedInEmail;
-          console.log("loggedInEmail: " + loggedInEmail);
+          //console.log("loggedInEmail: " + loggedInEmail);
 
           return (
                <>

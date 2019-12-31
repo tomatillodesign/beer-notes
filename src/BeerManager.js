@@ -166,7 +166,7 @@ class BeerManager extends React.Component {
      }
 
      addNewBrewery = (newBrewery) => {
-          console.log(newBrewery);
+          //console.log(newBrewery);
           this.setState(prevState => ({
             breweries: [...prevState.breweries, newBrewery]
           }))
@@ -202,8 +202,8 @@ class BeerManager extends React.Component {
 
 
     removeBeer = (beerObj) => {
-         console.log(beerObj);
-         console.log("Removed: " + beerObj.beer_name);
+         // console.log(beerObj);
+         // console.log("Removed: " + beerObj.beer_name);
          let beerID = beerObj.id;
          let beerName = beerObj.beer_name;
          let clbCopyBeerState = [...this.state.completeBeerList];
@@ -254,8 +254,8 @@ class BeerManager extends React.Component {
 
 
     changeBeerCardView = (newViewString) => {
-         console.log('CHANGE BEER CARD VIEW');
-         console.log(newViewString);
+         // console.log('CHANGE BEER CARD VIEW');
+         // console.log(newViewString);
          let newBeerCardView = 'Alphabetical';
          if( newViewString === 'view-high-count' ) { newBeerCardView = 'High Count'; }
          if( newViewString === 'view-rating' ) { newBeerCardView = 'Rating'; }
@@ -268,10 +268,10 @@ class BeerManager extends React.Component {
 
     addNewTypeOfBeer = (newTypeofBeer) => {
 
-         console.log('Add New Type of Beer: ' + newTypeofBeer);
+         //console.log('Add New Type of Beer: ' + newTypeofBeer);
          let previousBeerTypes = [...this.state.beerTypes];
          let included = previousBeerTypes.includes(newTypeofBeer);
-         console.log(included);
+         //console.log(included);
          if( included === false ) {
 
               // Sort all beer types, then update state

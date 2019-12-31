@@ -40,8 +40,8 @@ class SelectBrewery extends React.Component {
           let currentBreweryOptions = this.getBreweries();
           const edit = this.props.edit;
           const defaultBrewery = this.props.defaultBrewery;
-          console.log(defaultBrewery);
-          console.log(edit);
+          // console.log(defaultBrewery);
+          // console.log(edit);
 
           let selectedToDisplay = null;
           if( defaultBrewery !== null ) {

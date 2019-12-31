@@ -37,10 +37,10 @@ class NewBreweryForm extends React.Component {
           event.preventDefault();
 
           let customID = this.props.id;
-          console.log('SHORT Brewery ID: ' + customID);
+          //console.log('SHORT Brewery ID: ' + customID);
           if( customID === undefined ) {
                customID = shortid.generate();
-               console.log('SHORT Brewery ID: ' + customID);
+               //console.log('SHORT Brewery ID: ' + customID);
           }
 
           const entry = {
@@ -52,7 +52,7 @@ class NewBreweryForm extends React.Component {
                          timestamp: this.timestamp,
                     }
 
-          console.log(entry);
+          //console.log(entry);
           // 2 add the new beer to state (App.js)
           this.props.addNewBrewery(entry);
           // refresh the form

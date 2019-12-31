@@ -26,7 +26,7 @@ class SelectUSState extends React.Component {
           //console.log(countryObjs);
 
           const selectedState = this.props.selectedState;
-          console.log(selectedState);
+          //console.log(selectedState);
 
           const listToPublish = usStates.concat(countryObjs);
 
