@@ -26,8 +26,8 @@ function TabPanel(props) {
       component="div"
       role="tabpanel"
       hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
+      id={`scrollable-auto-tabpanel-${index}`}
+      aria-labelledby={`scrollable-auto-tab-${index}`}
       {...other}
     >
       {value === index && <Box p={3}>{children}</Box>}
@@ -43,8 +43,8 @@ TabPanel.propTypes = {
 
 function a11yProps(index) {
   return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    id: `scrollable-auto-tab-${index}`,
+    'aria-controls': `scrollable-auto-tabpanel-${index}`,
   };
 }
 
@@ -73,12 +73,21 @@ export default function HeaderTabs(props) {
            <Typography variant="h1" className={classes.title + " clb-header"}>
             My Beer Journal
           </Typography>
-        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-          <Tab label="My Beers" {...a11yProps(0)} />
-          <Tab label="New Entry" {...a11yProps(1)} />
-          <Tab label="New Beer" {...a11yProps(2)} />
-          <Tab label="New Brewery" {...a11yProps(3)} />
-          <Tab label="Account" {...a11yProps(4)} />
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="scrollable auto tabs example"
+          variant="scrollable"
+          scrollButtons="off"
+          centered
+          variant="scrollable"
+          scrollButtons="auto"
+          >
+               <Tab label="My Beers" {...a11yProps(0)} />
+               <Tab label="New Entry" {...a11yProps(1)} />
+               <Tab label="New Beer" {...a11yProps(2)} />
+               <Tab label="New Brewery" {...a11yProps(3)} />
+               <Tab label="Account" {...a11yProps(4)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>

@@ -340,12 +340,12 @@ body {
 
 .clb-light-border-outline-button.my-rating-button {
      display: inline;
-     position: relative;
+     /* position: relative;
      bottom: -1px;
      padding: 6px 15px;
      padding-right: 11px;
      border: 1px solid rgba(0, 0, 0, 0.15);
-     border-radius: 4px;
+     border-radius: 4px;*/
 }
 
 .account-buttons {
@@ -430,6 +430,11 @@ body {
 }
 
 
+.MuiAppBar-root {
+    z-index: 1020 !important;
+}
+
+
 
 /* #main-content-area {
   min-height: calc(100vh) !important;
@@ -479,6 +484,16 @@ html, .App, #main-content-area {
 
 /* ---- Media ----- */
 
+@media only screen and (min-width: 800px) {
+
+     .modal-dialog {
+         max-width: 600px !important;
+     }
+
+}
+
+
+
 @media only screen and (max-width: 1123px) {
 
      .clb-beer-card-area {
@@ -496,6 +511,18 @@ html, .App, #main-content-area {
 
      .clb-beer-card-area {
           grid-template-columns: 1fr 1fr;
+     }
+
+}
+
+@media only screen and (max-width: 580px) {
+
+     .App h1.clb-header {
+         font-size: 2rem;
+    }
+
+    .clb-select-view .MuiButton-label {
+         font-size: .6rem;
      }
 
 }
