@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "9601cc3f3115a11a7494297fca7272b9",
+    "revision": "49cc7b1fd210bf87f1c9442de8c5c360",
     "url": "/beer-notes/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/beer-notes/static/css/2.17e5ed98.chunk.css"
   },
   {
-    "revision": "16ce5875c6466db56fa7",
-    "url": "/beer-notes/static/css/main.5a351df1.chunk.css"
+    "revision": "c10b759fdc321aeafde4",
+    "url": "/beer-notes/static/css/main.a9f79738.chunk.css"
   },
   {
     "revision": "e854bacffd1cabcbb49e",
@@ -20,7 +20,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/beer-notes/static/js/2.fa596514.chunk.js.LICENSE"
   },
   {
-    "revision": "16ce5875c6466db56fa7",
+    "revision": "c10b759fdc321aeafde4",
     "url": "/beer-notes/static/js/main.fd04147c.chunk.js"
   },
   {
